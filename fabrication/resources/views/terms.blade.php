@@ -1,158 +1,255 @@
-<!DOCTYPE html>
-<html lang="en">
-    @extends('app')
-    @include('header')
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Terms & Conditions - FabricationHub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons (optional) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* custom smooth transitions */
-        .terms-card {
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-        .terms-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px -12px rgba(0,0,0,0.1);
-        }
-        /* responsive typography fine-tuning */
-        @media (max-width: 640px) {
-            .terms-section h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
-</head>
-<body class="bg-[#ECEFF3] font-sans antialiased">
+@extends('app')
 
-    <!-- ================= MAIN WRAPPER ================= -->
-    <div class="bg-[#ECEFF3] min-h-screen">
+@section('title', 'Terms & Conditions')
 
-        <!-- Page Title - FULLY RESPONSIVE -->
-        <section class="pt-8 sm:pt-10 md:pt-12 pb-6 md:pb-8">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
-                <div class="text-center">
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#183153]">
-                        Terms & Conditions
-                    </h1>
-                    <div class="w-32 sm:w-40 md:w-48 h-[2px] bg-[#BCD1EA] mx-auto mt-3"></div>
-                </div>
-                <p class="mt-6 sm:mt-8 md:mt-10 text-base sm:text-lg text-[#1D2433] text-center md:text-left">
-                    Last Updated: March 2026
-                </p>
-            </div>
-        </section>
+@push('styles')
 
-        <!-- Terms Content - FULLY RESPONSIVE (no layout changes, only spacing & sizing adjustments for mobile) -->
-        <section class="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 pb-16 md:pb-20 space-y-4 sm:space-y-5">
-            
-            <!-- Introduction Card -->
-            <div class="bg-[#F3F5F9] rounded-[18px] p-4 sm:p-5 terms-card">
-                <h2 class="text-lg sm:text-xl font-semibold text-[#183153]">
-                    Introduction
-                </h2>
-                <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-                <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
-                    Welcome to our platform. By accessing or using our services,
-                    you agree to be bound by these Terms & Conditions.
-                    Please read them carefully before using the app.
-                </p>
-            </div>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-            <!-- User Responsibilities Card -->
-            <div class="bg-[#F3F5F9] rounded-[18px] p-4 sm:p-5 terms-card">
-                <h2 class="text-lg sm:text-xl font-semibold text-[#183153]">
-                    User Responsibilities
-                </h2>
-                <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-                <ul class="list-disc pl-5 text-sm sm:text-base text-gray-700 space-y-1">
-                    <li>You must provide accurate and complete information.</li>
-                    <li>You are responsible for maintaining account security.</li>
-                    <li>Misuse of the platform may result in account suspension.</li>
-                </ul>
-            </div>
+html, body {
+    background: #ffffff;
+    font-family: 'Barlow', sans-serif;
+    color: #1E293B;
+    min-height: 100vh;
+    padding-top: 80px;
+}
 
-            <!-- Orders & Quotes Card -->
-            <div class="bg-[#F3F5F9] rounded-[18px] p-4 sm:p-5 terms-card">
-                <h2 class="text-lg sm:text-xl font-semibold text-[#183153]">
-                    Orders & Quotes
-                </h2>
-                <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-                <ul class="list-disc pl-5 text-sm sm:text-base text-gray-700 space-y-1">
-                    <li>Users can request quotes from vendors.</li>
-                    <li>Vendors provide pricing and delivery timelines.</li>
-                    <li>The platform does not guarantee final pricing.</li>
-                </ul>
-            </div>
+.terms-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+    background: #ffffff;
+}
 
-            <!-- Payments & Transactions Card -->
-            <div class="bg-[#F3F5F9] rounded-[18px] p-4 sm:p-5 terms-card">
-                <h2 class="text-lg sm:text-xl font-semibold text-[#183153]">
-                    Payments & Transactions
-                </h2>
-                <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-                <ul class="list-disc pl-5 text-sm sm:text-base text-gray-700 space-y-1">
-                    <li>Payments may be handled directly between users and vendors.</li>
-                    <li>We are not responsible for payment disputes outside the platform.</li>
-                </ul>
-            </div>
+.page-title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 12px;
+    position: relative;
+}
 
-            <!-- Cancellations & Refunds Card -->
-            <div class="bg-[#F3F5F9] rounded-[18px] p-4 sm:p-5 terms-card">
-                <h2 class="text-lg sm:text-xl font-semibold text-[#183153]">
-                    Cancellations & Refunds
-                </h2>
-                <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-                <ul class="list-disc pl-5 text-sm sm:text-base text-gray-700 space-y-1">
-                    <li>Cancellation policies depend on the vendor.</li>
-                    <li>Refund requests are handled according to vendor policy.</li>
-                </ul>
-            </div>
+.page-title span {
+    background: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding-bottom: 8px;
+    border-bottom: 4px solid #F97316;
+}
 
-            <!-- Vendor Responsibility Card -->
-            <div class="bg-[#F3F5F9] rounded-[18px] p-4 sm:p-5 terms-card">
-                <h2 class="text-lg sm:text-xl font-semibold text-[#183153]">
-                    Vendor Responsibility
-                </h2>
-                <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-                <ul class="list-disc pl-5 text-sm sm:text-base text-gray-700 space-y-1">
-                    <li>Vendors must provide accurate service information.</li>
-                    <li>Vendors are responsible for service quality and delivery.</li>
-                </ul>
-            </div>
+.last-updated {
+    text-align: center;
+    color: #94A3B8;
+    font-size: 16px;
+    margin-bottom: 50px;
+    font-weight: 500;
+}
 
-            <!-- Limitation of Liability Card -->
-            <div class="bg-[#F3F5F9] rounded-[18px] p-4 sm:p-5 terms-card">
-                <h2 class="text-lg sm:text-xl font-semibold text-[#183153]">
-                    Limitation of Liability
-                </h2>
-                <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-                <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
-                    We are not liable for damages, delays, losses, or disputes
-                    caused by vendors or third-party service providers.
-                </p>
-            </div>
+.terms-card {
+    background: #FBFCFE;
+    padding: 32px 36px;
+    border-radius: 22px;
+    margin-bottom: 28px;
+    border: 1px solid #E8EDF2;
+    border-left: 5px solid #F97316;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
 
-            <!-- Changes to Terms Card -->
-            <div class="bg-[#F3F5F9] rounded-[18px] p-4 sm:p-5 terms-card">
-                <h2 class="text-lg sm:text-xl font-semibold text-[#183153]">
-                    Changes to Terms
-                </h2>
-                <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-                <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
-                    We may update these terms from time to time.
-                    Continued use of the platform indicates acceptance of updates.
-                </p>
-            </div>
+.terms-card:hover {
+    transform: translateX(6px);
+    box-shadow: 0 14px 36px -12px rgba(249, 115, 22, 0.12);
+    border-color: #F97316;
+    background: #ffffff;
+}
 
-        </section>
+.terms-card h3 {
+    color: #0F172A;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
 
+.terms-card h3::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #F97316;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.terms-card hr {
+    border: none;
+    border-top: 2px solid #E8EDF2;
+    margin-bottom: 20px;
+}
+
+.terms-card p {
+    color: #475569;
+    line-height: 1.9;
+    font-size: 17px;
+}
+
+.terms-card ul {
+    padding-left: 22px;
+    list-style: none;
+}
+
+.terms-card ul li {
+    margin-bottom: 12px;
+    color: #475569;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.terms-card ul li::before {
+    content: '✦';
+    color: #F97316;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+@media (max-width: 992px) {
+    .terms-card {
+        padding: 28px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    html, body {
+        padding-top: 70px;
+    }
+    .terms-page {
+        padding: 1rem 1rem 2rem;
+    }
+    .page-title {
+        font-size: 32px;
+    }
+    .last-updated {
+        font-size: 14px;
+        margin-bottom: 35px;
+    }
+    .terms-card {
+        padding: 22px 24px;
+    }
+    .terms-card h3 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    html, body {
+        padding-top: 60px;
+    }
+    .page-title {
+        font-size: 26px;
+    }
+    .terms-card {
+        padding: 18px 20px;
+    }
+    .terms-card h3 {
+        font-size: 20px;
+    }
+    .terms-card p {
+        font-size: 15px;
+    }
+    .terms-card ul li {
+        font-size: 15px;
+    }
+}
+</style>
+
+@endpush
+
+@section('content')
+
+<div class="terms-page">
+
+    <h1 class="page-title">
+        <span>Terms & Conditions</span>
+    </h1>
+
+    <p class="last-updated">Last Updated: March 2026</p>
+
+    <div class="terms-card">
+        <h3>Introduction</h3>
+        <hr>
+        <p>Welcome to our platform. By accessing or using our services, you agree to be bound by these Terms & Conditions. Please read them carefully before using the app.</p>
     </div>
 
-   @include('footer')
+    <div class="terms-card">
+        <h3>User Responsibilities</h3>
+        <hr>
+        <ul>
+            <li>You must provide accurate and complete information.</li>
+            <li>You are responsible for maintaining the confidentiality of your account.</li>
+            <li>Any misuse of the platform may lead to account suspension.</li>
+        </ul>
+    </div>
 
-</body>
-</html>
+    <div class="terms-card">
+        <h3>Orders & Quotes</h3>
+        <hr>
+        <ul>
+            <li>Users can request quotes from vendors based on their requirements.</li>
+            <li>Vendors are responsible for providing accurate pricing and timelines.</li>
+            <li>The platform does not guarantee final pricing or availability.</li>
+        </ul>
+    </div>
+
+    <div class="terms-card">
+        <h3>Payments & Transactions</h3>
+        <hr>
+        <ul>
+            <li>Payments may be handled directly between users and vendors.</li>
+            <li>We are not responsible for disputes related to payments outside the platform.</li>
+        </ul>
+    </div>
+
+    <div class="terms-card">
+        <h3>Cancellations & Refunds</h3>
+        <hr>
+        <ul>
+            <li>Cancellation policies depend on the vendor.</li>
+            <li>Refunds (if applicable) will be handled by the vendor.</li>
+        </ul>
+    </div>
+
+    <div class="terms-card">
+        <h3>Vendor Responsibility</h3>
+        <hr>
+        <ul>
+            <li>Vendors must provide accurate details and deliver quality service.</li>
+            <li>Any service issues should be resolved directly with the vendor.</li>
+        </ul>
+    </div>
+
+    <div class="terms-card">
+        <h3>Limitation of Liability</h3>
+        <hr>
+        <p>We are not liable for any damages, delays, or losses caused by vendors or third-party services.</p>
+    </div>
+
+    <div class="terms-card">
+        <h3>Changes to Terms</h3>
+        <hr>
+        <p>We may update these terms from time to time. Continued use of the platform means you accept the updated terms.</p>
+    </div>
+
+</div>
+
+@endsection

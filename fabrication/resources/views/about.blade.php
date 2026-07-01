@@ -1,116 +1,229 @@
 @extends('app')
-@include('header')
+
+@section('title','About Us')
+
+@push('styles')
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background: #ffffff;
+    font-family: 'Barlow', sans-serif;
+    color: #1E293B;
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+.about-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+    background: #ffffff;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.page-title span {
+    background: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding-bottom: 8px;
+    border-bottom: 4px solid #F97316;
+}
+
+.about-card {
+    background: #FBFCFE;
+    padding: 32px 36px;
+    border-radius: 22px;
+    margin-bottom: 28px;
+    border: 1px solid #E8EDF2;
+    border-left: 5px solid #F97316;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.about-card:hover {
+    transform: translateX(6px);
+    box-shadow: 0 14px 36px -12px rgba(249, 115, 22, 0.12);
+    border-color: #F97316;
+    background: #ffffff;
+}
+
+.about-card h3 {
+    color: #0F172A;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.about-card h3::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #F97316;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.about-card hr {
+    border: none;
+    border-top: 2px solid #E8EDF2;
+    margin-bottom: 20px;
+}
+
+.about-card p {
+    color: #475569;
+    line-height: 1.9;
+    font-size: 17px;
+}
+
+.about-card ul {
+    padding-left: 22px;
+    list-style: none;
+}
+
+.about-card ul li {
+    margin-bottom: 12px;
+    color: #475569;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.about-card ul li::before {
+    content: '✦';
+    color: #F97316;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+@media (max-width: 992px) {
+    .about-card {
+        padding: 28px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    html, body {
+        padding-top: 70px;
+    }
+    .about-page {
+        padding: 1rem 1rem 2rem;
+    }
+    .page-title {
+        font-size: 32px;
+        margin-bottom: 35px;
+    }
+    .about-card {
+        padding: 22px 24px;
+    }
+    .about-card h3 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    html, body {
+        padding-top: 60px;
+    }
+    .page-title {
+        font-size: 26px;
+    }
+    .about-card {
+        padding: 18px 20px;
+    }
+    .about-card h3 {
+        font-size: 20px;
+    }
+    .about-card p {
+        font-size: 15px;
+    }
+    .about-card ul li {
+        font-size: 15px;
+    }
+}
+</style>
+
+@endpush
+
 @section('content')
 
-<div class="bg-[#ECEFF3] min-h-screen">
+<div class="about-page">
 
-    <!-- Page Heading -->
-    <section class="pt-8 sm:pt-10 pb-6 sm:pb-8 px-4">
+    <h1 class="page-title">
+        <span>About Us</span>
+    </h1>
 
-        <div class="text-center">
+    <div class="about-card">
+        <h3>Who We Are</h3>
+        <hr>
+        <p>
+            FabriQ is a platform that connects customers with trusted fabrication
+            vendors for custom fabrication, maintenance services, and industrial
+            solutions through one simple marketplace.
+        </p>
+    </div>
 
-            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#183153]">
-                About Us
-            </h1>
+    <div class="about-card">
+        <h3>What We Do</h3>
+        <hr>
+        <ul>
+            <li>Help customers request customized quotations.</li>
+            <li>Connect users with verified fabrication vendors.</li>
+            <li>Provide secure communication between customers and vendors.</li>
+            <li>Offer transparent pricing and service tracking.</li>
+        </ul>
+    </div>
 
-            <div class="w-24 sm:w-32 h-[2px] bg-[#BCD1EA] mx-auto mt-2 sm:mt-3"></div>
+    <div class="about-card">
+        <h3>Why Choose Us</h3>
+        <hr>
+        <ul>
+            <li>Verified & trusted vendors</li>
+            <li>Quick quotation process</li>
+            <li>Transparent communication</li>
+            <li>Fast customer support</li>
+            <li>Reliable fabrication partners</li>
+        </ul>
+    </div>
 
-        </div>
+    <div class="about-card">
+        <h3>Our Mission</h3>
+        <hr>
+        <p>
+            Our mission is to simplify the fabrication industry by helping
+            customers easily discover reliable vendors, compare quotations,
+            and complete projects with confidence.
+        </p>
+    </div>
 
-    </section>
-
-    <!-- Content -->
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 pb-12 sm:pb-16 space-y-4 sm:space-y-6">
-
-        <!-- Who We Are -->
-        <div class="bg-[#F3F5F9] rounded-[16px] sm:rounded-[20px] p-4 sm:p-6">
-
-            <h2 class="text-xl sm:text-2xl font-semibold text-[#183153]">
-                Who We Are
-            </h2>
-
-            <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-
-            <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
-                We are a platform that connects customers with trusted vendors
-                for custom fabrication and service needs.
-            </p>
-
-        </div>
-
-        <!-- What We Do -->
-        <div class="bg-[#F3F5F9] rounded-[16px] sm:rounded-[20px] p-4 sm:p-6">
-
-            <h2 class="text-xl sm:text-2xl font-semibold text-[#183153]">
-                What We Do
-            </h2>
-
-            <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-
-            <ul class="list-disc pl-4 sm:pl-5 text-sm sm:text-base text-gray-700 space-y-1 sm:space-y-1.5">
-
-                <li>Help users request customized quotes</li>
-                <li>Connect users with verified vendors</li>
-                <li>Provide a smooth and transparent experience</li>
-
-            </ul>
-
-        </div>
-
-        <!-- Why Choose Us -->
-        <div class="bg-[#F3F5F9] rounded-[16px] sm:rounded-[20px] p-4 sm:p-6">
-
-            <h2 class="text-xl sm:text-2xl font-semibold text-[#183153]">
-                Why Choose Us
-            </h2>
-
-            <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-
-            <ul class="list-disc pl-4 sm:pl-5 text-sm sm:text-base text-gray-700 space-y-1 sm:space-y-1.5">
-
-                <li>Trusted vendors</li>
-                <li>Easy quote process</li>
-                <li>Transparent communication</li>
-                <li>Fast response time</li>
-
-            </ul>
-
-        </div>
-
-        <!-- Mission -->
-        <div class="bg-[#F3F5F9] rounded-[16px] sm:rounded-[20px] p-4 sm:p-6">
-
-            <h2 class="text-xl sm:text-2xl font-semibold text-[#183153]">
-                Our Mission
-            </h2>
-
-            <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-
-            <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
-                Our mission is to simplify the process of finding reliable
-                vendors and getting accurate quotes quickly and efficiently.
-            </p>
-
-        </div>
-
-        <!-- Vision -->
-        <div class="bg-[#F3F5F9] rounded-[16px] sm:rounded-[20px] p-4 sm:p-6">
-
-            <h2 class="text-xl sm:text-2xl font-semibold text-[#183153]">
-                Our Vision
-            </h2>
-
-            <div class="h-[1px] bg-[#BCD1EA] mt-2 sm:mt-3 mb-3 sm:mb-4"></div>
-
-            <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
-                To become the most trusted marketplace for custom fabrication
-                and service solutions.
-            </p>
-
-        </div>
-
-    </section>
+    <div class="about-card">
+        <h3>Our Vision</h3>
+        <hr>
+        <p>
+            To become India's most trusted digital marketplace for fabrication,
+            industrial services, and manufacturing solutions.
+        </p>
+    </div>
 
 </div>
-@include('footer')
+
 @endsection

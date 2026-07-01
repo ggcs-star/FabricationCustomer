@@ -6,7 +6,7 @@
 
 <!-- Hero Section -->
 
-<section class="hero-bg pt-36 pb-16">
+<section class="hero-bg pt-36 pb-16" style="background: #ffffff;">
 
     <div class="container-custom">
 
@@ -14,11 +14,11 @@
             Verified Network
         </p>
 
-        <h1 class="text-white text-5xl font-bold mt-4">
+        <h1 class="text-black text-5xl font-bold mt-4">
             Find Fabrication Vendors
         </h1>
 
-        <p class="text-gray-400 mt-5 text-lg">
+        <p class="text-gray-600 mt-5 text-lg">
             Browse verified fabricators across India.
             Compare, shortlist and get quotes.
         </p>
@@ -33,13 +33,13 @@
 
                 <input type="text"
                        placeholder="Search vendors, specialities..."
-                       class="w-full bg-[#171717] border border-[#2E2E2E]
-                              rounded-2xl py-5 pl-14 pr-5 text-white">
+                       class="w-full bg-[#F5F5F5] border border-gray-300
+                              rounded-2xl py-5 pl-14 pr-5 text-black placeholder-gray-500">
 
             </div>
 
-            <select class="bg-[#171717] border border-[#2E2E2E]
-                           rounded-2xl px-6 text-white">
+            <select class="bg-[#F5F5F5] border border-gray-300
+                           rounded-2xl px-6 text-black">
 
                 <option>All Cities</option>
                 <option>Ahmedabad</option>
@@ -49,8 +49,8 @@
 
             </select>
 
-            <button class="secondary-btn">
-                <i class="fa fa-sliders mr-2"></i>
+            <button class="border border-gray-300 text-black rounded-full px-6 py-3 font-semibold hover:border-[#FF8A1E] hover:text-[#FF8A1E] transition flex items-center gap-2">
+                <i class="fa fa-sliders mr-1"></i>
                 Filters
             </button>
 
@@ -291,9 +291,12 @@
 
                     <div class="grid grid-cols-2 gap-4 mt-6">
 
-                        <button class="secondary-btn !py-3 text-sm">
-                            View Profile
-                        </button>
+                    <button
+    class="w-full py-3 rounded-full border border-gray-400
+           bg-white text-gray-800 hover:bg-gray-100
+           font-semibold transition duration-300">
+    View Profile
+</button>
 
                         <button class="primary-btn !py-3 text-sm">
                             Get Quote →

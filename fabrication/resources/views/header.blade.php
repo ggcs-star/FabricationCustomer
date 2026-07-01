@@ -1,5 +1,5 @@
-<header class="fixed top-0 left-0 w-full z-50 navbar-blur">
-    <div class="container-custom">
+<header class="fixed top-0 left-0 w-full z-50 bg-black shadow-lg">  
+      <div class="container-custom">
 
         <nav class="flex items-center justify-between py-6">
 
@@ -37,12 +37,12 @@
                     </a>
                 </li>
 
-              <li>
-    <a href="/how-it-works"
-       class="text-white hover:text-[#FF8C00] transition">
-        How It Works
-    </a>
-</li>
+                <li>
+                    <a href="/how-it-works"
+                       class="text-white hover:text-[#FF8C00] transition">
+                        How It Works
+                    </a>
+                </li>
 
                 <li>
                     <a href="#"
@@ -55,19 +55,19 @@
 
 
             <!-- Desktop Buttons -->
-          <div class="hidden lg:flex items-center gap-4">
+            <div class="hidden lg:flex items-center gap-4">
 
-    <a href="/vendors"
-       class="bg-white text-gray-900 border border-gray-200 px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition">
-        Find Vendors
-    </a>
+                <a href="/vendors"
+                   class="bg-white text-gray-900 border border-gray-200 px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition">
+                    Find Vendors
+                </a>
 
-    <a href="/quote"
-       class="primary-btn">
-        Get Free Quote
-    </a>
+                <a href="/quote"
+                   class="primary-btn">
+                    Get Free Quote
+                </a>
 
-</div>
+            </div>
 
 
             <!-- Mobile Menu Button -->

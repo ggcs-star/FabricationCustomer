@@ -1,9 +1,7 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    @extends('app')
-    @include('header')
+@extends('app')
+
+@section('content')
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
     <title>Our Services · FabriQ</title>
@@ -394,33 +392,32 @@
             color: #FF8A1E;
         }
     </style>
-</head>
-<body>
+
 
     <!-- Hero (exactly as given, but with responsive adjustments) -->
-    <section class="hero-bg pt-36 pb-16" style="padding-top: 8rem; padding-bottom: 3.5rem;">
-        <div class="container-custom">
-            <p class="text-[#FF8A1E] uppercase text-sm tracking-[3px] font-semibold">
-                What We Offer
-            </p>
-            <h1 class="text-white text-6xl font-bold mt-4" style="font-size: 3.6rem;">
-                Our Services
-            </h1>
-            <p class="text-gray-400 mt-5 max-w-2xl text-lg leading-8" style="color: #bcc6d4;">
-                From structural steel to premium glass work — discover
-                the full range of fabrication services available through
-                verified vendors on FabriQ.
-            </p>
-            <div class="flex flex-wrap gap-4 mt-10 filter-buttons">
-                <button class="bg-[#FF8A1E] text-white px-6 py-3 rounded-full border-0 font-semibold" style="background:#FF8A1E;">All</button>
-                <button class="secondary-btn">Popular</button>
-                <button class="secondary-btn">Steel</button>
-                <button class="secondary-btn">Glass</button>
-                <button class="secondary-btn">Interior</button>
-                <button class="secondary-btn">Aluminium</button>
-            </div>
+  <section class="hero-bg pt-36 pb-16" style="padding-top: 8rem; padding-bottom: 3.5rem; background: #ffffff;">
+    <div class="container-custom">
+        <p class="text-[#FF8A1E] uppercase text-sm tracking-[3px] font-semibold">
+            What We Offer
+        </p>
+        <h1 class="text-black text-6xl font-bold mt-4" style="font-size: 3.6rem;">
+            Our Services
+        </h1>
+        <p class="text-gray-600 mt-5 max-w-2xl text-lg leading-8">
+            From structural steel to premium glass work — discover
+            the full range of fabrication services available through
+            verified vendors on FabriQ.
+        </p>
+        <div class="flex flex-wrap gap-4 mt-10 filter-buttons">
+            <button class="bg-[#FF8A1E] text-white px-6 py-3 rounded-full border-0 font-semibold" style="background:#FF8A1E;">All</button>
+            <button class="border border-gray-300 text-black rounded-full px-6 py-3 font-semibold hover:border-[#FF8A1E] hover:text-[#FF8A1E] transition">Popular</button>
+            <button class="border border-gray-300 text-black rounded-full px-6 py-3 font-semibold hover:border-[#FF8A1E] hover:text-[#FF8A1E] transition">Steel</button>
+            <button class="border border-gray-300 text-black rounded-full px-6 py-3 font-semibold hover:border-[#FF8A1E] hover:text-[#FF8A1E] transition">Glass</button>
+            <button class="border border-gray-300 text-black rounded-full px-6 py-3 font-semibold hover:border-[#FF8A1E] hover:text-[#FF8A1E] transition">Interior</button>
+            <button class="border border-gray-300 text-black rounded-full px-6 py-3 font-semibold hover:border-[#FF8A1E] hover:text-[#FF8A1E] transition">Aluminium</button>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Services Grid -->
     <section class="bg-[#F7F7F7] py-20">

@@ -112,9 +112,14 @@ Route::get('/wishlist', function () {
 Route::get('/notifications', function () {
     return view('notifications');
 })->name('notifications');
+
 Route::get('/services', function () {
     return view('services');
-});
+})->name('services');
+
+Route::get('/vendor-profile', function () {
+    return view('vendor_profile');
+})->name('vendor-profile');
 
 Route::get('/saved-addresses', function () {
     return view('saved-addresses');

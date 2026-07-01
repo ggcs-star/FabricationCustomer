@@ -71,7 +71,6 @@
         }
 
         /* Buttons */
-
         .primary-btn{
             background:#FF8C00;
             color:#fff;
@@ -79,6 +78,7 @@
             padding:14px 32px;
             font-weight:600;
             transition:0.3s ease;
+            display:inline-block;
         }
 
         .primary-btn:hover{
@@ -86,58 +86,32 @@
             transform:translateY(-2px);
         }
 
-      <button class="border border-gray-300
-               text-gray-700
-               rounded-full
-               py-3 text-sm
-               hover:border-[#FF8A1E]
-               hover:text-[#FF8A1E]
-               transition">
-    View Profile
-</button>   
+        .secondary-btn{
+            border:1px solid #333;
+            color:#fff;
+            border-radius:9999px;
+            padding:14px 32px;
+            font-weight:600;
+            transition:0.3s ease;
+            display:inline-block;
+        }
 
         .secondary-btn:hover{
             border-color:#FF8C00;
         }
 
-        /* Card Hover */
-
-        .card-hover{
-            transition:all .3s ease;
-        }
-
-        .card-hover:hover{
-            transform:translateY(-8px);
-        }
-
-        /* Section Heading */
-
-        .section-title{
-            font-size:48px;
-            font-weight:800;
-            line-height:1.2;
-            color:white;
-        }
-
-        @media(max-width:768px){
-            .section-title{
-                font-size:34px;
-            }
-        }
-
-        /* Orange Text */
-
-        .text-primary{
-            color:#FF8C00;
-        }
-
         /* Navbar Blur */
-
         .navbar-blur{
             backdrop-filter: blur(12px);
             background: rgba(0,0,0,0.45);
         }
 
+        /* ===== HIDE FOOTER ON MOBILE ===== */
+        @media (max-width: 768px) {
+            footer {
+                display: none !important;
+            }
+        }
     </style>
 
     @stack('styles')
