@@ -5,76 +5,55 @@
 @section('content')
 
 <!-- Hero Section -->
-
-<section class="hero-bg pt-36 pb-16" style="background: #ffffff;">
-
-    <div class="container-custom">
-
-        <p class="text-[#FF8A1E] uppercase text-sm tracking-[3px] font-semibold">
+<section class="bg-gradient-to-br from-[#161616] via-[#1B1B1B] to-[#202020] pt-32 pb-12">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+        <p class="uppercase tracking-[4px] text-[#FF8C00] font-semibold text-xs mb-2">
             Verified Network
         </p>
-
-        <h1 class="text-black text-5xl font-bold mt-4">
+        <h1 class="text-3xl lg:text-4xl font-bold text-white leading-tight">
             Find Fabrication Vendors
         </h1>
-
-        <p class="text-gray-600 mt-5 text-lg">
-            Browse verified fabricators across India.
-            Compare, shortlist and get quotes.
+        <p class="text-gray-400 text-base mt-3 max-w-3xl leading-6">
+            Browse verified fabrication vendors across India. Compare,
+            shortlist and request quotations for your projects.
         </p>
 
         <!-- Search -->
-
-        <div class="flex flex-col lg:flex-row gap-4 mt-10">
-
-            <div class="flex-1 relative">
-
-                <i class="fa fa-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
-
-                <input type="text"
-                       placeholder="Search vendors, specialities..."
-                       class="w-full bg-[#F5F5F5] border border-gray-300
-                              rounded-2xl py-5 pl-14 pr-5 text-black placeholder-gray-500">
-
+        <div class="mt-6 flex flex-col lg:flex-row gap-3">
+            <div class="relative flex-1">
+                <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+                <input
+                    type="text"
+                    placeholder="Search vendors, specialties..."
+                    class="w-full h-12 rounded-xl bg-[#2A2A2A] border border-[#3B3B3B] pl-12 pr-4 text-white placeholder:text-gray-500 text-sm focus:outline-none focus:border-[#FF8C00] transition">
             </div>
-
-            <select class="bg-[#F5F5F5] border border-gray-300
-                           rounded-2xl px-6 text-black">
-
+            <select class="w-full lg:w-40 h-12 rounded-xl bg-[#2A2A2A] border border-[#3B3B3B] text-white px-4 text-sm focus:outline-none focus:border-[#FF8C00]">
                 <option>All Cities</option>
                 <option>Ahmedabad</option>
-                <option>Mumbai</option>
-                <option>Pune</option>
-                <option>Delhi</option>
-
+                <option>Vadodara</option>
+                <option>Surat</option>
+                <option>Rajkot</option>
             </select>
-
-            <button class="border border-gray-300 text-black rounded-full px-6 py-3 font-semibold hover:border-[#FF8A1E] hover:text-[#FF8A1E] transition flex items-center gap-2">
-                <i class="fa fa-sliders mr-1"></i>
+            <button class="h-12 px-6 rounded-xl bg-[#2A2A2A] border border-[#3B3B3B] text-white font-semibold text-sm hover:bg-[#FF8C00] hover:border-[#FF8C00] transition">
+                <i class="fas fa-sliders-h mr-2"></i>
                 Filters
             </button>
-
         </div>
-
     </div>
-
 </section>
 
-
 <!-- Vendor Listing -->
-
-<section class="bg-[#F7F7F7] py-20">
-
-    <div class="container-custom">
-
-        <p class="text-gray-600 mb-8">
-            12 vendors found
-        </p>
+<section class="bg-[#F7F7F7] py-8">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+        
+        <div class="flex items-center gap-3 mb-6 flex-wrap">
+            <span class="text-sm font-medium" style="font-family: Inter, sans-serif; color: #111;">
+                12 vendors found
+            </span>
+        </div>
 
         @php
-
         $vendors = [
-
             [
                 'badge' => 'Top Rated',
                 'name' => 'Mehta Steel Works',
@@ -84,9 +63,8 @@
                 'projects' => '820',
                 'price' => '₹85+',
                 'rating' => '4.9',
-                'image' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd'
+                'image' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=320&fit=crop&auto=format'
             ],
-
             [
                 'badge' => 'Most Experienced',
                 'name' => 'PrimeStruct Co.',
@@ -96,9 +74,8 @@
                 'projects' => '1200',
                 'price' => '₹75+',
                 'rating' => '4.9',
-                'image' => 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5'
+                'image' => 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&h=320&fit=crop&auto=format'
             ],
-
             [
                 'badge' => 'Top Rated',
                 'name' => 'IronVault Structures',
@@ -108,9 +85,8 @@
                 'projects' => '980',
                 'price' => '₹80+',
                 'rating' => '4.9',
-                'image' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd'
+                'image' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=320&fit=crop&auto=format'
             ],
-
             [
                 'badge' => 'Fast Delivery',
                 'name' => 'ArcLight Fabricators',
@@ -120,9 +96,8 @@
                 'projects' => '560',
                 'price' => '₹95+',
                 'rating' => '4.8',
-                'image' => 'https://images.unsplash.com/photo-1517048676732-d65bc937f952'
+                'image' => 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&h=320&fit=crop&auto=format'
             ],
-
             [
                 'badge' => 'Premium',
                 'name' => 'Luxo Design Studio',
@@ -132,9 +107,8 @@
                 'projects' => '390',
                 'price' => '₹280+',
                 'rating' => '4.8',
-                'image' => 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85'
+                'image' => 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&h=320&fit=crop&auto=format'
             ],
-
             [
                 'badge' => '',
                 'name' => 'GlassEdge Interiors',
@@ -144,9 +118,8 @@
                 'projects' => '340',
                 'price' => '₹120+',
                 'rating' => '4.7',
-                'image' => 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3'
+                'image' => 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=320&fit=crop&auto=format'
             ],
-
             [
                 'badge' => '',
                 'name' => 'SteelForm Works',
@@ -156,9 +129,8 @@
                 'projects' => '670',
                 'price' => '₹88+',
                 'rating' => '4.7',
-                'image' => 'https://images.unsplash.com/photo-1517048676732-d65bc937f952'
+                'image' => 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=320&fit=crop&auto=format'
             ],
-
             [
                 'badge' => '',
                 'name' => 'ClearView Glass Co.',
@@ -168,9 +140,8 @@
                 'projects' => '450',
                 'price' => '₹135+',
                 'rating' => '4.7',
-                'image' => 'https://images.unsplash.com/photo-1497366754035-f200968a6e72'
+                'image' => 'https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=600&h=320&fit=crop&auto=format'
             ],
-
             [
                 'badge' => '',
                 'name' => 'AluVision Systems',
@@ -180,140 +151,152 @@
                 'projects' => '430',
                 'price' => '₹110+',
                 'rating' => '4.6',
-                'image' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab'
+                'image' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=320&fit=crop&auto=format'
             ],
-
+            [
+                'badge' => '',
+                'name' => 'CraftBuild Projects',
+                'category' => 'Bespoke & Exhibition Builds',
+                'city' => 'Hyderabad',
+                'experience' => '8yrs',
+                'projects' => '210',
+                'price' => '₹95+',
+                'rating' => '4.6',
+                'image' => 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=320&fit=crop&auto=format'
+            ],
+            [
+                'badge' => '',
+                'name' => 'InnoFrame Aluminium',
+                'category' => 'Modular Facade Systems',
+                'city' => 'Pune',
+                'experience' => '10yrs',
+                'projects' => '320',
+                'price' => '₹105+',
+                'rating' => '4.6',
+                'image' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=320&fit=crop&auto=format'
+            ],
+            [
+                'badge' => '',
+                'name' => 'CeilCraft Interiors',
+                'category' => 'Gypsum & Metal Ceilings',
+                'city' => 'Chennai',
+                'experience' => '7yrs',
+                'projects' => '280',
+                'price' => '₹65+',
+                'rating' => '4.5',
+                'image' => 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=320&fit=crop&auto=format'
+            ],
         ];
-
         @endphp
 
-        <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             @foreach($vendors as $vendor)
-
-            <div class="bg-white rounded-[28px] overflow-hidden shadow-sm border">
-
+            <div class="bg-white rounded-2xl overflow-hidden border cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl" 
+                 style="border-color: rgba(0, 0, 0, 0.07); box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 16px;">
+                
                 <!-- Image -->
-
-                <div class="relative">
-
-                    <img src="{{ $vendor['image'] }}"
-                         class="w-full h-60 object-cover">
-
+                <div class="h-48 relative overflow-hidden">
+                    <img src="{{ $vendor['image'] }}" 
+                         alt="{{ $vendor['name'] }}" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                    
+                    <!-- Gradient Overlay -->
+                    <div class="absolute inset-0" style="background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.6));"></div>
+                    
+                    <!-- Badge -->
                     @if($vendor['badge'] != '')
-                    <span class="absolute top-4 left-4
-                                 bg-[#FF8A1E] text-white
-                                 text-xs px-3 py-1 rounded-full">
-
+                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
+                         style="background: #FF7A00; color: #fff; font-family: Inter, sans-serif;">
                         {{ $vendor['badge'] }}
-
-                    </span>
+                    </div>
                     @endif
-
-                    <span class="absolute top-4 right-4
-                                 bg-green-100 text-green-700
-                                 text-xs px-3 py-1 rounded-full">
-
-                        ✓ Verified
-
-                    </span>
-
-                    <span class="absolute bottom-4 right-4
-                                 bg-white px-3 py-1 rounded-full text-sm">
-
-                        ⭐ {{ $vendor['rating'] }}
-
-                    </span>
-
-                    <span class="absolute bottom-4 left-4
-                                 text-white text-sm">
-
-                        📍 {{ $vendor['city'] }}
-
-                    </span>
-
+                    
+                    <!-- Verified Badge -->
+                    <div class="absolute top-3 right-3 flex items-center gap-1 bg-white rounded-full px-2.5 py-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.801 10A10 10 0 1 1 17 3.335"/>
+                            <path d="m9 11 3 3L22 4"/>
+                        </svg>
+                        <span class="text-xs font-semibold text-green-600">Verified</span>
+                    </div>
+                    
+                    <!-- Location -->
+                    <div class="absolute bottom-3 left-3">
+                        <div class="flex items-center gap-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                            <span class="text-xs text-white">{{ $vendor['city'] }}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Rating -->
+                    <div class="absolute bottom-3 right-3 flex items-center gap-1 bg-white rounded-full px-2 py-0.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#FF7A00" stroke="#FF7A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
+                        </svg>
+                        <span class="text-xs font-bold" style="color: #111;">{{ $vendor['rating'] }}</span>
+                    </div>
                 </div>
-
-
+                
                 <!-- Content -->
-
-                <div class="p-6">
-
-                    <h3 class="font-bold text-xl">
+                <div class="p-5">
+                    <div class="font-bold text-base mb-0.5" style="font-family: Poppins, sans-serif; color: #111;">
                         {{ $vendor['name'] }}
-                    </h3>
-
-                    <p class="text-[#FF8A1E] text-sm mt-2">
+                    </div>
+                    <div class="text-xs mb-3" style="font-family: Inter, sans-serif; color: #FF7A00;">
                         {{ $vendor['category'] }}
-                    </p>
-
-
-                    <div class="grid grid-cols-3 gap-4 mt-6">
-
-                        <div class="bg-gray-50 rounded-xl p-3 text-center">
-
-                            <h4 class="font-bold">
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-3 mb-4 text-center py-3 rounded-xl" style="background: #f9f9f9;">
+                        <div>
+                            <div class="text-sm font-bold" style="font-family: Poppins, sans-serif; color: #111;">
                                 {{ $vendor['experience'] }}
-                            </h4>
-
-                            <p class="text-xs text-gray-500">
-                                Experience
-                            </p>
-
+                            </div>
+                            <div class="text-xs" style="color: #999;">Experience</div>
                         </div>
-
-                        <div class="bg-gray-50 rounded-xl p-3 text-center">
-
-                            <h4 class="font-bold">
+                        <div>
+                            <div class="text-sm font-bold" style="font-family: Poppins, sans-serif; color: #111;">
                                 {{ $vendor['projects'] }}
-                            </h4>
-
-                            <p class="text-xs text-gray-500">
-                                Projects
-                            </p>
-
+                            </div>
+                            <div class="text-xs" style="color: #999;">Projects</div>
                         </div>
-
-                        <div class="bg-gray-50 rounded-xl p-3 text-center">
-
-                            <h4 class="font-bold text-[#FF8A1E]">
+                        <div>
+                            <div class="text-sm font-bold" style="font-family: Poppins, sans-serif; color: #FF7A00;">
                                 {{ $vendor['price'] }}
-                            </h4>
-
-                            <p class="text-xs text-gray-500">
-                                Per sqft
-                            </p>
-
+                            </div>
+                            <div class="text-xs" style="color: #999;">Per sqft</div>
                         </div>
-
                     </div>
+                    
+                    <!-- Buttons -->
+                   <div class="flex gap-2">
+    <a href="{{ url('/vendor-profile') }}" class="flex-1">
+        <button
+            class="w-full py-2.5 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50"
+            style="border-color: rgba(0, 0, 0, 0.1); color: #111; font-family: Inter, sans-serif;">
+            View Profile
+        </button>
+    </a>
 
-
-                    <div class="grid grid-cols-2 gap-4 mt-6">
-
-                    <button
-    class="w-full py-3 rounded-full border border-gray-400
-           bg-white text-gray-800 hover:bg-gray-100
-           font-semibold transition duration-300">
-    View Profile
-</button>
-
-                        <button class="primary-btn !py-3 text-sm">
-                            Get Quote →
+                        <button class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90" 
+                                style="background: #FF7A00; font-family: Inter, sans-serif;">
+                            Get Quote 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
                         </button>
-
                     </div>
-
                 </div>
-
             </div>
-
             @endforeach
 
         </div>
-
     </div>
-
 </section>
 
 @endsection

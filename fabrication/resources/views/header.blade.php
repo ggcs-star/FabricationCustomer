@@ -1,78 +1,68 @@
-<header class="fixed top-0 left-0 w-full z-50 bg-black shadow-lg">  
-      <div class="container-custom">
+<header class="fixed top-0 left-0 w-full z-50 bg-white shadow-sm">
 
-        <nav class="flex items-center justify-between py-6">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+
+        <nav class="flex items-center justify-between h-16">
 
             <!-- Logo -->
-            <a href="/" class="flex items-center gap-3">
-
-                <div class="w-11 h-11 rounded-xl bg-[#FF8C00]
-                            flex items-center justify-center">
-
-                    <i class="fas fa-tools text-white text-lg"></i>
-
+            <a href="/" class="flex items-center gap-2 flex-shrink-0">
+                <div class="w-9 h-9 rounded-xl bg-[#FF8C00] flex items-center justify-center">
+                    <i class="fas fa-tools text-white text-sm"></i>
                 </div>
-
-                <h2 class="text-white text-3xl font-bold">
+                <h2 class="text-black text-2xl font-bold tracking-tight">
                     FabriQ
                 </h2>
-
             </a>
 
-
-            <!-- Desktop Menu -->
-            <ul class="hidden lg:flex items-center gap-12">
+            <!-- Desktop Menu - Centered with spacing -->
+            <ul class="hidden lg:flex items-center gap-8">
 
                 <li>
                     <a href="/services"
-                       class="text-white hover:text-[#FF8C00] transition">
+                       class="text-gray-700 text-sm font-medium hover:text-[#FF8C00] transition duration-300">
                         Services
                     </a>
                 </li>
 
                 <li>
                     <a href="/vendors"
-                       class="text-white hover:text-[#FF8C00] transition">
+                       class="text-gray-700 text-sm font-medium hover:text-[#FF8C00] transition duration-300">
                         Vendors
                     </a>
                 </li>
 
                 <li>
                     <a href="/how-it-works"
-                       class="text-white hover:text-[#FF8C00] transition">
-                        How It Works
+                       class="text-gray-700 text-sm font-medium hover:text-[#FF8C00] transition duration-300">
+                        How it works
                     </a>
                 </li>
 
                 <li>
-                    <a href="#"
-                       class="text-white hover:text-[#FF8C00] transition">
+                    <a href="/amc-plans"
+                       class="text-gray-700 text-sm font-medium hover:text-[#FF8C00] transition duration-300">
                         AMC Plans
                     </a>
                 </li>
 
             </ul>
 
+            <!-- Right Side -->
+            <div class="hidden lg:flex items-center gap-3">
 
-            <!-- Desktop Buttons -->
-            <div class="hidden lg:flex items-center gap-4">
-
-                <a href="/vendors"
-                   class="bg-white text-gray-900 border border-gray-200 px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition">
+                <button class="px-4 py-2 rounded-full text-sm font-medium border border-gray-300 hover:bg-gray-50 transition text-gray-700">
                     Find Vendors
-                </a>
+                </button>
 
-                <a href="/quote"
-                   class="primary-btn">
+                <button class="px-5 py-2 rounded-full text-sm font-semibold text-white bg-[#FF8C00] hover:bg-[#e67a00] transition">
                     Get Free Quote
-                </a>
+                </button>
 
             </div>
 
-
             <!-- Mobile Menu Button -->
             <button id="menu-btn"
-                    class="lg:hidden text-white text-3xl">
+                    class="lg:hidden text-gray-700 text-2xl">
 
                 <i class="fas fa-bars"></i>
 
@@ -82,48 +72,48 @@
 
     </div>
 
-
     <!-- Mobile Menu -->
     <div id="mobile-menu"
-         class="hidden lg:hidden bg-black border-t border-gray-800">
+         class="hidden lg:hidden bg-white border-t border-gray-200">
 
-        <div class="container-custom py-6">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 py-4">
 
-            <ul class="flex flex-col gap-6">
+            <ul class="flex flex-col gap-4">
 
                 <li>
-                    <a href="/services"
-                       class="text-white block">
+                    <a href="/services" class="text-gray-700 text-sm block hover:text-[#FF8C00] transition">
                         Services
                     </a>
                 </li>
 
                 <li>
-                    <a href="/vendors"
-                       class="text-white block">
+                    <a href="/vendors" class="text-gray-700 text-sm block hover:text-[#FF8C00] transition">
                         Vendors
                     </a>
                 </li>
 
                 <li>
-                    <a href="#"
-                       class="text-white block">
+                    <a href="/track-project" class="text-gray-700 text-sm block hover:text-[#FF8C00] transition">
                         Track Project
                     </a>
                 </li>
 
                 <li>
-                    <a href="#"
-                       class="text-white block">
+                    <a href="/amc-plans" class="text-gray-700 text-sm block hover:text-[#FF8C00] transition">
                         AMC Plans
                     </a>
                 </li>
 
+                <li class="pt-2 border-t border-gray-200">
+                    <button class="w-full py-2.5 rounded-full text-sm font-medium border border-gray-300 text-gray-700 hover:bg-gray-50 transition">
+                        Find Vendors
+                    </button>
+                </li>
+
                 <li>
-                    <a href="/quote"
-                       class="primary-btn text-center block">
+                    <button class="w-full py-2.5 rounded-full text-sm font-semibold text-white bg-[#FF8C00] hover:bg-[#e67a00] transition">
                         Get Free Quote
-                    </a>
+                    </button>
                 </li>
 
             </ul>
@@ -131,16 +121,17 @@
         </div>
 
     </div>
+
 </header>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
-    const btn = document.getElementById('menu-btn');
-    const menu = document.getElementById('mobile-menu');
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
 
-    btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
+    menuBtn.addEventListener('click', function () {
+        mobileMenu.classList.toggle('hidden');
     });
 
 });

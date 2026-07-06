@@ -16,23 +16,24 @@ html, body {
     font-family: 'Barlow', sans-serif;
     color: #1E293B;
     min-height: 100vh;
-    padding-top: 80px;
+    padding-top: 0px;
 }
 
 .terms-page {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem 1.5rem 3rem;
+    padding: 6rem 1.5rem 3rem;
     background: #ffffff;
 }
 
 .page-title {
     text-align: center;
-    font-size: 42px;
+    font-size: 36px;
     font-weight: 700;
     color: #0F172A;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     position: relative;
+    margin-top: 0px;
 }
 
 .page-title span {
@@ -47,16 +48,16 @@ html, body {
 .last-updated {
     text-align: center;
     color: #94A3B8;
-    font-size: 16px;
-    margin-bottom: 50px;
+    font-size: 14px;
+    margin-bottom: 44px;
     font-weight: 500;
 }
 
 .terms-card {
     background: #FBFCFE;
-    padding: 32px 36px;
+    padding: 28px 32px;
     border-radius: 22px;
-    margin-bottom: 28px;
+    margin-bottom: 26px;
     border: 1px solid #E8EDF2;
     border-left: 5px solid #F97316;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -72,9 +73,9 @@ html, body {
 
 .terms-card h3 {
     color: #0F172A;
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 700;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -93,13 +94,13 @@ html, body {
 .terms-card hr {
     border: none;
     border-top: 2px solid #E8EDF2;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .terms-card p {
     color: #475569;
-    line-height: 1.9;
-    font-size: 17px;
+    line-height: 1.8;
+    font-size: 16px;
 }
 
 .terms-card ul {
@@ -108,9 +109,9 @@ html, body {
 }
 
 .terms-card ul li {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     color: #475569;
-    font-size: 17px;
+    font-size: 16px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -125,50 +126,55 @@ html, body {
 
 @media (max-width: 992px) {
     .terms-card {
-        padding: 28px 30px;
+        padding: 24px 28px;
     }
 }
 
 @media (max-width: 768px) {
     html, body {
-        padding-top: 70px;
+        padding-top: 0px;
     }
     .terms-page {
-        padding: 1rem 1rem 2rem;
+        padding: 5rem 1rem 2rem;
     }
     .page-title {
-        font-size: 32px;
+        font-size: 28px;
     }
     .last-updated {
-        font-size: 14px;
-        margin-bottom: 35px;
+        font-size: 13px;
+        margin-bottom: 34px;
     }
     .terms-card {
-        padding: 22px 24px;
+        padding: 20px 22px;
+        margin-bottom: 22px;
     }
     .terms-card h3 {
-        font-size: 22px;
+        font-size: 20px;
     }
 }
 
 @media (max-width: 480px) {
     html, body {
-        padding-top: 60px;
+        padding-top: 0px;
+    }
+    .terms-page {
+        padding: 4.5rem 1rem 2rem;
     }
     .page-title {
-        font-size: 26px;
+        font-size: 24px;
     }
     .terms-card {
-        padding: 18px 20px;
+        padding: 16px 18px;
+        margin-bottom: 18px;
     }
     .terms-card h3 {
-        font-size: 20px;
+        font-size: 18px;
     }
     .terms-card p {
-        font-size: 15px;
+        font-size: 14px;
     }
     .terms-card ul li {
-        font-size: 15px;
+        font-size: 14px;
     }
 }
 </style>

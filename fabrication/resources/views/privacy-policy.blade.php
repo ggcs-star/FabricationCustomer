@@ -17,13 +17,13 @@ html, body {
     font-family: 'Barlow', sans-serif;
     color: #1E293B;
     min-height: 100vh;
-    padding-top: 80px;
+    padding-top: 60px;
 }
 
 .privacy-page {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem 1.5rem 3rem;
+    padding: 0.5rem 1.5rem 3rem;
     background: #ffffff;
 }
 

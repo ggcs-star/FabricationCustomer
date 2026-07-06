@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>My Orders - FabriQ</title>
+    <title>My Wishlist - FabriQ</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -92,7 +92,7 @@
         }
 
         /* ===== MAIN CONTENT WITH SIDEBAR ===== */
-        .orders-page {
+        .wishlist-page {
             padding: 30px 40px;
             max-width: 1500px;
             margin: 0 auto;
@@ -299,8 +299,14 @@
             color: #F97316;
         }
 
-        /* ===== ORDER CARDS ===== */
-        .order-card {
+        .page-header .badge {
+            background: #F97316;
+            font-size: 14px;
+            padding: 6px 16px;
+        }
+
+        /* ===== WISHLIST CARDS ===== */
+        .wishlist-card {
             border: none;
             border-radius: 18px;
             overflow: hidden;
@@ -309,67 +315,134 @@
             height: 100%;
             transition: 0.3s;
             border: 1px solid #E8EDF2;
+            position: relative;
         }
 
-        .order-card:hover {
+        .wishlist-card:hover {
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             transform: translateY(-2px);
         }
 
-        .order-img {
+        .wishlist-img {
             width: 100%;
-            height: 250px;
+            height: 220px;
             object-fit: cover;
         }
 
-        .status-bar {
-            background: #f2f4f6;
-            text-align: center;
-            padding: 12px;
-            font-weight: 600;
-            font-size: 16px;
-            border-top: 1px solid #E8EDF2;
+        .wishlist-card .card-body {
+            padding: 20px;
         }
 
-        .status-bar.cancelled {
-            color: #dc3545;
-            background: #FEF2F2;
-        }
-
-        .status-bar.delivered {
-            color: #10b981;
-            background: #ECFDF5;
-        }
-
-        .status-bar.out-for-delivery {
-            color: #F97316;
-            background: #FFF4EA;
-        }
-
-        .status-bar.processing {
-            color: #3b82f6;
-            background: #EFF6FF;
-        }
-
-        .order-id {
-            font-size: 13px;
-            color: #94A3B8;
-            margin-bottom: 6px;
-        }
-
-        .rating i {
-            color: #F97316;
-            cursor: pointer;
-            transition: 0.2s;
+        .wishlist-card .product-name {
             font-size: 18px;
+            font-weight: 700;
+            color: #0F172A;
+            margin-bottom: 4px;
         }
 
-        .rating i:hover {
-            transform: scale(1.2);
+        .wishlist-card .vendor-name {
+            color: #94A3B8;
+            font-size: 14px;
+            margin-bottom: 8px;
         }
 
-        .rating i.fa-regular {
+        .wishlist-card .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #F97316;
+            margin-bottom: 10px;
+        }
+
+        .wishlist-card .rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+
+        .wishlist-card .rating .stars {
+            color: #F97316;
+            font-size: 16px;
+        }
+
+        .wishlist-card .rating .stars i {
+            margin-right: 2px;
+        }
+
+        .wishlist-card .rating .rating-value {
+            font-weight: 600;
+            color: #0F172A;
+            font-size: 15px;
+        }
+
+        .wishlist-card .rating .reviews {
+            color: #94A3B8;
+            font-size: 13px;
+        }
+
+        .wishlist-card .btn-add-cart {
+            background: #F97316;
+            color: #fff;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .wishlist-card .btn-add-cart:hover {
+            background: #E8680C;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+        }
+
+        .wishlist-card .heart-icon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            color: #EF4444;
+            font-size: 22px;
+            background: rgba(255, 255, 255, 0.9);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .wishlist-card .heart-icon:hover {
+            transform: scale(1.1);
+            background: white;
+        }
+
+        /* Empty state */
+        .empty-wishlist {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-wishlist i {
+            font-size: 64px;
             color: #CBD5E1;
+            margin-bottom: 20px;
+        }
+
+        .empty-wishlist h3 {
+            font-size: 24px;
+            color: #0F172A;
+            margin-bottom: 8px;
+        }
+
+        .empty-wishlist p {
+            color: #94A3B8;
+            font-size: 16px;
         }
 
         /* ===== RESPONSIVE ===== */
@@ -378,7 +451,7 @@
                 grid-template-columns: 250px 1fr;
                 gap: 24px;
             }
-            .orders-page {
+            .wishlist-page {
                 padding: 24px 30px;
             }
         }
@@ -445,14 +518,14 @@
             .profile-sidebar .nav-item.vendor-link .nav-left {
                 flex-direction: row;
             }
-            .orders-page {
+            .wishlist-page {
                 padding: 20px 20px;
             }
             .page-header h2 {
                 font-size: 24px;
             }
-            .order-img {
-                height: 200px;
+            .wishlist-img {
+                height: 180px;
             }
             .navbar-custom .navbar-brand {
                 font-size: 1.5rem;
@@ -467,7 +540,7 @@
                 padding-top: 55px;
                 padding-bottom: 55px;
             }
-            .orders-page {
+            .wishlist-page {
                 padding: 16px 14px;
             }
             .page-header {
@@ -502,21 +575,8 @@
             .profile-sidebar .user-email {
                 font-size: 11px;
             }
-            .order-card .row {
-                flex-direction: column;
-            }
-            .order-card .col-md-4,
-            .order-card .col-md-8 {
-                width: 100%;
-                flex: 0 0 100%;
-                max-width: 100%;
-            }
-            .order-img {
+            .wishlist-img {
                 height: 200px;
-            }
-            .status-bar {
-                font-size: 14px;
-                padding: 10px;
             }
             .navbar-custom .navbar-brand {
                 font-size: 1.3rem;
@@ -537,8 +597,11 @@
                 padding: 6px 10px;
                 font-size: 1.1rem;
             }
-            .rating i {
+            .wishlist-card .product-name {
                 font-size: 16px;
+            }
+            .wishlist-card .price {
+                font-size: 18px;
             }
             .bottom-nav {
                 display: flex;
@@ -546,7 +609,7 @@
         }
 
         @media (max-width: 576px) {
-            .orders-page {
+            .wishlist-page {
                 padding: 12px 10px;
             }
             .page-header h2 {
@@ -587,24 +650,21 @@
                 font-size: 12px;
                 width: 14px;
             }
-            .order-img {
-                height: 170px;
+            .wishlist-img {
+                height: 160px;
             }
-            .order-card .p-4 {
-                padding: 16px !important;
+            .wishlist-card .card-body {
+                padding: 16px;
             }
-            .order-card h4 {
-                font-size: 1.1rem;
+            .wishlist-card .product-name {
+                font-size: 15px;
             }
-            .order-card h5 {
-                font-size: 1rem;
+            .wishlist-card .price {
+                font-size: 16px;
             }
-            .status-bar {
+            .wishlist-card .btn-add-cart {
                 font-size: 13px;
-                padding: 8px;
-            }
-            .order-id {
-                font-size: 12px;
+                padding: 6px 20px;
             }
             .navbar-custom .navbar-brand {
                 font-size: 1.1rem;
@@ -621,23 +681,17 @@
                 font-size: 12px;
                 padding: 3px 10px;
             }
-            .navbar-custom .d-flex.gap-3 {
-                gap: 12px !important;
-            }
-            .col-xl-6.col-lg-12.mb-4 {
-                padding-left: 6px;
-                padding-right: 6px;
-            }
-            .rating i {
-                font-size: 14px;
-            }
-            .rating {
-                gap: 3px;
+            .wishlist-card .heart-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+                top: 8px;
+                right: 8px;
             }
         }
 
         @media (max-width: 400px) {
-            .orders-page {
+            .wishlist-page {
                 padding: 8px 6px;
             }
             .page-header h2 {
@@ -671,24 +725,21 @@
                 font-size: 11px;
                 width: 12px;
             }
-            .order-img {
+            .wishlist-img {
                 height: 140px;
             }
-            .order-card .p-4 {
-                padding: 12px !important;
+            .wishlist-card .card-body {
+                padding: 12px;
             }
-            .order-card h4 {
-                font-size: 1rem;
+            .wishlist-card .product-name {
+                font-size: 14px;
             }
-            .order-card h5 {
-                font-size: 0.9rem;
+            .wishlist-card .price {
+                font-size: 14px;
             }
-            .status-bar {
-                font-size: 11px;
-                padding: 6px;
-            }
-            .order-id {
-                font-size: 10px;
+            .wishlist-card .btn-add-cart {
+                font-size: 12px;
+                padding: 5px 16px;
             }
             .search-box {
                 width: 100px;
@@ -770,7 +821,7 @@
 
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item mx-1 mx-lg-2">
-                        <a class="nav-link active" href="#"><i class="fas fa-home"></i> Home</a>
+                        <a class="nav-link" href="#"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item mx-1 mx-lg-2">
                         <a class="nav-link" href="#"><i class="fas fa-tools"></i> Services</a>
@@ -779,13 +830,13 @@
                         <a class="nav-link" href="#"><i class="fas fa-store"></i> Vendors</a>
                     </li>
                     <li class="nav-item mx-1 mx-lg-2">
-                        <a class="nav-link" href="#"><i class="fas fa-info-circle"></i> How We Work</a>
+                        <a class="nav-link active" href="#"><i class="fas fa-heart"></i> Wishlist</a>
                     </li>
                 </ul>
 
                 <div class="d-flex align-items-center gap-3 flex-wrap flex-sm-nowrap">
 
-                    <input type="text" class="form-control search-box" placeholder="Search orders...">
+                    <input type="text" class="form-control search-box" placeholder="Search wishlist...">
 
                     <div class="nav-icons">
                         <i class="fa-regular fa-user"></i>
@@ -800,107 +851,113 @@
     </nav>
 
     <!-- ===== MAIN CONTENT WITH SIDEBAR ===== -->
-    <div class="orders-page">
+    <div class="wishlist-page">
 
         <div class="page-layout">
 
             <!-- ===== SIDEBAR ===== -->
             @include('sidebar')
 
-            <!-- ===== ORDERS CONTENT ===== -->
-            <div class="orders-content">
+            <!-- ===== WISHLIST CONTENT ===== -->
+            <div class="wishlist-content">
 
                 <!-- Page Header -->
                 <div class="page-header">
-                    <i class="fas fa-box"></i>
-                    <h2>My Orders</h2>
+                    <i class="fas fa-heart"></i>
+                    <h2>My Wishlist</h2>
+                    <span class="badge">6 items</span>
                 </div>
 
-                <!-- Orders Grid -->
+                <!-- Wishlist Grid -->
                 <div class="row g-4">
 
                     @php
-                    $orders = [
+                    $wishlistItems = [
                         [
-                            'id' => 'ORD-2024-001',
                             'name' => 'Royal Fortress Steel Gate',
                             'vendor' => 'Apex Metal Works',
-                            'price' => '₹12,500',
-                            'image' => 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800',
-                            'status' => 'Out for Delivery',
-                            'status_class' => 'out-for-delivery',
-                            'cancelled' => false
-                        ],
-                        [
-                            'id' => 'ORD-2024-002',
-                            'name' => 'Bespoke Metal Gate',
-                            'vendor' => 'PrimeFab Solutions',
-                            'price' => '₹35,000',
-                            'image' => 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800',
-                            'status' => 'Order Cancelled',
-                            'status_class' => 'cancelled',
-                            'cancelled' => true
-                        ],
-                        [
-                            'id' => 'ORD-2024-003',
-                            'name' => 'Smooth Glide Sliding Gate',
-                            'vendor' => 'Apex Metal Works',
                             'price' => '₹12,000',
-                            'image' => 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800',
-                            'status' => 'Delivered on 23 Mar 2024',
-                            'status_class' => 'delivered',
-                            'cancelled' => false
+                            'rating' => 4.7,
+                            'reviews' => 128,
+                            'image' => 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800'
                         ],
                         [
-                            'id' => 'ORD-2024-004',
-                            'name' => 'Premium Steel Security Gate',
+                            'name' => 'Premium Designer Main Door',
+                            'vendor' => 'PrimeFab Solutions',
+                            'price' => '₹4,000',
+                            'rating' => 4.2,
+                            'reviews' => 89,
+                            'image' => 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800'
+                        ],
+                        [
+                            'name' => 'Bespoke Metal Craft Gate',
                             'vendor' => 'SteelCraft Industries',
-                            'price' => '₹18,750',
-                            'image' => 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800',
-                            'status' => 'Processing',
-                            'status_class' => 'processing',
-                            'cancelled' => false
+                            'price' => '₹35,000',
+                            'rating' => 4.8,
+                            'reviews' => 256,
+                            'image' => 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800'
+                        ],
+                        [
+                            'name' => 'Royal Fortress Steel Gate',
+                            'vendor' => 'Apex Metal Works',
+                            'price' => '₹10,000',
+                            'rating' => 3.7,
+                            'reviews' => 45,
+                            'image' => 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800'
+                        ],
+                        [
+                            'name' => 'Bespoke Metal Craft Gate',
+                            'vendor' => 'SteelCraft Industries',
+                            'price' => '₹25,000',
+                            'rating' => 4.8,
+                            'reviews' => 312,
+                            'image' => 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800'
+                        ],
+                        [
+                            'name' => 'Modern Sliding Gate System',
+                            'vendor' => 'Apex Metal Works',
+                            'price' => '₹18,500',
+                            'rating' => 4.5,
+                            'reviews' => 167,
+                            'image' => 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800'
                         ]
                     ];
                     @endphp
 
-                    @foreach($orders as $order)
-                    <div class="col-xl-6 col-lg-12">
-                        <div class="order-card">
-                            <div class="row g-0">
-                                <div class="col-md-4">
-                                    <img src="{{ $order['image'] }}" class="order-img" alt="{{ $order['name'] }}">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="p-4">
-                                        <span class="order-id"><i class="far fa-clock"></i> Order ID: {{ $order['id'] }}</span>
-                                        <h4 class="fw-bold mt-1">{{ $order['name'] }}</h4>
-                                        <p class="text-muted mb-1">by {{ $order['vendor'] }}</p>
-                                        <h5 class="fw-bold mt-2">From {{ $order['price'] }}</h5>
-                                        <div class="mt-3">
-                                            <small class="fw-semibold d-block mb-1">Rate this order</small>
-                                            <div class="rating">
-                                                <i class="fa-regular fa-star"></i>
-                                                <i class="fa-regular fa-star"></i>
-                                                <i class="fa-regular fa-star"></i>
-                                                <i class="fa-regular fa-star"></i>
-                                                <i class="fa-regular fa-star"></i>
-                                            </div>
-                                        </div>
+                    @foreach($wishlistItems as $item)
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="wishlist-card">
+                            <img src="{{ $item['image'] }}" class="wishlist-img" alt="{{ $item['name'] }}">
+                            
+                            <!-- Heart icon (filled) -->
+                            <button class="heart-icon" aria-label="Remove from wishlist">
+                                <i class="fas fa-heart"></i>
+                            </button>
+
+                            <div class="card-body">
+                                <h5 class="product-name">{{ $item['name'] }}</h5>
+                                <p class="vendor-name">by {{ $item['vendor'] }}</p>
+                                <div class="price">From {{ $item['price'] }}</div>
+
+                                <div class="rating">
+                                    <div class="stars">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            @if($i <= floor($item['rating']))
+                                                <i class="fas fa-star"></i>
+                                            @elseif($i - $item['rating'] < 1 && $item['rating'] - floor($item['rating']) >= 0.5)
+                                                <i class="fas fa-star-half-alt"></i>
+                                            @else
+                                                <i class="far fa-star"></i>
+                                            @endif
+                                        @endfor
                                     </div>
+                                    <span class="rating-value">{{ $item['rating'] }}</span>
+                                    <span class="reviews">({{ $item['reviews'] }} reviews)</span>
                                 </div>
-                            </div>
-                            <div class="status-bar {{ $order['status_class'] }}">
-                                @if($order['cancelled'])
-                                    <i class="fas fa-times-circle me-1"></i>
-                                @elseif($order['status_class'] == 'delivered')
-                                    <i class="fas fa-check-circle me-1"></i>
-                                @elseif($order['status_class'] == 'out-for-delivery')
-                                    <i class="fas fa-truck me-1"></i>
-                                @elseif($order['status_class'] == 'processing')
-                                    <i class="fas fa-spinner fa-pulse me-1"></i>
-                                @endif
-                                {{ $order['status'] }}
+
+                                <button class="btn-add-cart">
+                                    <i class="fas fa-shopping-cart me-2"></i> Add to Cart
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -929,8 +986,8 @@
             <span>Vendors</span>
         </a>
         <a href="#">
-            <i class="fas fa-box"></i>
-            <span>Orders</span>
+            <i class="fas fa-heart"></i>
+            <span>Wishlist</span>
         </a>
         <a href="#">
             <i class="fas fa-user"></i>
@@ -939,6 +996,54 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Add to cart button click handler
+        document.querySelectorAll('.btn-add-cart').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const productName = this.closest('.card-body').querySelector('.product-name').textContent;
+                alert('✅ Added to cart: ' + productName);
+            });
+        });
+
+        // Remove from wishlist (heart icon click)
+        document.querySelectorAll('.heart-icon').forEach(heart => {
+            heart.addEventListener('click', function() {
+                const card = this.closest('.wishlist-card');
+                const productName = card.querySelector('.product-name').textContent;
+                if (confirm('Remove "' + productName + '" from wishlist?')) {
+                    card.style.transition = 'all 0.3s ease';
+                    card.style.transform = 'scale(0.8)';
+                    card.style.opacity = '0';
+                    setTimeout(() => {
+                        card.remove();
+                        // Update count
+                        const badge = document.querySelector('.badge');
+                        const currentCount = parseInt(badge.textContent);
+                        badge.textContent = (currentCount - 1) + ' items';
+                        // Show empty state if no items left
+                        const remainingItems = document.querySelectorAll('.wishlist-card').length;
+                        if (remainingItems === 0) {
+                            const grid = document.querySelector('.row.g-4');
+                            grid.innerHTML = `
+                                <div class="col-12">
+                                    <div class="empty-wishlist">
+                                        <i class="fas fa-heart"></i>
+                                        <h3>Your wishlist is empty</h3>
+                                        <p>Start adding items you love to your wishlist!</p>
+                                        <a href="#" class="btn" style="background:#F97316; color:#fff; padding:10px 30px; border-radius:50px; font-weight:600;">Start Shopping</a>
+                                    </div>
+                                </div>
+                            `;
+                            // Hide badge
+                            const badge = document.querySelector('.badge');
+                            if (badge) badge.style.display = 'none';
+                        }
+                    }, 300);
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
