@@ -1,491 +1,427 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>My Profile - FABRIQ</title>
+@extends('app')
 
-    <script src="https://cdn.tailwindcss.com"></script>
+@section('title', 'FabriQ · My Profile')
 
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-    <style>
-        /* custom styles for responsiveness and edit interactions */
-        .edit-btn {
-            cursor: pointer;
-            transition: all 0.2s ease;
-            padding: 6px;
-            border-radius: 50%;
-        }
-        .edit-btn:hover {
-            background-color: rgba(24, 49, 83, 0.1);
-            transform: scale(1.1);
-        }
-        .edit-btn:active {
-            transform: scale(0.9);
-        }
-        .editable-field {
-            transition: all 0.2s ease;
-        }
-        .editable-field.editing {
-            background-color: #E8EEF8;
-            border: 2px solid #183153;
-        }
-        .editable-field input {
-            background: transparent;
-            border: none;
-            outline: none;
-            width: 100%;
-            font-size: inherit;
-            color: inherit;
-        }
-        .editable-field input:focus {
-            outline: none;
-        }
-        /* sidebar scroll fix */
-        .sidebar-scroll {
-            overflow-y: auto;
-            max-height: calc(100vh - 80px);
-        }
-        .sidebar-scroll::-webkit-scrollbar {
-            width: 4px;
-        }
-        .sidebar-scroll::-webkit-scrollbar-track {
-            background: #E2E8F0;
-            border-radius: 10px;
-        }
-        .sidebar-scroll::-webkit-scrollbar-thumb {
-            background: #183153;
-            border-radius: 10px;
-        }
-        /* responsive adjustments */
-        @media (max-width: 1024px) {
-            .sidebar {
-                width: 320px !important;
-            }
-        }
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 100% !important;
-                min-height: auto !important;
-                padding: 12px !important;
-            }
-            .profile-content {
-                padding: 20px !important;
-            }
-            .grid-cols-2 {
-                grid-template-columns: 1fr !important;
-            }
-            .flex.gap-16 {
-                gap: 20px !important;
-                flex-wrap: wrap;
-            }
-            .max-w-xl {
-                max-width: 100% !important;
-            }
-            .nav-search {
-                display: none !important;
-            }
-            .nav-links {
-                display: none !important;
-            }
-        }
-        @media (max-width: 640px) {
-            .sidebar {
-                padding: 8px !important;
-            }
-            .sidebar .text-2xl {
-                font-size: 1.1rem !important;
-            }
-            .sidebar .space-y-10 {
-                gap: 12px !important;
-            }
-            .profile-content {
-                padding: 16px !important;
-            }
-            .profile-content .w-36 {
-                width: 100px !important;
-                height: 100px !important;
-            }
-        }
-        /* mobile menu toggle */
-        .mobile-menu-btn {
-            display: none;
-        }
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: flex !important;
-            }
-        }
-        .sidebar-hidden {
-            display: none;
-        }
-        @media (max-width: 768px) {
-            .sidebar-hidden {
-                display: block;
-            }
-            .sidebar-visible {
-                display: none;
-            }
-        }
-    </style>
-</head>
-<body class="bg-[#F7F9FC]">
+@section('content')
 
-    <!-- Navbar -->
-    <nav class="bg-white border-b">
-        <div class="max-w-full px-4 sm:px-6 md:px-8 py-3 md:py-4 flex items-center justify-between flex-wrap gap-2">
+<!-- ===== MAIN LAYOUT: sidebar + profile content (full height, scrollable) ===== -->
+<div class="flex flex-col lg:flex-row bg-[#f8fafc] min-h-screen">
 
-            <div class="flex items-center gap-2 md:gap-3">
-                <img src="https://placehold.co/40x40/183153/white?text=F" class="h-8 md:h-10" alt="">
-                <h1 class="text-2xl md:text-3xl font-bold text-[#183153]">FABRIQ</h1>
-            </div>
+    <!-- ===== SIDEBAR (full height, sticky, scrollable) ===== -->
+    <div class="lg:flex-shrink-0 lg:w-[280px] xl:w-[300px]">
+        @include('sidebar')
+    </div>
 
-            <ul class="hidden md:flex gap-6 lg:gap-12 text-[#5A6475] font-medium">
-                <li><a href="/">Home</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="{{ route('vendors') }}">Vendors</a></li>
-                <li><a href="{{ route('how-it-works') }}">How We Work</a></li>
-            </ul>
+    <!-- ===== PROFILE CONTENT (scrollable) ===== -->
+    <div class="flex-1 min-w-0 p-4 sm:p-6 md:p-8 lg:p-10 overflow-y-auto bg-[#f8fafc]">
 
-            <div class="flex items-center gap-3 md:gap-5">
-
-                <div class="relative nav-search">
-                    <input type="text"
-                        placeholder="Search"
-                        class="w-48 lg:w-72 border rounded-xl py-2 px-4 pr-10 outline-none text-sm">
-                    <i class="fa fa-search absolute right-4 top-3 text-gray-400"></i>
-                </div>
-
-                <button class="md:hidden mobile-menu-btn w-10 h-10 rounded-full bg-[#D8EBFF] flex items-center justify-center" onclick="toggleSidebar()">
-                    <i class="fa-solid fa-bars text-[#183153] text-xl"></i>
-                </button>
-
-                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#D8EBFF] flex items-center justify-center">
-                    <i class="fa-regular fa-user text-[#183153] text-lg md:text-xl"></i>
-                </div>
-
-                <div class="relative">
-                    <i class="fa-solid fa-cart-shopping text-2xl md:text-3xl text-[#183153]"></i>
-                </div>
-
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Section -->
-    <section class="flex flex-col md:flex-row" id="mainSection">
-
-        <!-- Sidebar -->
-        <div id="sidebar" class="sidebar w-full md:w-[420px] bg-[#EEF2F7] min-h-screen p-3 md:p-4 sidebar-scroll">
-
-            <div class="bg-white rounded-3xl p-4 md:p-5 flex items-center justify-between text-[#6DAAF9] font-semibold text-xl md:text-2xl">
-                <div class="flex items-center gap-3 md:gap-4">
-                    <i class="fa-regular fa-user text-2xl md:text-3xl"></i>
-                    <span>My Profile</span>
-                </div>
-                <button class="md:hidden" onclick="toggleSidebar()">
-                    <i class="fa-solid fa-xmark text-2xl text-[#183153]"></i>
-                </button>
-                <i class="fa-solid fa-angle-right hidden md:block"></i>
-            </div>
-
-            <div class="mt-6 md:mt-8 space-y-6 md:space-y-10 text-xl md:text-2xl">
-
-                <a href="#" class="flex justify-between items-center hover:text-[#183153] transition">
-                    <div class="flex items-center gap-3 md:gap-5">
-                        <i class="fa-regular fa-box"></i>
-                        <span>Orders</span>
-                    </div>
-                    <i class="fa-solid fa-angle-right"></i>
-                </a>
-
-                <a href="#" class="flex justify-between items-center hover:text-[#183153] transition">
-                    <div class="flex items-center gap-3 md:gap-5">
-                        <i class="fa-regular fa-heart"></i>
-                        <span>Wishlist</span>
-                    </div>
-                    <i class="fa-solid fa-angle-right"></i>
-                </a>
-
-                <a href="#" class="flex justify-between items-center hover:text-[#183153] transition">
-                    <div class="flex items-center gap-3 md:gap-5">
-                        <i class="fa-regular fa-bell"></i>
-                        <span>Notifications</span>
-                    </div>
-                    <i class="fa-solid fa-angle-right"></i>
-                </a>
-
-                <a href="#" class="flex justify-between items-center hover:text-[#183153] transition">
-                    <div class="flex items-center gap-3 md:gap-5">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span>Saved Addresses</span>
-                    </div>
-                    <i class="fa-solid fa-angle-right"></i>
-                </a>
-
-                <a href="#" class="flex justify-between items-center hover:text-[#183153] transition">
-                    <div class="flex items-center gap-3 md:gap-5">
-                        <i class="fa-regular fa-circle-info"></i>
-                        <span>App Info & Support</span>
-                    </div>
-                    <i class="fa-solid fa-angle-right"></i>
-                </a>
-
-                <a href="#" class="flex justify-between items-center hover:text-[#183153] transition">
-                    <div class="flex items-center gap-3 md:gap-5">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                        <span>Account Actions</span>
-                    </div>
-                    <i class="fa-solid fa-angle-right"></i>
-                </a>
-
-                <a href="#" class="flex justify-between items-center hover:text-[#183153] transition">
-                    <div class="flex items-center gap-3 md:gap-5">
-                        <i class="fa-solid fa-briefcase"></i>
-                        <span>Become a Vendor</span>
-                    </div>
-                    <i class="fa-solid fa-angle-right"></i>
-                </a>
-
-                <a href="#" class="flex justify-between items-center hover:text-red-600 transition">
-                    <div class="flex items-center gap-3 md:gap-5">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        <span>Logout</span>
-                    </div>
-                </a>
-
+        <!-- top bar with time/weather -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <h1 class="text-xl sm:text-2xl font-bold text-[#0f172a] flex items-center gap-2">
+                <i class="fas fa-user-edit text-[#f97316]"></i> My Profile
+            </h1>
+            <div class="flex items-center gap-3 sm:gap-4 text-xs sm:text-sm text-[#475569] flex-wrap">
+                <span><i class="fas fa-cloud-sun text-[#f97316] mr-1"></i> 33°C</span>
+                <span><i class="fas fa-clock mr-1"></i> 02:06 PM</span>
+                <span class="hidden xs:inline"><i class="fas fa-calendar-alt mr-1"></i> 03-07-2026</span>
+                <span class="hidden sm:inline">ENG <i class="fas fa-chevron-down ml-1"></i></span>
+                <span class="hidden sm:inline">IN <i class="fas fa-chevron-down ml-1"></i></span>
             </div>
         </div>
 
-        <!-- Profile Content -->
-        <div class="flex-1 bg-white p-4 sm:p-6 md:p-10 profile-content">
+        <!-- profile card -->
+        <div class="bg-white rounded-3xl border border-[#eef2f6] p-5 sm:p-6 md:p-8 lg:p-10 max-w-3xl shadow-sm">
 
-            <!-- Profile Image -->
-            <div class="flex justify-center mb-8 md:mb-12">
-
-                <div class="relative">
-
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300"
-                        class="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full object-cover">
-
-                    <button class="edit-btn absolute bottom-0 right-0 w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full shadow-md flex items-center justify-center" onclick="alert('Change profile picture')">
-                        <i class="fa-solid fa-pen text-[#183153] text-sm sm:text-base"></i>
-                    </button>
-
+            <!-- First Name -->
+            <div class="mb-5 sm:mb-6">
+                <label class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#64748b]">First Name</label>
+                <div class="text-lg sm:text-xl font-semibold text-[#0f172a] mt-1 pb-2 border-b border-[#f1f5f9]">
+                    Chiranshi
                 </div>
-
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-
-                <!-- First Name -->
-                <div>
-                    <label class="block mb-2 text-[#183153] font-medium">
-                        First Name
-                    </label>
-
-                    <div class="bg-[#F3F6FB] rounded-xl px-4 md:px-5 py-3 md:py-4 flex justify-between items-center editable-field" id="firstNameField">
-                        <span id="firstNameDisplay">Chiranshi</span>
-                        <input type="text" id="firstNameInput" value="Chiranshi" class="hidden bg-transparent outline-none w-full" />
-                        <i class="fa-solid fa-pen text-[#183153] edit-btn" onclick="enableEdit('firstName')"></i>
-                    </div>
+            <!-- Last Name -->
+            <div class="mb-5 sm:mb-6">
+                <label class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#64748b]">Last Name</label>
+                <div class="text-lg sm:text-xl font-semibold text-[#0f172a] mt-1 pb-2 border-b border-[#f1f5f9]">
+                    Thummar
                 </div>
-
-                <!-- Last Name -->
-                <div>
-                    <label class="block mb-2 text-[#183153] font-medium">
-                        Last Name
-                    </label>
-
-                    <div class="bg-[#F3F6FB] rounded-xl px-4 md:px-5 py-3 md:py-4 flex justify-between items-center editable-field" id="lastNameField">
-                        <span id="lastNameDisplay">Thummar</span>
-                        <input type="text" id="lastNameInput" value="Thummar" class="hidden bg-transparent outline-none w-full" />
-                        <i class="fa-solid fa-pen text-[#183153] edit-btn" onclick="enableEdit('lastName')"></i>
-                    </div>
-                </div>
-
             </div>
 
             <!-- Gender -->
-            <div class="mt-6 md:mt-10">
-
-                <label class="block mb-3 md:mb-4 text-[#183153] font-medium">
-                    Gender
-                </label>
-
-                <div class="flex flex-wrap gap-4 md:gap-16">
-
-                    <label class="flex items-center gap-2 md:gap-3 text-sm md:text-base">
-                        <input type="radio" name="gender" value="female" checked onchange="updateGender(this)">
-                        Female
+            <div class="mb-5 sm:mb-6">
+                <label class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#64748b]">Gender</label>
+                <div class="flex flex-wrap gap-4 sm:gap-6 mt-2 pt-1">
+                    <label class="flex items-center gap-2 text-sm font-medium text-[#1e293b] cursor-pointer">
+                        <input type="radio" name="gender" value="female" checked class="accent-[#f97316] w-4 h-4"> Female
                     </label>
-
-                    <label class="flex items-center gap-2 md:gap-3 text-sm md:text-base">
-                        <input type="radio" name="gender" value="male" onchange="updateGender(this)">
-                        Male
+                    <label class="flex items-center gap-2 text-sm font-medium text-[#1e293b] cursor-pointer">
+                        <input type="radio" name="gender" value="male" class="accent-[#f97316] w-4 h-4"> Male
                     </label>
-
-                    <label class="flex items-center gap-2 md:gap-3 text-sm md:text-base">
-                        <input type="radio" name="gender" value="other" onchange="updateGender(this)">
-                        Other
+                    <label class="flex items-center gap-2 text-sm font-medium text-[#1e293b] cursor-pointer">
+                        <input type="radio" name="gender" value="other" class="accent-[#f97316] w-4 h-4"> Other
                     </label>
-
                 </div>
-
             </div>
 
-            <!-- Email -->
-            <div class="mt-6 md:mt-10 max-w-full md:max-w-xl">
-
-                <label class="block mb-2 text-[#183153] font-medium">
-                    Email Address
-                </label>
-
-                <div class="bg-[#F3F6FB] rounded-xl px-4 md:px-5 py-3 md:py-4 flex justify-between items-center editable-field" id="emailField">
-                    <span id="emailDisplay">chiranshithummar123@gmail.com</span>
-                    <input type="email" id="emailInput" value="chiranshithummar123@gmail.com" class="hidden bg-transparent outline-none w-full" />
-                    <i class="fa-solid fa-pen text-[#183153] edit-btn" onclick="enableEdit('email')"></i>
+            <!-- Email Address -->
+            <div class="mb-5 sm:mb-6">
+                <label class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#64748b]">Email Address</label>
+                <div class="text-sm sm:text-base font-medium text-[#0f172a] mt-1 pb-2 border-b border-[#f1f5f9] flex flex-wrap items-center justify-between gap-2">
+                    <span class="break-all">chiranshithummar123@gmail.com</span>
+                    <span class="text-[#10b981] text-xs sm:text-sm font-medium whitespace-nowrap"><i class="fas fa-check-circle mr-1"></i> Verified</span>
                 </div>
-
             </div>
 
-            <!-- Mobile -->
-            <div class="mt-6 md:mt-10 max-w-full md:max-w-xl">
-
-                <label class="block mb-2 text-[#183153] font-medium">
-                    Mobile Number
-                </label>
-
-                <div class="bg-[#F3F6FB] rounded-xl px-4 md:px-5 py-3 md:py-4 flex justify-between items-center editable-field" id="mobileField">
-                    <span id="mobileDisplay">1234567890</span>
-                    <input type="tel" id="mobileInput" value="1234567890" class="hidden bg-transparent outline-none w-full" />
-                    <i class="fa-solid fa-pen text-[#183153] edit-btn" onclick="enableEdit('mobile')"></i>
+            <!-- Mobile Number -->
+            <div class="mb-6 sm:mb-8">
+                <label class="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-[#64748b]">Mobile Number</label>
+                <div class="text-lg sm:text-xl font-semibold text-[#0f172a] mt-1 pb-2 border-b border-[#f1f5f9]">
+                    1234567890
                 </div>
+            </div>
 
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap gap-3 sm:gap-4 pt-2">
+                <button class="bg-[#f97316] hover:bg-[#e16e0e] text-white font-semibold px-5 sm:px-8 py-2.5 sm:py-3 rounded-full transition flex items-center gap-2 text-sm sm:text-base">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+                <button class="border border-[#e2e8f0] hover:bg-[#f1f5f9] text-[#1e293b] font-semibold px-5 sm:px-8 py-2.5 sm:py-3 rounded-full transition flex items-center gap-2 text-sm sm:text-base">
+                    <i class="fas fa-edit"></i> Edit Profile
+                </button>
             </div>
 
         </div>
-    </section>
 
-    <script>
-        // ========== SIDEBAR TOGGLE FOR MOBILE ==========
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar.style.display === 'none' || sidebar.classList.contains('sidebar-hidden')) {
-                sidebar.style.display = 'block';
-                sidebar.classList.remove('sidebar-hidden');
-                sidebar.classList.add('sidebar-visible');
-            } else {
-                sidebar.style.display = 'none';
-                sidebar.classList.add('sidebar-hidden');
-                sidebar.classList.remove('sidebar-visible');
-            }
+        <!-- spacer for bottom -->
+        <div class="h-4"></div>
+
+    </div>
+</div>
+
+<!-- ===== STYLES TO OVERRIDE AND FIX LAYOUT ===== -->
+<style>
+    /* ===== HIDE FOOTER COMPLETELY ===== */
+    footer {
+        display: none !important;
+    }
+
+    /* ===== SIDEBAR OVERRIDES ===== */
+    .profile-sidebar {
+        height: 100vh;
+        overflow-y: auto;
+        position: sticky;
+        top: 0;
+        border-radius: 0 18px 18px 0;
+        margin-left: 0 !important;
+        padding-left: 24px !important;
+        width: 100%;
+        min-width: 260px;
+        background: #FBFCFE;
+        border: 1px solid #E8EDF2;
+        border-left: none;
+        border-right: 4px solid #F97316;
+        padding: 24px 20px;
+    }
+
+    /* ===== RESPONSIVE BREAKPOINTS ===== */
+
+    /* Tablet and below: sidebar becomes horizontal / grid */
+    @media (max-width: 1024px) {
+        .profile-sidebar {
+            height: auto;
+            position: static;
+            border-radius: 18px;
+            border-left: 4px solid #F97316;
+            border-right: none;
+            margin: 0 0 16px 0 !important;
+            padding: 20px 24px !important;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 4px;
+            min-width: auto;
+            width: 100%;
         }
 
-        // On window resize, reset sidebar visibility for desktop
-        window.addEventListener('resize', function() {
-            const sidebar = document.getElementById('sidebar');
-            if (window.innerWidth >= 768) {
-                sidebar.style.display = 'block';
-                sidebar.classList.remove('sidebar-hidden');
-                sidebar.classList.add('sidebar-visible');
-            } else {
-                // on mobile, keep it hidden by default unless toggled
-                if (!sidebar.classList.contains('sidebar-visible')) {
-                    sidebar.style.display = 'none';
-                    sidebar.classList.add('sidebar-hidden');
-                }
-            }
-        });
-
-        // ========== EDIT FUNCTIONALITY ==========
-        function enableEdit(field) {
-            const displayEl = document.getElementById(field + 'Display');
-            const inputEl = document.getElementById(field + 'Input');
-            const fieldContainer = document.getElementById(field + 'Field');
-
-            if (displayEl.classList.contains('hidden')) {
-                // Cancel edit mode - save changes
-                displayEl.textContent = inputEl.value;
-                displayEl.classList.remove('hidden');
-                inputEl.classList.add('hidden');
-                fieldContainer.classList.remove('editing');
-                // Show success message
-                showToast(field + ' updated successfully!');
-                return;
-            }
-
-            // Enter edit mode
-            displayEl.classList.add('hidden');
-            inputEl.classList.remove('hidden');
-            inputEl.focus();
-            inputEl.select();
-            fieldContainer.classList.add('editing');
-
-            // Handle Enter key to save
-            inputEl.onkeydown = function(e) {
-                if (e.key === 'Enter') {
-                    displayEl.textContent = inputEl.value;
-                    displayEl.classList.remove('hidden');
-                    inputEl.classList.add('hidden');
-                    fieldContainer.classList.remove('editing');
-                    showToast(field + ' updated successfully!');
-                }
-                if (e.key === 'Escape') {
-                    inputEl.value = displayEl.textContent;
-                    displayEl.classList.remove('hidden');
-                    inputEl.classList.add('hidden');
-                    fieldContainer.classList.remove('editing');
-                }
-            };
-
-            // Handle blur (click outside) to save
-            inputEl.onblur = function() {
-                if (!inputEl.classList.contains('hidden')) {
-                    displayEl.textContent = inputEl.value;
-                    displayEl.classList.remove('hidden');
-                    inputEl.classList.add('hidden');
-                    fieldContainer.classList.remove('editing');
-                }
-            };
+        .profile-sidebar .sidebar-header {
+            grid-column: 1 / -1;
+            border-bottom: 2px solid #F97316;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
         }
 
-        // ========== GENDER UPDATE ==========
-        function updateGender(radio) {
-            showToast('Gender updated to: ' + radio.value);
+        .profile-sidebar .user-info {
+            grid-column: 1 / -1;
+            margin-bottom: 12px;
         }
 
-        // ========== TOAST NOTIFICATION ==========
-        function showToast(message) {
-            // Remove existing toast
-            const existingToast = document.querySelector('.custom-toast');
-            if (existingToast) existingToast.remove();
-
-            const toast = document.createElement('div');
-            toast.className = 'custom-toast fixed bottom-6 left-1/2 -translate-x-1/2 bg-[#183153] text-white px-6 py-3 rounded-xl shadow-lg z-50 transition-all duration-300 text-sm md:text-base';
-            toast.textContent = message;
-            document.body.appendChild(toast);
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(-50%) translateY(20px)';
-                setTimeout(() => toast.remove(), 300);
-            }, 2000);
+        .profile-sidebar hr {
+            grid-column: 1 / -1;
+            margin-bottom: 12px;
         }
 
-        // ========== INITIALIZE - show sidebar on desktop, hide on mobile ==========
-        document.addEventListener('DOMContentLoaded', function() {
-            const sidebar = document.getElementById('sidebar');
-            if (window.innerWidth < 768) {
-                sidebar.style.display = 'none';
-                sidebar.classList.add('sidebar-hidden');
-            } else {
-                sidebar.style.display = 'block';
-                sidebar.classList.add('sidebar-visible');
-            }
-        });
-    </script>
+        .profile-sidebar .nav-item {
+            padding: 10px 14px;
+            font-size: 13px;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            gap: 4px;
+            margin-bottom: 2px;
+        }
 
-</body>
-</html>
+        .profile-sidebar .nav-item .nav-left {
+            gap: 8px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-sidebar .nav-item .nav-left i {
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .profile-sidebar .nav-item .arrow {
+            display: none;
+        }
+
+        .profile-sidebar .nav-item .right-group {
+            display: none;
+        }
+
+        .profile-sidebar .nav-item.logout {
+            grid-column: 1 / -1;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .profile-sidebar .nav-item.logout .nav-left {
+            flex-direction: row;
+        }
+
+        .profile-sidebar .nav-item.vendor-link {
+            grid-column: 1 / -1;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .profile-sidebar .nav-item.vendor-link .nav-left {
+            flex-direction: row;
+        }
+
+        .lg\:flex-shrink-0 {
+            width: 100% !important;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .profile-sidebar {
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            padding: 16px 18px !important;
+            gap: 3px;
+            border-radius: 14px;
+        }
+
+        .profile-sidebar .sidebar-header {
+            padding-bottom: 14px;
+            margin-bottom: 14px;
+        }
+
+        .profile-sidebar .brand {
+            font-size: 20px;
+        }
+
+        .profile-sidebar .brand i {
+            font-size: 22px;
+        }
+
+        .profile-sidebar .nav-item {
+            padding: 8px 10px;
+            font-size: 12px;
+        }
+
+        .profile-sidebar .nav-item .nav-left {
+            gap: 6px;
+        }
+
+        .profile-sidebar .nav-item .nav-left i {
+            font-size: 14px;
+            width: 18px;
+        }
+
+        .profile-sidebar .user-name {
+            font-size: 16px;
+        }
+
+        .profile-sidebar .user-email {
+            font-size: 12px;
+        }
+
+        /* ensure content scrolls */
+        .flex-1 {
+            overflow-y: auto !important;
+            height: auto !important;
+            min-height: 100vh;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .profile-sidebar {
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            padding: 12px 14px !important;
+            border-radius: 12px;
+        }
+
+        .profile-sidebar .sidebar-header {
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+
+        .profile-sidebar .brand {
+            font-size: 18px;
+            gap: 8px;
+        }
+
+        .profile-sidebar .brand i {
+            font-size: 20px;
+        }
+
+        .profile-sidebar .user-info {
+            margin-bottom: 8px;
+        }
+
+        .profile-sidebar .user-name {
+            font-size: 15px;
+        }
+
+        .profile-sidebar .user-email {
+            font-size: 11px;
+        }
+
+        .profile-sidebar .nav-item {
+            padding: 8px 8px;
+            font-size: 11px;
+            border-radius: 8px;
+        }
+
+        .profile-sidebar .nav-item .nav-left {
+            gap: 5px;
+        }
+
+        .profile-sidebar .nav-item .nav-left i {
+            font-size: 13px;
+            width: 16px;
+        }
+
+        .profile-sidebar .nav-item.logout {
+            padding: 8px 8px;
+        }
+
+        .profile-sidebar .nav-item.vendor-link {
+            padding: 8px 8px;
+        }
+
+        /* extra small screens */
+        .profile-sidebar .nav-item span {
+            font-size: 10px;
+        }
+
+        /* hide some meta info on very small screens */
+        .xs\:inline {
+            display: none !important;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .profile-sidebar {
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            padding: 10px 10px !important;
+            border-radius: 10px;
+        }
+
+        .profile-sidebar .sidebar-header {
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .profile-sidebar .brand {
+            font-size: 16px;
+            gap: 6px;
+        }
+
+        .profile-sidebar .brand i {
+            font-size: 18px;
+        }
+
+        .profile-sidebar .user-name {
+            font-size: 14px;
+        }
+
+        .profile-sidebar .user-email {
+            font-size: 10px;
+        }
+
+        .profile-sidebar .nav-item {
+            padding: 6px 6px;
+            font-size: 10px;
+            border-radius: 6px;
+        }
+
+        .profile-sidebar .nav-item .nav-left {
+            gap: 4px;
+        }
+
+        .profile-sidebar .nav-item .nav-left i {
+            font-size: 12px;
+            width: 14px;
+        }
+
+        .profile-sidebar hr {
+            margin-bottom: 8px;
+        }
+    }
+
+    /* ensure scrolling works on all devices */
+    html,
+    body {
+        height: 100%;
+        overflow-x: hidden;
+    }
+
+    #app,
+    main {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    /* fix for header overlap */
+    .profile-sidebar {
+        scroll-margin-top: 70px;
+    }
+
+    /* small screens - ensure the sidebar doesn't break */
+    @media (max-width: 480px) {
+        .profile-sidebar .brand {
+            font-size: 17px;
+        }
+        .profile-sidebar .brand i {
+            font-size: 19px;
+        }
+        .profile-sidebar .nav-item span {
+            font-size: 10px;
+        }
+        .profile-sidebar .nav-item .nav-left i {
+            font-size: 12px;
+            width: 14px;
+        }
+    }
+</style>
+
+@endsection

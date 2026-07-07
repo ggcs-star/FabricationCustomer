@@ -19,6 +19,7 @@
         cursor: grab;
         user-select: none;
         -webkit-user-select: none;
+        touch-action: pan-y;
     }
 
     .service-carousel:active {
@@ -27,34 +28,26 @@
 
     .service-carousel-inner {
         display: flex;
-        gap: 24px;
-        transition: transform 0.4s ease;
+        gap: 16px;
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         will-change: transform;
     }
 
     .service-carousel-item {
         flex: 0 0 auto;
-        width: 280px;
+        width: 240px;
+        min-height: 120px;
     }
 
-    /* Scrollbar hide */
     .service-carousel::-webkit-scrollbar {
         display: none;
     }
-
     .service-carousel {
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
 
-    /* Dots Navigation */
-    .carousel-dots {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 24px;
-    }
-
+    /* Dots */
     .carousel-dots .dot {
         width: 10px;
         height: 10px;
@@ -78,14 +71,9 @@
     }
 
     /* Arrow Buttons */
-    .carousel-arrows {
-        display: flex;
-        gap: 12px;
-    }
-
     .carousel-arrows button {
-        width: 44px;
-        height: 44px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         border: 1px solid #E8EDF2;
         background: #ffffff;
@@ -95,14 +83,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 16px;
+        font-size: 14px;
     }
 
-    .carousel-arrows button:hover {
+    .carousel-arrows button:hover:not(:disabled) {
         background: #F97316;
         border-color: #F97316;
         color: #ffffff;
-        box-shadow: 0 8px 20px -8px rgba(249, 115, 22, 0.4);
+        box-shadow: 0 4px 12px -4px rgba(249, 115, 22, 0.4);
     }
 
     .carousel-arrows button:disabled {
@@ -119,319 +107,482 @@
 
     @media (max-width: 768px) {
         .service-carousel-item {
-            width: 240px;
+            width: 190px;
+            min-height: 100px;
+            padding: 16px !important;
         }
         .carousel-arrows button {
-            width: 38px;
-            height: 38px;
-            font-size: 14px;
-        }
-        .service-carousel-item .h-72 {
-            height: 200px;
+            width: 34px;
+            height: 34px;
+            font-size: 12px;
         }
     }
 
     @media (max-width: 480px) {
         .service-carousel-item {
-            width: 200px;
+            width: 160px;
+            min-height: 90px;
+            padding: 14px !important;
         }
-        .service-carousel-item .h-72 {
-            height: 160px;
+    }
+
+    /* Container */
+    .container-custom {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    @media (min-width: 640px) {
+        .container-custom {
+            padding: 0 32px;
         }
-        .service-carousel-item .p-6 {
-            padding: 16px;
-        }
-        .service-carousel-item h3 {
-            font-size: 16px;
-        }
-        .service-carousel-item p {
-            font-size: 13px;
-        }
+    }
+
+    /* Primary Button */
+    .primary-btn {
+        background: #FF8C00;
+        color: #fff;
+        border-radius: 9999px;
+        padding: 14px 32px;
+        font-weight: 600;
+        transition: 0.3s ease;
+        display: inline-block;
+        border: none;
+        cursor: pointer;
+    }
+
+    .primary-btn:hover {
+        background: #e67e00;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px -8px rgba(249, 115, 22, 0.4);
+    }
+
+    /* Trending Products / Featured Projects Card */
+    .trending-card {
+        transition: all 0.3s ease;
+    }
+    .trending-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Scrollbar Hide */
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 </style>
 
 <!-- ===== HERO SECTION ===== -->
-<!-- ===== HERO SECTION ===== -->
-<section class="bg-white pt-20 pb-8 md:pt-24 lg:pt-28">
-    <div class="container-custom">
-
+<section class="bg-black pt-20 pb-8 md:pt-24 lg:pt-28">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
         <div class="grid lg:grid-cols-2 gap-6 md:gap-8 items-center">
-            <!-- LEFT CONTENT -->
             <div>
-
-                <!-- Badge -->
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#FF8C00]/40 bg-[#FF8C00]/10">
                     <span class="w-1.5 h-1.5 rounded-full bg-[#FF8C00]"></span>
-                    <span class="text-[#FF8C00] text-[10px] md:text-xs font-medium">
-                        India's #1 Fabrication Marketplace
-                    </span>
+                    <span class="text-[#FF8C00] text-[10px] md:text-xs font-medium">India's #1 Fabrication Marketplace</span>
                 </div>
-
-                <!-- Heading -->
-                <h1 class="text-black text-[22px] sm:text-[28px] md:text-[34px] lg:text-[40px] font-bold leading-[1.2] mt-3">
-                    Build Your
-                    <br>
-                    <span class="text-[#FF8C00]">Dream Space</span>
-                    <br>
-                    With Verified
-                    <br>
-                    Fabrication Experts
+                <h1 class="text-white text-[22px] sm:text-[28px] md:text-[34px] lg:text-[40px] font-bold leading-[1.2] mt-3">
+                    Build Your <br><span class="text-[#FF8C00]">Dream Space</span><br> With Verified <br> Fabrication Experts
                 </h1>
-
-                <!-- Description -->
                 <p class="text-gray-600 text-xs sm:text-sm md:text-base leading-5 md:leading-6 mt-3 max-w-xl">
-                    Get quotations from trusted vendors for Steel Structures,
-                    Glass Work, Aluminium, False Ceiling, Interior and Custom
-                    Fabrication.
+                    Get quotations from trusted vendors for Steel Structures, Glass Work, Aluminium, False Ceiling, Interior and Custom Fabrication.
                 </p>
-
-                <!-- Buttons -->
                 <div class="flex flex-wrap gap-2 md:gap-3 mt-4">
                     <a href="#" class="primary-btn flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 text-xs md:text-sm">
-                        Get Free Quote
-                        <i class="fas fa-arrow-right text-[10px] md:text-xs"></i>
+                        Get Free Quote <i class="fas fa-arrow-right text-[10px] md:text-xs"></i>
                     </a>
-
-                    <a href="/services"
-                       class="border border-gray-300 text-black rounded-full px-4 py-2 md:px-5 md:py-2.5 text-xs md:text-sm font-semibold hover:border-[#FF8C00] hover:text-[#FF8C00] transition">
-                        Explore Services
-                    </a>
+                    <a href="/services" class="border border-gray-300 text-white rounded-full px-4 py-2 md:px-5 md:py-2.5 text-xs md:text-sm font-semibold hover:border-[#FF8C00] hover:text-[#FF8C00] transition">Explore Services</a>
                 </div>
-
-                <!-- Stats -->
-                <div class="border-t border-gray-200 mt-6 md:mt-8 pt-5 md:pt-6">
-
+                <div class="border-t border-[#1F2937] mt-6 md:mt-8 pt-5 md:pt-6">
                     <div class="grid grid-cols-3 gap-3 md:gap-4">
-
-                        <div>
-                            <h3 class="text-black text-lg md:text-2xl font-bold">
-                                5000+
-                            </h3>
-                            <p class="text-gray-500 text-[10px] md:text-sm mt-0.5 md:mt-1">
-                                Projects Completed
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 class="text-black text-lg md:text-2xl font-bold">
-                                250+
-                            </h3>
-                            <p class="text-gray-500 text-[10px] md:text-sm mt-0.5 md:mt-1">
-                                Verified Vendors
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 class="text-black text-lg md:text-2xl font-bold">
-                                4.8 ★
-                            </h3>
-                            <p class="text-gray-500 text-[10px] md:text-sm mt-0.5 md:mt-1">
-                                Customer Rating
-                            </p>
-                        </div>
-
+                        <div><h3 class="text-white text-lg md:text-2xl font-bold">5000+</h3><p class="text-gray-500 text-[10px] md:text-sm mt-0.5 md:mt-1">Projects Completed</p></div>
+                        <div><h3 class="text-white text-lg md:text-2xl font-bold">250+</h3><p class="text-gray-500 text-[10px] md:text-sm mt-0.5 md:mt-1">Verified Vendors</p></div>
+                        <div><h3 class="text-white text-lg md:text-2xl font-bold">4.8 ★</h3><p class="text-gray-500 text-[10px] md:text-sm mt-0.5 md:mt-1">Customer Rating</p></div>
                     </div>
-
                 </div>
-
             </div>
-
-            <!-- RIGHT IMAGE -->
             <div class="relative mt-4 md:mt-0">
-
-                <!-- Light Orange Glow -->
                 <div class="absolute -inset-3 md:-inset-4 bg-[#FF8C00]/10 blur-[40px] md:blur-[60px] rounded-full"></div>
-
                 <div class="relative rounded-[20px] md:rounded-[28px] overflow-hidden shadow-lg">
-
-                    <img src="{{ asset('images/hero-fabrication.jpg') }}"
-                         alt="Fabrication"
-                         class="w-full h-[250px] sm:h-[300px] md:h-[380px] lg:h-[420px] object-cover"
-                         onerror="this.src='https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200'">
-
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200" alt="Fabrication" class="w-full h-[250px] sm:h-[300px] md:h-[380px] lg:h-[420px] object-cover">
                 </div>
-
-                <!-- Play Button -->
-                <button class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                               w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-white shadow-xl
-                               flex items-center justify-center">
-
+                <button class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full bg-white shadow-xl flex items-center justify-center">
                     <i class="fas fa-play text-base sm:text-lg md:text-xl text-black ml-0.5 sm:ml-1"></i>
-
                 </button>
-
-                <!-- Floating Card -->
                 <div class="absolute -bottom-3 left-3 md:-bottom-4 md:left-4 bg-white rounded-xl md:rounded-2xl p-3 md:p-4 shadow-xl">
-
                     <div class="flex items-center gap-2 md:gap-3">
-
                         <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-orange-100 flex items-center justify-center">
                             <i class="fas fa-check text-[#FF8C00] text-xs md:text-base"></i>
                         </div>
-
-                        <div>
-                            <h4 class="font-bold text-gray-900 text-[10px] md:text-sm">
-                                Quality Guaranteed
-                            </h4>
-                            <p class="text-gray-500 text-[8px] md:text-xs">
-                                Every project inspected
-                            </p>
-                        </div>
-
+                        <div><h4 class="font-bold text-gray-900 text-[10px] md:text-sm">Quality Guaranteed</h4><p class="text-gray-500 text-[8px] md:text-xs">Every project inspected</p></div>
                     </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-<!-- ===== SERVICE CATEGORIES CAROUSEL ===== -->
-<section class="py-16 bg-white">
-    <div class="container-custom">
-
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
-            <div>
-                <p class="text-[#FF8C00] uppercase text-sm font-semibold tracking-[6px]">
-                    What We Offer
-                </p>
-                <h2 class="text-3xl md:text-5xl font-bold mt-3 text-black">
-                    Service Categories
-                </h2>
-            </div>
-            <div class="flex items-center gap-4">
-                <a href="/services" class="text-[#FF8C00] font-medium whitespace-nowrap">
-                    View All →
-                </a>
-                <div class="carousel-arrows">
-                    <button id="prev-btn" aria-label="Previous">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button id="next-btn" aria-label="Next">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
                 </div>
             </div>
         </div>
-
-      @php
-$services = [
-    ['title'=>'Steel Structure','vendors'=>'480+ vendors','image'=>'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200'],
-    ['title'=>'Glass Work','vendors'=>'210+ vendors','image'=>'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200'],
-    ['title'=>'Aluminium Work','vendors'=>'330+ vendors','image'=>'https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200'],
-    ['title'=>'False Ceiling','vendors'=>'290+ vendors','image'=>'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200'],
-    ['title'=>'Interior Work','vendors'=>'540+ vendors','image'=>'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200'],
-    ['title'=>'MS Fabrication','vendors'=>'160+ vendors','image'=>'https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200'],
-    ['title'=>'HVAC Work','vendors'=>'180+ vendors','image'=>'https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200'],
-    ['title'=>'Painting Work','vendors'=>'420+ vendors','image'=>'https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200'],
-    ['title'=>'Electrical Work','vendors'=>'380+ vendors','image'=>'https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200'],
-];
-@endphp
-
-        <div class="service-carousel" id="serviceCarousel">
-            <div class="service-carousel-inner" id="carouselInner">
-                @foreach($services as $service)
-                <div class="service-carousel-item rounded-3xl overflow-hidden shadow-lg hover:-translate-y-2 transition-all bg-white border border-[#E8EDF2]">
-                    <div class="relative">
-                        <img src="{{ $service['image'] }}"
-                             alt="{{ $service['title'] }}"
-                             class="w-full h-72 object-cover"
-                             onerror="this.src='https://via.placeholder.com/400x300/F97316/ffffff?text={{ substr($service['title'], 0, 1) }}'">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-xl text-black">{{ $service['title'] }}</h3>
-                        <a href="/services" class="inline-flex items-center justify-center w-full mt-4 px-6 py-3 bg-[#FF8C00] text-white font-semibold rounded-full hover:bg-[#e67e00] transition-all">
-                            Explore <i class="fas fa-arrow-right ml-2"></i>
-                        </a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-
-        <!-- <div class="carousel-dots" id="carouselDots"></div> -->
     </div>
 </section>
 
-<!-- ===== TOP VERIFIED FABRICATORS ===== -->
+<!-- ===== SERVICE CATEGORIES - HORIZONTAL SCROLL ===== -->
 <section class="py-16 bg-white">
-    <div class="container-custom">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+        <!-- Header -->
+        <div class="mb-10 transition-all duration-700 opacity-100 translate-y-0">
+            <div class="flex items-end justify-between">
+                <div>
+                    <div class="text-xs font-semibold uppercase tracking-widest mb-2" style="color: rgb(255, 122, 0); font-family: Inter, sans-serif;">
+                        What We Offer
+                    </div>
+                    <h2 class="text-4xl font-bold" style="font-family: Poppins, sans-serif; color: rgb(17, 17, 17);">
+                        Service Categories
+                    </h2>
+                </div>
+                <button class="hidden md:flex items-center gap-2 text-sm font-medium" style="color: rgb(255, 122, 0); font-family: Inter, sans-serif;">
+                    View All 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5 12h14"></path>
+                        <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        @php
+        $services = [
+            ['title' => 'Steel Structure', 'vendors' => '480+ vendors', 'icon' => 'M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18ZM6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2ZM18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2ZM10 6h4ZM10 10h4ZM10 14h4ZM10 18h4Z', 'viewBox' => '0 0 24 24'],
+            ['title' => 'Glass Work', 'vendors' => '210+ vendors', 'icon' => 'M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83zM2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17', 'viewBox' => '0 0 24 24'],
+            ['title' => 'Aluminium Work', 'vendors' => '330+ vendors', 'icon' => 'M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18', 'viewBox' => '0 0 24 24'],
+            ['title' => 'False Ceiling', 'vendors' => '290+ vendors', 'icon' => 'M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z', 'viewBox' => '0 0 24 24'],
+            ['title' => 'Interior Work', 'vendors' => '540+ vendors', 'icon' => 'M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', 'viewBox' => '0 0 24 24'],
+            ['title' => 'MS Fabrication', 'vendors' => '160+ vendors', 'icon' => 'M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2zM12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6z', 'viewBox' => '0 0 24 24'],
+            ['title' => 'SS Fabrication', 'vendors' => '120+ vendors', 'icon' => 'M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z', 'viewBox' => '0 0 24 24'],
+            ['title' => 'Custom Projects', 'vendors' => '180+ vendors', 'icon' => 'M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73zM12 22V12M3.29 7L12 12l8.71-5M7.5 4.27l9 5.15', 'viewBox' => '0 0 24 24'],
+        ];
+        @endphp
+
+        <!-- Horizontal Scroll Carousel -->
+        <div class="flex gap-5 overflow-x-auto pb-4 scrollbar-hide">
+            @foreach($services as $index => $service)
+            <div class="group flex-shrink-0 w-44 bg-white rounded-2xl p-5 cursor-pointer border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-md" 
+                 style="border-color: rgba(0, 0, 0, 0.07); box-shadow: rgba(0, 0, 0, 0.04) 0px 2px 16px; transition: 0.5s {{ $index * 50 }}ms; opacity: 1; transform: translateY(0px);">
+                
+                <!-- Icon -->
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-all duration-300 group-hover:scale-110" 
+                     style="background: rgba(255, 122, 0, 0.08);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="{{ $service['viewBox'] }}" fill="none" stroke="#FF7A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="{{ $service['icon'] }}"></path>
+                    </svg>
+                </div>
+                
+                <!-- Title -->
+                <div class="font-semibold text-sm mb-1" style="font-family: Poppins, sans-serif; color: rgb(17, 17, 17);">
+                    {{ $service['title'] }}
+                </div>
+                
+                <!-- Vendor Count -->
+                <div class="text-xs mb-2" style="font-family: Inter, sans-serif; color: rgb(153, 153, 153);">
+                    {{ $service['vendors'] }}
+                </div>
+                
+                <!-- Explore Link -->
+              <a href="{{ url('/services') }}" class="flex items-center gap-1 text-xs font-medium" style="color: rgb(255, 122, 0);">
+    Explore
+    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14"></path>
+        <path d="m12 5 7 7-7 7"></path>
+    </svg>
+</a>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="py-16 bg-[#F8F8F8]">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+        <div class="text-center mb-12">
+            <p class="text-[#FF8C00] uppercase text-sm font-semibold tracking-[6px]">Simple Process</p>
+            <h2 class="text-3xl md:text-4xl font-bold mt-3 text-black">How It Works</h2>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Step 01 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 group">
+                <div class="flex items-start gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0 group-hover:bg-orange-100 transition">
+                        <i class="fas fa-calendar-check text-2xl text-[#FF8C00]"></i>
+                    </div>
+                    <div>
+                        <span class="inline-block bg-orange-100 text-[#FF8C00] text-xs font-semibold px-3 py-0.5 rounded-full mb-2">
+                            Step 01
+                        </span>
+                        <h3 class="text-lg font-semibold text-black">Book a Fabrication Service</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">Choose the fabrication service you need and submit your project requirements.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 02 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 group">
+                <div class="flex items-start gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0 group-hover:bg-orange-100 transition">
+                        <i class="fas fa-user-check text-2xl text-[#FF8C00]"></i>
+                    </div>
+                    <div>
+                        <span class="inline-block bg-orange-100 text-[#FF8C00] text-xs font-semibold px-3 py-0.5 rounded-full mb-2">
+                            Step 02
+                        </span>
+                        <h3 class="text-lg font-semibold text-black">Vendor Confirms Request</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">Verified fabricators review your request and accept the booking.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 03 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 group">
+                <div class="flex items-start gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0 group-hover:bg-orange-100 transition">
+                        <i class="fas fa-ruler-combined text-2xl text-[#FF8C00]"></i>
+                    </div>
+                    <div>
+                        <span class="inline-block bg-orange-100 text-[#FF8C00] text-xs font-semibold px-3 py-0.5 rounded-full mb-2">
+                            Step 03
+                        </span>
+                        <h3 class="text-lg font-semibold text-black">On-Site Measurement</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">The vendor visits your location to inspect and take measurements.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 04 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 group">
+                <div class="flex items-start gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0 group-hover:bg-orange-100 transition">
+                        <i class="fas fa-file-invoice-dollar text-2xl text-[#FF8C00]"></i>
+                    </div>
+                    <div>
+                        <span class="inline-block bg-orange-100 text-[#FF8C00] text-xs font-semibold px-3 py-0.5 rounded-full mb-2">
+                            Step 04
+                        </span>
+                        <h3 class="text-lg font-semibold text-black">Final Quote Approval</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">Review pricing, material details and approve the final quotation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 05 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 group">
+                <div class="flex items-start gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0 group-hover:bg-orange-100 transition">
+                        <i class="fas fa-hammer text-2xl text-[#FF8C00]"></i>
+                    </div>
+                    <div>
+                        <span class="inline-block bg-orange-100 text-[#FF8C00] text-xs font-semibold px-3 py-0.5 rounded-full mb-2">
+                            Step 05
+                        </span>
+                        <h3 class="text-lg font-semibold text-black">Fabrication Work Begins</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">The selected vendor starts fabrication and keeps you updated.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 06 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 group">
+                <div class="flex items-start gap-4">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0 group-hover:bg-orange-100 transition">
+                        <i class="fas fa-shield-halved text-2xl text-[#FF8C00]"></i>
+                    </div>
+                    <div>
+                        <span class="inline-block bg-orange-100 text-[#FF8C00] text-xs font-semibold px-3 py-0.5 rounded-full mb-2">
+                            Step 06
+                        </span>
+                        <h3 class="text-lg font-semibold text-black">Secure Payment & Completion</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">Release payment securely after successful project completion.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== TOP VERIFIED FABRICATORS - UPDATED WITH HOVER EFFECTS ===== -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+        <!-- Header -->
+        <div class="flex items-end justify-between mb-10 transition-all duration-700 opacity-100 translate-y-0">
             <div>
-                <p class="text-[#FF8C00] uppercase text-sm font-semibold">Top Rated</p>
-                <h2 class="text-3xl md:text-5xl font-bold mt-3 text-black">
-                    Top Verified Fabricators <br class="hidden md:block"> Near You
+                <div class="text-xs font-semibold uppercase tracking-widest mb-3" style="color: rgb(255, 122, 0); font-family: Inter, sans-serif;">
+                    Top Rated
+                </div>
+                <h2 class="text-4xl font-bold" style="font-family: Poppins, sans-serif; color: rgb(17, 17, 17);">
+                    Top Verified Fabricators<br>Near You
                 </h2>
             </div>
-            <a href="/vendors" class="text-[#FF8C00] whitespace-nowrap">View All Vendors →</a>
+            <button class="hidden md:flex items-center gap-2 text-sm font-medium" style="color: rgb(255, 122, 0); font-family: Inter, sans-serif;">
+                View All Vendors 
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                </svg>
+            </button>
         </div>
 
         @php
         $vendors = [
-            ['name'=>'Mehta Steel Works', 'city'=>'Ahmedabad', 'rating'=>'4.9', 'image'=>'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200'],
-            ['name'=>'ArcLight Fabricators', 'city'=>'Mumbai', 'rating'=>'4.8', 'image'=>'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200'],
-            ['name'=>'GlassEdge Interiors', 'city'=>'Pune', 'rating'=>'4.7', 'image'=>'https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200'],
-            ['name'=>'PrimeStruct Co.', 'city'=>'Delhi', 'rating'=>'4.9', 'image'=>'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200'],
+            [
+                'name' => 'Mehta Steel Works',
+                'exp' => '18 yrs exp',
+                'projects' => '820 projects',
+                'price' => '₹85/sqft',
+                'rating' => '4.9',
+                'location' => 'Ahmedabad',
+                'image' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=320&fit=crop&auto=format'
+            ],
+            [
+                'name' => 'ArcLight Fabricators',
+                'exp' => '12 yrs exp',
+                'projects' => '560 projects',
+                'price' => '₹95/sqft',
+                'rating' => '4.8',
+                'location' => 'Mumbai',
+                'image' => 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&h=320&fit=crop&auto=format'
+            ],
+            [
+                'name' => 'GlassEdge Interiors',
+                'exp' => '9 yrs exp',
+                'projects' => '340 projects',
+                'price' => '₹120/sqft',
+                'rating' => '4.7',
+                'location' => 'Pune',
+                'image' => 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=320&fit=crop&auto=format'
+            ],
+            [
+                'name' => 'PrimeStruct Co.',
+                'exp' => '22 yrs exp',
+                'projects' => '1200 projects',
+                'price' => '₹75/sqft',
+                'rating' => '4.9',
+                'location' => 'Delhi',
+                'image' => 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&h=320&fit=crop&auto=format'
+            ],
         ];
         @endphp
 
-        <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
-            @foreach($vendors as $vendor)
-            <div class="rounded-3xl overflow-hidden shadow-lg hover:-translate-y-2 transition-all bg-white border border-[#E8EDF2]">
-                <div class="relative">
-                    <img src="{{ $vendor['image'] }}" class="w-full h-72 object-cover" alt="{{ $vendor['name'] }}">
-                    <div class="absolute top-4 right-4 bg-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">⭐ {{ $vendor['rating'] }}</div>
+        <!-- Vendor Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            @foreach($vendors as $index => $vendor)
+            <div class="group bg-white rounded-2xl overflow-hidden border cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-[#FF7A00]/30" 
+                 style="border-color: rgba(0, 0, 0, 0.07); box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 16px; transition: 0.5s {{ $index * 80 }}ms; opacity: 1; transform: translateY(0px);">
+                
+                <!-- Image Section -->
+                <div class="h-40 relative overflow-hidden">
+                    <img src="{{ $vendor['image'] }}" 
+                         alt="{{ $vendor['name'] }}" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                         loading="lazy">
+                    
+                    <!-- Gradient Overlay -->
+                    <div class="absolute inset-0 transition-opacity duration-500 group-hover:bg-black/20" style="background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.5));"></div>
+                    
+                    <!-- Location Badge -->
+                    <div class="absolute bottom-3 left-3 flex items-center gap-1 transition-all duration-300 group-hover:translate-x-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span class="text-xs text-white">{{ $vendor['location'] }}</span>
+                    </div>
+                    
+                    <!-- Rating Badge -->
+                    <div class="absolute top-3 right-3 bg-white rounded-full px-2.5 py-1 flex items-center gap-1 transition-all duration-300 group-hover:scale-105 group-hover:shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#FF7A00" stroke="#FF7A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path>
+                        </svg>
+                        <span class="text-xs font-semibold" style="color: rgb(17, 17, 17);">{{ $vendor['rating'] }}</span>
+                    </div>
                 </div>
-                <div class="p-6">
-                    <h3 class="font-bold text-xl text-black">{{ $vendor['name'] }}</h3>
-                    <p class="text-gray-500 mt-2">📍 {{ $vendor['city'] }}</p>
-                  <a href="{{ route('vendor-profile') }}"
-                    class="block w-full mt-4 px-6 py-3 bg-[#FF8C00] text-white font-semibold rounded-full hover:bg-[#e67e00] transition-all text-center">
-                          View Profile
-                </a>
+                
+                <!-- Content Section -->
+                <div class="p-5 transition-all duration-300 group-hover:bg-orange-50/30">
+                    <div class="font-bold text-base mb-1 transition-colors duration-300 group-hover:text-[#FF7A00]" style="font-family: Poppins, sans-serif; color: rgb(17, 17, 17);">
+                        {{ $vendor['name'] }}
+                    </div>
+                    
+                    <div class="flex gap-4 mb-4">
+                        <span class="text-xs text-gray-500 transition-all duration-300 group-hover:text-gray-700">{{ $vendor['exp'] }}</span>
+                        <span class="text-xs text-gray-500 transition-all duration-300 group-hover:text-gray-700">{{ $vendor['projects'] }}</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs text-gray-500 transition-all duration-300 group-hover:text-gray-700">From</span>
+                        <span class="font-bold transition-all duration-300 group-hover:scale-105 group-hover:text-[#FF7A00]" style="font-family: Poppins, sans-serif; color: rgb(255, 122, 0);">
+                            {{ $vendor['price'] }}
+                        </span>
+                    </div>
+                    
+                    <div class="flex gap-2">
+                       <div class="flex-1">
+    <a href="{{ url('/vendor-profile') }}">
+        <button
+            class="w-full py-2 rounded-xl text-sm font-medium border transition-all duration-300 hover:bg-gray-50 group-hover:border-[#FF7A00]/50 group-hover:text-[#FF7A00]"
+            style="border-color: rgba(0, 0, 0, 0.1); color: rgb(17, 17, 17);">
+            Profile
+        </button>
+    </a>
+</div>
+                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:opacity-90 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/25" 
+                                style="background: rgb(255, 122, 0);">
+                            Get Quote
+                        </button>
+                    </div>
                 </div>
             </div>
             @endforeach
         </div>
     </div>
 </section>
+
 <!-- ===== FEATURED PROJECTS ===== -->
-<section class="py-24 bg-black">
-    <div class="container-custom">
+<section class="py-16 bg-black">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
         <p class="text-[#FF8C00] uppercase text-sm font-semibold">Portfolio</p>
-        <h2 class="text-3xl md:text-5xl font-bold text-white mb-12">Featured Projects</h2>
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-10">Featured Projects</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div class="lg:col-span-2 lg:row-span-2 rounded-3xl overflow-hidden relative group">
-                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72" class="w-full h-64 md:h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="lg:col-span-2 lg:row-span-2 rounded-2xl overflow-hidden relative group trending-card">
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=800" class="w-full h-64 md:h-full object-cover group-hover:scale-105 transition duration-500" alt="Luxury Office Interior">
                 <div class="absolute inset-0 bg-black/40"></div>
                 <div class="absolute bottom-6 left-6">
                     <p class="text-orange-400 text-sm">Interior</p>
                     <h3 class="text-white text-xl md:text-2xl font-bold">Luxury Office Interior</h3>
                 </div>
             </div>
-            <div class="rounded-3xl overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f" class="w-full h-64 object-cover">
+            <div class="rounded-2xl overflow-hidden relative trending-card">
+                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600" class="w-full h-64 object-cover" alt="Glass Partition">
                 <div class="absolute bottom-4 left-4 text-white">
                     <h3 class="font-bold text-sm md:text-base">Glass Partition Project</h3>
                 </div>
             </div>
-            <div class="rounded-3xl overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd" class="w-full h-64 object-cover">
+            <div class="rounded-2xl overflow-hidden relative trending-card">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600" class="w-full h-64 object-cover" alt="Warehouse">
                 <div class="absolute bottom-4 left-4 text-white">
                     <h3 class="font-bold text-sm md:text-base">Warehouse Fabrication</h3>
                 </div>
             </div>
-            <div class="rounded-3xl overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab" class="w-full h-80 object-cover">
+            <div class="rounded-2xl overflow-hidden relative trending-card">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600" class="w-full h-80 object-cover" alt="Commercial">
                 <div class="absolute bottom-4 left-4 text-white">
                     <h3 class="font-bold text-sm md:text-base">Commercial Structure</h3>
                 </div>
             </div>
-            <div class="rounded-3xl overflow-hidden relative">
-                <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" class="w-full h-64 object-cover">
+            <div class="rounded-2xl overflow-hidden relative trending-card">
+                <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=600" class="w-full h-64 object-cover" alt="Residential">
                 <div class="absolute bottom-4 left-4 text-white">
                     <h3 class="font-bold text-sm md:text-base">Residential Terrace Work</h3>
                 </div>
@@ -441,219 +592,107 @@ $services = [
 </section>
 
 <!-- ===== BOOK A MEASUREMENT ===== -->
-<section class="py-24 bg-white">
-
-    <div class="container-custom">
-
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
             <div class="order-2 lg:order-1">
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
-                     class="rounded-3xl w-full h-[300px] md:h-[500px] object-cover">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800" class="rounded-2xl w-full h-[300px] md:h-[500px] object-cover" alt="Site Visit">
             </div>
-
             <div class="order-1 lg:order-2">
-
-                <p class="text-[#FF8C00] uppercase text-sm font-semibold">
-                    Book a Measurement
-                </p>
-
-                <h2 class="text-3xl md:text-5xl font-bold text-black mt-4">
-                    Book A Free <br> Site Visit
-                </h2>
-
-                <p class="text-gray-500 mt-6">
-                    Our trained engineers visit your site,
-                    take precise measurements and provide
-                    competitive quotations.
-                </p>
-
-                <form class="mt-10 space-y-5">
-
-                    <input type="text"
-                           placeholder="Full Name"
-                           class="w-full border rounded-xl px-5 py-4">
-
-                    <input type="text"
-                           placeholder="Mobile Number"
-                           class="w-full border rounded-xl px-5 py-4">
-
-                    <input type="text"
-                           placeholder="City"
-                           class="w-full border rounded-xl px-5 py-4">
-
-                    <select class="w-full border rounded-xl px-5 py-4">
+                <p class="text-[#FF8C00] uppercase text-sm font-semibold">Book a Measurement</p>
+                <h2 class="text-3xl md:text-5xl font-bold text-black mt-4">Book A Free <br> Site Visit</h2>
+                <p class="text-gray-500 mt-6">Our trained engineers visit your site, take precise measurements and provide competitive quotations.</p>
+                <form class="mt-8 space-y-4">
+                    <input type="text" placeholder="Full Name" class="w-full border rounded-xl px-5 py-3.5">
+                    <input type="text" placeholder="Mobile Number" class="w-full border rounded-xl px-5 py-3.5">
+                    <input type="text" placeholder="City" class="w-full border rounded-xl px-5 py-3.5">
+                    <select class="w-full border rounded-xl px-5 py-3.5">
                         <option>Select Project Type</option>
                         <option>Steel Structure</option>
                         <option>Glass Work</option>
                         <option>Interior Work</option>
                     </select>
-
-                    <button class="primary-btn w-full">
-                        Book Free Site Visit
-                    </button>
-
+                    <button class="primary-btn w-full">Book Free Site Visit</button>
                 </form>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
 
 <!-- ===== TESTIMONIALS ===== -->
-<section class="py-24 bg-[#F7F7F7]">
-
-    <div class="container-custom">
-
-        <div class="text-center mb-16">
-
-            <p class="text-[#FF8A1E] text-lg uppercase tracking-[10px] font-bold">
-                TESTIMONIALS
-            </p>
-            <h2 class="text-3xl md:text-5xl font-bold text-black">
-                What Our Customers Say
-            </h2>
-
+<section class="py-16 bg-[#F7F7F7]">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+        <div class="text-center mb-12">
+            <p class="text-[#FF8A1E] text-lg uppercase tracking-[10px] font-bold mb-4">Testimonials</p>
+            <h2 class="text-3xl md:text-5xl font-bold text-black">What Our Customers Say</h2>
         </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             @for($i=1;$i<=6;$i++)
-
-            <div class="bg-white rounded-3xl p-8 shadow-sm">
-
-                <div class="text-orange-400 text-xl mb-4">
-                    ★★★★★
-                </div>
-
-                <p class="text-gray-600 leading-8">
-                    FabriQ made the entire process seamless.
-                    Excellent vendors and transparent pricing.
-                </p>
-
-                <div class="mt-6 flex items-center gap-4">
-
-                    <div class="w-12 h-12 rounded-full bg-orange-500 text-white flex items-center justify-center">
-                        R
-                    </div>
-
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+                <div class="text-orange-400 text-xl mb-3">★★★★★</div>
+                <p class="text-gray-600 leading-7 text-sm">"The quotation process was smooth and transparent. I'd like to see a more detailed breakdown of the pricing structure."</p>
+                <div class="mt-4 flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold">R</div>
                     <div>
-                        <h4 class="font-bold">Rahul Sharma</h4>
-                        <p class="text-gray-500 text-sm">Ahmedabad</p>
+                        <h4 class="font-bold text-sm">Harshita Sharma</h4>
+                        <p class="text-gray-500 text-xs">Ahmedabad</p>
                     </div>
-
                 </div>
-
             </div>
-
             @endfor
-
         </div>
-
     </div>
-
 </section>
 
 <!-- ===== WHY CHOOSE FABRIQ ===== -->
-<section class="bg-[#F8F8F8] py-24">
-
-    <div class="max-w-7xl mx-auto px-6">
-
-        <div class="text-center mb-14">
-            <p class="text-[#FF8A1E] text-xl uppercase tracking-[10px] font-bold mb-4">
-                OUR ADVANTAGE
-            </p>
-            <h2 class="text-[32px] md:text-[48px] font-bold text-[#111827] mt-3">
-                Why Choose FabriQ
-            </h2>
+<section class="py-16 bg-[#F8F8F8]">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+        <div class="text-center mb-12">
+            <p class="text-[#FF8A1E] text-xl uppercase tracking-[10px] font-bold mb-2">Our Advantage</p>
+            <h2 class="text-[32px] md:text-[48px] font-bold text-[#111827] mt-1">Why Choose FabriQ</h2>
         </div>
-
         @php
         $features = [
-            ['icon' => 'fa-shield-alt', 'title' => 'Verified Vendors', 'desc' => 'All vendors pass a rigorous 8-point verification including GST, trade license and site audits.'],
-            ['icon' => 'fa-chart-line', 'title' => 'Transparent Pricing', 'desc' => 'Compare itemized quotations side-by-side. No hidden charges, no surprises.'],
-            ['icon' => 'fa-chart-bar', 'title' => 'Live Project Tracking', 'desc' => 'Real-time milestone updates, photo reports and payment-linked progress gates.'],
-            ['icon' => 'fa-medal', 'title' => 'Quality Assurance', 'desc' => 'Independent QA inspectors visit your site at key milestones — at no extra cost.'],
-            ['icon' => 'fa-headset', 'title' => 'Dedicated Support', 'desc' => 'A personal project manager is assigned from quote to handover.'],
-            ['icon' => 'fa-clock', 'title' => 'AMC Services', 'desc' => 'Annual maintenance contracts to keep your fabrication performing for years.'],
+            ['icon' => 'fa-shield-alt', 'title' => 'Verified Vendors', 'desc' => 'All vendors are registered with a verified certificate. This ensures that the products and services are legitimate and trustworthy.'],
+            ['icon' => 'fa-chart-line', 'title' => 'Transparent Pricing', 'desc' => 'Our pricing is clearly outlined, making it easy for customers to understand the costs involved.'],
+            ['icon' => 'fa-medal', 'title' => 'Quality Assurance', 'desc' => 'Our products undergo rigorous testing to ensure they meet the highest standards.'],
+            ['icon' => 'fa-headset', 'title' => 'Dedicated Support', 'desc' => 'We offer dedicated support to help customers with any queries or issues they may encounter.'],
         ];
         @endphp
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             @foreach($features as $feature)
-
-            <div class="bg-white border border-[#E8E8E8] rounded-[20px] p-8">
-
+            <div class="bg-white border border-[#E8E8E8] rounded-[20px] p-6">
                 <div class="w-12 h-12 rounded-xl bg-[#FFF4EA] flex items-center justify-center">
                     <i class="fas {{ $feature['icon'] }} text-[#FF8A1E] text-lg"></i>
                 </div>
-
-                <h3 class="text-[20px] font-semibold text-[#111827] mt-8">
-                    {{ $feature['title'] }}
-                </h3>
-
-                <p class="text-[#6B7280] text-[15px] leading-7 mt-4">
-                    {{ $feature['desc'] }}
-                </p>
-
+                <h3 class="text-[18px] font-semibold text-[#111827] mt-4">{{ $feature['title'] }}</h3>
+                <p class="text-[#6B7280] text-[14px] leading-6 mt-2">{{ $feature['desc'] }}</p>
             </div>
-
             @endforeach
-
         </div>
-
     </div>
-
 </section>
 
 <!-- ===== LIVE PROJECT TRACKING ===== -->
-<section class="bg-black py-28 overflow-hidden">
-
-    <div class="max-w-7xl mx-auto px-6">
-
-        <div class="grid lg:grid-cols-2 items-center gap-16 lg:gap-24">
-
+<section class="py-16 bg-black">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+        <div class="grid lg:grid-cols-2 items-center gap-12 lg:gap-16">
             <div>
-
-                <p class="text-[#FF8A1E] uppercase text-xs tracking-[3px] font-semibold">
-                    Real-Time Dashboard
-                </p>
-
-                <h2 class="text-white text-[32px] md:text-[56px] font-bold leading-[40px] md:leading-[64px] mt-4">
-                    Live Project
-                    <br>
-                    Tracking
-                </h2>
-
-                <p class="text-gray-400 text-base md:text-lg mt-8 max-w-md">
-                    Know exactly where your project stands —
-                    from first measurement to final handover.
-                </p>
-
-                <button class="mt-10 bg-[#FF8A1E] hover:bg-orange-600 text-white px-8 py-4 rounded-full font-medium transition">
-                    View Full Dashboard →
-                </button>
-
+                <p class="text-[#FF8A1E] uppercase text-xs tracking-[3px] font-semibold">Real-Time Dashboard</p>
+                <h2 class="text-white text-[32px] md:text-[48px] font-bold leading-[40px] md:leading-[56px] mt-3">Live Project <br> Tracking</h2>
+                <p class="text-gray-400 text-base md:text-lg mt-4 max-w-md">Know exactly where your project stands — from first measurement to final handover.</p>
+                <button class="mt-6 bg-[#FF8A1E] hover:bg-orange-600 text-white px-6 py-3 rounded-full font-medium transition text-sm">View Full Dashboard →</button>
             </div>
-
-            <div class="bg-[#141414] border border-[#262626] rounded-[24px] p-6 md:p-8 max-w-[500px] w-full">
-
+            <div class="bg-[#141414] border border-[#262626] rounded-[20px] p-6 md:p-8 w-full">
                 <div class="flex flex-wrap justify-between items-start gap-2">
                     <div>
-                        <h3 class="text-white font-semibold text-lg md:text-xl">
-                            Office Renovation — Phase 2
-                        </h3>
-                        <p class="text-gray-500 text-sm mt-2">Project ID: FQ-2024-0872</p>
+                        <h3 class="text-white font-semibold text-lg md:text-xl">Office Renovation — Phase 2</h3>
+                        <p class="text-gray-500 text-sm mt-1">Project ID: FQ-2024-0872</p>
                     </div>
-                    <span class="bg-[#2A1A09] text-[#FF8A1E] text-xs px-4 py-2 rounded-full">On Track</span>
+                    <span class="bg-[#2A1A09] text-[#FF8A1E] text-xs px-4 py-1.5 rounded-full">On Track</span>
                 </div>
-
-                <div class="mt-8">
-                    <div class="flex justify-between text-sm mb-3">
+                <div class="mt-6">
+                    <div class="flex justify-between text-sm mb-2">
                         <span class="text-gray-400">Overall Progress</span>
                         <span class="text-[#FF8A1E]">75%</span>
                     </div>
@@ -661,113 +700,47 @@ $services = [
                         <div class="w-[75%] h-2 rounded-full bg-[#FF8A1E]"></div>
                     </div>
                 </div>
-
-                <div class="space-y-6 md:space-y-8 mt-8 md:mt-10">
-                    <div class="flex items-center gap-4">
-                        <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-check text-white text-[10px]"></i>
-                        </div>
-                        <span class="text-white text-sm md:text-base">Measurement Completed</span>
-                    </div>
-
-                    <div class="flex items-center gap-4">
-                        <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-check text-white text-[10px]"></i>
-                        </div>
-                        <span class="text-white text-sm md:text-base">Design Submitted</span>
-                    </div>
-
-                    <div class="flex items-center gap-4">
-                        <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-check text-white text-[10px]"></i>
-                        </div>
-                        <span class="text-white text-sm md:text-base">Quotation Approved</span>
-                    </div>
-
-                    <div class="flex items-center gap-4">
-                        <div class="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-check text-white text-[10px]"></i>
-                        </div>
-                        <span class="text-white text-sm md:text-base">Payment Received</span>
-                    </div>
-
-                    <div class="border border-[#6B3D13] bg-[#2A1A09] rounded-xl px-4 md:px-5 py-3 md:py-4 flex flex-wrap justify-between items-center gap-2">
-                        <div class="flex items-center gap-4">
-                            <div class="w-6 h-6 rounded-full bg-[#FF8A1E] flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-circle text-white text-[7px]"></i>
-                            </div>
-                            <span class="text-white text-sm md:text-base">Execution Running</span>
-                        </div>
-                        <span class="bg-[#FF8A1E] text-white text-xs px-3 py-1 rounded-full">Active</span>
+                <div class="space-y-4 mt-6">
+                    <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-white text-[8px]"></i></div><span class="text-white text-sm">Measurement Completed</span></div>
+                    <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-white text-[8px]"></i></div><span class="text-white text-sm">Design Submitted</span></div>
+                    <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-white text-[8px]"></i></div><span class="text-white text-sm">Quotation Approved</span></div>
+                    <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-white text-[8px]"></i></div><span class="text-white text-sm">Payment Received</span></div>
+                    <div class="border border-[#6B3D13] bg-[#2A1A09] rounded-xl px-4 py-3 flex flex-wrap justify-between items-center gap-2">
+                        <div class="flex items-center gap-3"><div class="w-5 h-5 rounded-full bg-[#FF8A1E] flex items-center justify-center flex-shrink-0"><i class="fas fa-circle text-white text-[6px]"></i></div><span class="text-white text-sm">Execution Running</span></div>
+                        <span class="bg-[#FF8A1E] text-white text-xs px-3 py-0.5 rounded-full">Active</span>
                     </div>
                 </div>
-
-                <p class="text-gray-500 text-sm mt-6 md:mt-8">Completion 75%</p>
-
+                <p class="text-gray-500 text-sm mt-4">Completion 75%</p>
             </div>
-
         </div>
-
     </div>
-
 </section>
 
 <!-- ===== AMC SECTION ===== -->
-<section class="py-24 bg-[#F5F5F5]">
-
-    <div class="container-custom">
-
-        <div class="bg-gradient-to-r from-[#FF8C1A] to-[#FF932E] rounded-[32px] overflow-hidden">
-
-            <div class="grid lg:grid-cols-2 gap-10 items-center p-6 md:p-8 lg:p-14">
-
+<section class="py-16 bg-[#F5F5F5]">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+        <div class="bg-gradient-to-r from-[#FF8C1A] to-[#FF932E] rounded-[28px] overflow-hidden">
+            <div class="grid lg:grid-cols-2 gap-8 items-center p-8 md:p-10 lg:p-12">
                 <div>
-
-                    <p class="uppercase text-white/80 text-xs font-semibold tracking-wider">
-                        Annual Maintenance
-                    </p>
-
-                    <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-bold mt-4 leading-tight">
-                        Keep Your Structure
-                        Maintained For Years
-                    </h2>
-
-                    <p class="text-white/90 mt-6 leading-8 max-w-xl">
-                        Quarterly inspections, priority response and preventive
-                        maintenance — keeping your fabrication performing at its best.
-                    </p>
-
-                    <button class="mt-8 bg-white text-[#FF8C1A] px-8 py-4 rounded-full font-semibold hover:scale-105 transition">
-                        Explore AMC Plans →
-                    </button>
-
+                    <p class="uppercase text-white/80 text-xs font-semibold tracking-wider">Annual Maintenance</p>
+                    <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-bold mt-3 leading-tight">Keep Your Structure Maintained For Years</h2>
+                    <p class="text-white/90 mt-4 leading-7 max-w-xl text-sm">Quarterly inspections, priority response and preventive maintenance — keeping your fabrication performing at its best.</p>
+                    <button class="mt-6 bg-white text-[#FF8C1A] px-6 py-3 rounded-full font-semibold hover:scale-105 transition text-sm">Explore AMC Plans →</button>
                 </div>
-
                 <div class="relative">
-
-                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200"
-                         class="rounded-[24px] w-full h-[280px] md:h-[320px] object-cover">
-
-                    <div class="absolute -bottom-5 left-6 bg-white rounded-2xl px-4 md:px-5 py-4 shadow-xl max-w-[90%]">
-
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800" class="rounded-[20px] w-full h-[260px] md:h-[300px] object-cover" alt="AMC">
+                    <div class="absolute -bottom-4 left-5 bg-white rounded-2xl px-4 py-3 shadow-xl max-w-[90%]">
                         <h4 class="font-semibold text-sm">AMC Coverage</h4>
-
-                        <div class="flex flex-wrap gap-2 md:gap-3 mt-2 text-xs text-gray-500">
+                        <div class="flex flex-wrap gap-2 mt-1 text-xs text-gray-500">
                             <span>✓ Quarterly Visit</span>
                             <span>✓ 24h Response</span>
                             <span>✓ Parts Discount</span>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
 
 <!-- ===== CAROUSEL JAVASCRIPT ===== -->
@@ -785,20 +758,21 @@ document.addEventListener('DOMContentLoaded', function() {
     let totalItems = 0;
     let isDragging = false;
     let startX = 0;
-    let currentTranslate = 0;
     let prevTranslate = 0;
+    let autoPlayInterval = null;
+    const AUTO_PLAY_DELAY = 4000;
 
     function getItemWidth() {
         const item = inner.querySelector('.service-carousel-item');
-        if (!item) return 280;
-        const gap = 24;
+        if (!item) return 240;
+        const gap = 16;
         return item.offsetWidth + gap;
     }
 
     function getVisibleItems() {
         const containerWidth = carousel.offsetWidth;
         const itemW = getItemWidth();
-        return Math.floor(containerWidth / itemW);
+        return Math.max(1, Math.floor(containerWidth / itemW));
     }
 
     function updateCarousel() {
@@ -807,14 +781,10 @@ document.addEventListener('DOMContentLoaded', function() {
         totalItems = inner.querySelectorAll('.service-carousel-item').length;
 
         const maxIndex = Math.max(0, totalItems - visibleItems);
-        if (currentIndex > maxIndex) {
-            currentIndex = maxIndex;
-        }
+        if (currentIndex > maxIndex) currentIndex = maxIndex;
 
-        const translateX = -currentIndex * itemWidth;
-        inner.style.transform = `translateX(${translateX}px)`;
-        currentTranslate = translateX;
-        prevTranslate = translateX;
+        inner.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
+        prevTranslate = -currentIndex * itemWidth;
 
         updateDots();
         updateButtons();
@@ -826,10 +796,7 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < totalDots; i++) {
             const dot = document.createElement('button');
             dot.className = 'dot' + (i === currentIndex ? ' active' : '');
-            dot.setAttribute('data-index', i);
-            dot.addEventListener('click', () => {
-                goTo(i);
-            });
+            dot.addEventListener('click', () => { goTo(i); resetAutoPlay(); });
             dotsContainer.appendChild(dot);
         }
     }
@@ -848,31 +815,43 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function next() {
         const maxIndex = Math.max(0, totalItems - visibleItems);
-        if (currentIndex < maxIndex) {
-            goTo(currentIndex + 1);
-        }
+        if (currentIndex < maxIndex) goTo(currentIndex + 1);
+        else goTo(0);
+        resetAutoPlay();
     }
 
     function prev() {
-        if (currentIndex > 0) {
-            goTo(currentIndex - 1);
-        }
+        if (currentIndex > 0) goTo(currentIndex - 1);
+        else goTo(Math.max(0, totalItems - visibleItems));
+        resetAutoPlay();
     }
 
-    // Mouse Drag Events
+    function resetAutoPlay() {
+        if (autoPlayInterval) { clearInterval(autoPlayInterval); autoPlayInterval = null; }
+        startAutoPlay();
+    }
+
+    function startAutoPlay() {
+        if (autoPlayInterval) clearInterval(autoPlayInterval);
+        autoPlayInterval = setInterval(() => {
+            const maxIndex = Math.max(0, totalItems - visibleItems);
+            if (currentIndex >= maxIndex) goTo(0);
+            else next();
+        }, AUTO_PLAY_DELAY);
+    }
+
+    // Mouse Drag
     carousel.addEventListener('mousedown', (e) => {
         isDragging = true;
         startX = e.pageX;
         carousel.style.cursor = 'grabbing';
         carousel.style.transition = 'none';
+        if (autoPlayInterval) { clearInterval(autoPlayInterval); autoPlayInterval = null; }
     });
 
     carousel.addEventListener('mousemove', (e) => {
         if (!isDragging) return;
-        const currentX = e.pageX;
-        const diff = currentX - startX;
-        const translate = prevTranslate + diff;
-        inner.style.transform = `translateX(${translate}px)`;
+        inner.style.transform = `translateX(${prevTranslate + (e.pageX - startX)}px)`;
     });
 
     carousel.addEventListener('mouseup', (e) => {
@@ -880,20 +859,12 @@ document.addEventListener('DOMContentLoaded', function() {
         isDragging = false;
         carousel.style.cursor = 'grab';
         carousel.style.transition = 'transform 0.3s ease';
-
-        const currentX = e.pageX;
-        const diff = currentX - startX;
-        const threshold = 50;
-
-        if (diff < -threshold) {
-            next();
-        } else if (diff > threshold) {
-            prev();
-        } else {
-            updateCarousel();
-        }
-
+        const diff = e.pageX - startX;
+        if (diff < -50) next();
+        else if (diff > 50) prev();
+        else updateCarousel();
         prevTranslate = -currentIndex * itemWidth;
+        startAutoPlay();
     });
 
     carousel.addEventListener('mouseleave', () => {
@@ -903,55 +874,48 @@ document.addEventListener('DOMContentLoaded', function() {
             carousel.style.transition = 'transform 0.3s ease';
             updateCarousel();
             prevTranslate = -currentIndex * itemWidth;
+            startAutoPlay();
         }
     });
 
-    // Touch Events
-    let touchStartX = 0;
-    let touchPrevTranslate = 0;
-
+    // Touch
+    let touchStartX = 0, touchPrevTranslate = 0;
     carousel.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
         touchPrevTranslate = -currentIndex * itemWidth;
         carousel.style.transition = 'none';
+        if (autoPlayInterval) { clearInterval(autoPlayInterval); autoPlayInterval = null; }
     }, { passive: true });
 
     carousel.addEventListener('touchmove', (e) => {
-        const currentX = e.touches[0].clientX;
-        const diff = currentX - touchStartX;
-        const translate = touchPrevTranslate + diff;
-        inner.style.transform = `translateX(${translate}px)`;
+        const diff = e.touches[0].clientX - touchStartX;
+        inner.style.transform = `translateX(${touchPrevTranslate + diff}px)`;
     }, { passive: true });
 
     carousel.addEventListener('touchend', (e) => {
         carousel.style.transition = 'transform 0.3s ease';
         const diff = e.changedTouches[0].clientX - touchStartX;
-        const threshold = 50;
-
-        if (diff < -threshold) {
-            next();
-        } else if (diff > threshold) {
-            prev();
-        } else {
-            updateCarousel();
-        }
+        if (diff < -50) next();
+        else if (diff > 50) prev();
+        else updateCarousel();
+        startAutoPlay();
     }, { passive: true });
 
-    // Button Events
     nextBtn.addEventListener('click', next);
     prevBtn.addEventListener('click', prev);
 
-    // Window Resize
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            updateCarousel();
-        }, 200);
+        resizeTimeout = setTimeout(updateCarousel, 200);
     });
 
-    // Initialize
-    setTimeout(updateCarousel, 100);
+    setTimeout(() => { updateCarousel(); startAutoPlay(); }, 100);
+
+    carousel.addEventListener('mouseenter', () => {
+        if (autoPlayInterval) { clearInterval(autoPlayInterval); autoPlayInterval = null; }
+    });
+    carousel.addEventListener('mouseleave', startAutoPlay);
 });
 </script>
 

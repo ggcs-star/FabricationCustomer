@@ -5,49 +5,58 @@
 @section('content')
 
 <!-- HERO SECTION -->
-<section class="bg-[#0B0B0D] overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 py-20">
+<section class="bg-[#0B0B0D] overflow-hidden pt-8 md:pt-12 lg:pt-16">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16 py-12 md:py-16">
 
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
 
             <!-- Left -->
             <div>
-                <span class="text-[#FF8C00] uppercase text-sm font-semibold tracking-wider">
-                    Annual Maintenance Contracts
+                <span class="text-[#FF8C00] uppercase text-xs font-semibold tracking-wider">
+                    Annual Maintenance Contract
                 </span>
 
-                <h1 class="text-4xl md:text-5xl font-bold text-white mt-4 leading-tight">
+                <h1 class="text-3xl md:text-4xl font-bold text-white mt-3 leading-tight">
                     Keep Your Structure
                     <span class="text-[#FF8C00] block">
                         Maintained For Years
                     </span>
                 </h1>
 
-                <p class="text-gray-300 mt-6 text-lg leading-relaxed">
+                <p class="text-gray-300 mt-4 text-sm md:text-base leading-relaxed">
                     Protect your fabrication investment with scheduled inspections,
-                    preventive maintenance and emergency support.
+                    preventive maintenance and 24×7 emergency support — from the same engineers who built it.
                 </p>
 
-                <div class="flex flex-wrap gap-6 mt-8 text-gray-300">
+                <div class="flex flex-wrap gap-4 mt-6 text-gray-300 text-sm">
 
                     <div>✓ Plans from ₹4,999/year</div>
                     <div>✓ 2,000+ Structures</div>
                     <div>✓ Serving 18+ Cities</div>
 
                 </div>
+
+                <div class="flex flex-wrap gap-3 mt-8">
+                    <a href="#" class="bg-[#FF8C00] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-orange-600 transition">
+                        Find Vendors
+                    </a>
+                    <a href="#" class="border border-gray-400 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:border-[#FF8C00] hover:text-[#FF8C00] transition">
+                        Get Free Quote
+                    </a>
+                </div>
             </div>
 
             <!-- Right -->
             <div class="relative">
 
-                <img src="{{ asset('images/amc-hero.jpg') }}"
-                     class="rounded-3xl w-full h-[420px] object-cover">
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800" 
+                     class="rounded-2xl w-full h-[320px] object-cover">
 
-                <div class="absolute bottom-6 left-6 right-6 bg-white rounded-2xl p-5 shadow-xl">
+                <div class="absolute bottom-4 left-4 right-4 bg-white rounded-xl p-4 shadow-xl">
 
-                    <h4 class="font-semibold">Next Scheduled Visit</h4>
+                    <h4 class="font-semibold text-sm">Next Scheduled Visit</h4>
 
-                    <p class="text-gray-500 text-sm mt-2">
+                    <p class="text-gray-500 text-xs mt-1">
                         📅 April 15, 2026 • 10:00 AM
                     </p>
 
@@ -60,19 +69,18 @@
     </div>
 </section>
 
-
 <!-- COVERAGE -->
-<section class="py-20 bg-gray-50">
+<section class="py-16 bg-gray-50">
 
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
 
-        <div class="text-center mb-14">
+        <div class="text-center mb-12">
 
-            <span class="text-[#FF8C00] uppercase text-sm font-semibold">
+            <span class="text-[#FF8C00] uppercase text-xs font-semibold">
                 Every Plan Includes
             </span>
 
-            <h2 class="text-4xl font-bold mt-3">
+            <h2 class="text-2xl md:text-3xl font-bold mt-2">
                 Comprehensive Maintenance Coverage
             </h2>
 
@@ -80,31 +88,40 @@
 
         @php
         $features = [
-        ['Structural Inspection','Complete check of joints, welds and load-bearing elements'],
-        ['Corrosion Assessment','Early rust detection and coating inspection'],
-        ['Digital Health Report','Detailed report with recommendations'],
-        ['Risk Flagging','Immediate alerts for critical issues'],
-        ['Scheduled Maintenance','Preventive maintenance work'],
-        ['Year-round Support','Dedicated support team available']
+            [
+                'icon' => '🏗️',
+                'title' => 'Structural Inspection',
+                'desc' => 'Complete check of joints, welds and load-bearing elements'
+            ],
+            [
+                'icon' => '🔬',
+                'title' => 'Corrosion Assessment',
+                'desc' => 'Early rust detection and coating inspection'
+            ],
+            [
+                'icon' => '📊',
+                'title' => 'Digital Health Report',
+                'desc' => 'Detailed report with photos, measurements and recommendations'
+            ]
         ];
         @endphp
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
 
             @foreach($features as $feature)
 
-            <div class="bg-white rounded-3xl p-8 shadow-sm border">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border hover:shadow-md transition text-center">
 
-                <div class="w-12 h-12 rounded-xl bg-orange-100 flex items-center justify-center mb-6">
-                    🔧
+                <div class="text-4xl mb-4">
+                    {{ $feature['icon'] }}
                 </div>
 
-                <h4 class="font-bold text-xl mb-3">
-                    {{ $feature[0] }}
+                <h4 class="font-bold text-base md:text-lg mb-2">
+                    {{ $feature['title'] }}
                 </h4>
 
-                <p class="text-gray-500">
-                    {{ $feature[1] }}
+                <p class="text-gray-500 text-sm">
+                    {{ $feature['desc'] }}
                 </p>
 
             </div>
@@ -117,41 +134,40 @@
 
 </section>
 
-
 <!-- PRICING -->
-<section class="py-20 bg-white">
+<section class="py-16 bg-white">
 
-    <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
 
-        <div class="text-center mb-14">
+        <div class="text-center mb-12">
 
-            <span class="text-[#FF8C00] uppercase text-sm font-semibold">
+            <span class="text-[#FF8C00] uppercase text-xs font-semibold">
                 Transparent Pricing
             </span>
 
-            <h2 class="text-4xl font-bold mt-3">
+            <h2 class="text-2xl md:text-3xl font-bold mt-2">
                 Choose Your AMC Plan
             </h2>
 
         </div>
 
-        <div class="grid lg:grid-cols-3 gap-8">
+        <div class="grid lg:grid-cols-3 gap-6">
 
             <!-- Essential -->
-            <div class="border rounded-3xl p-8">
+            <div class="border rounded-2xl p-6 hover:shadow-lg transition">
 
-                <h3 class="text-2xl font-bold">Essential</h3>
+                <h3 class="text-xl font-bold">Essential</h3>
 
-                <p class="text-gray-500 mt-2">
+                <p class="text-gray-500 text-sm mt-1">
                     Small residential projects
                 </p>
 
-                <h2 class="text-5xl font-bold mt-6">
+                <h2 class="text-4xl font-bold mt-5">
                     ₹4,999
-                    <span class="text-lg text-gray-500">/year</span>
+                    <span class="text-base text-gray-500">/year</span>
                 </h2>
 
-                <ul class="space-y-4 mt-8 text-gray-600">
+                <ul class="space-y-3 mt-6 text-gray-600 text-sm">
 
                     <li>✓ 2 site visits/year</li>
                     <li>✓ Visual inspection</li>
@@ -162,32 +178,32 @@
                 </ul>
 
                 <button
-                    class="w-full border border-gray-300 py-3 rounded-full mt-8 hover:bg-gray-100">
+                    class="w-full border border-gray-300 py-2.5 rounded-full mt-6 text-sm hover:bg-gray-100 transition">
                     Get Started
                 </button>
 
             </div>
 
             <!-- Professional -->
-            <div class="border-2 border-[#FF8C00] rounded-3xl p-8 relative">
+            <div class="border-2 border-[#FF8C00] rounded-2xl p-6 relative hover:shadow-lg transition">
 
                 <span
-                    class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FF8C00] text-white px-5 py-2 rounded-full text-sm">
+                    class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#FF8C00] text-white px-4 py-1 rounded-full text-[10px] font-semibold">
                     Most Popular
                 </span>
 
-                <h3 class="text-2xl font-bold">Professional</h3>
+                <h3 class="text-xl font-bold">Professional</h3>
 
-                <p class="text-gray-500 mt-2">
+                <p class="text-gray-500 text-sm mt-1">
                     Offices & Commercial
                 </p>
 
-                <h2 class="text-5xl font-bold mt-6 text-[#FF8C00]">
+                <h2 class="text-4xl font-bold mt-5 text-[#FF8C00]">
                     ₹9,999
-                    <span class="text-lg text-gray-500">/year</span>
+                    <span class="text-base text-gray-500">/year</span>
                 </h2>
 
-                <ul class="space-y-4 mt-8 text-gray-600">
+                <ul class="space-y-3 mt-6 text-gray-600 text-sm">
 
                     <li>✓ 4 quarterly visits</li>
                     <li>✓ Structural audit</li>
@@ -199,29 +215,27 @@
                 </ul>
 
                 <button
-                    class="w-full bg-[#FF8C00] text-white py-3 rounded-full mt-8 hover:bg-orange-600">
+                    class="w-full bg-[#FF8C00] text-white py-2.5 rounded-full mt-6 text-sm hover:bg-orange-600 transition">
                     Choose Professional
                 </button>
 
             </div>
 
             <!-- Enterprise -->
-            <div class="bord
-            
-            er rounded-3xl p-8">
+            <div class="border rounded-2xl p-6 hover:shadow-lg transition">
 
-                <h3 class="text-2xl font-bold">Enterprise</h3>
+                <h3 class="text-xl font-bold">Enterprise</h3>
 
-                <p class="text-gray-500 mt-2">
+                <p class="text-gray-500 text-sm mt-1">
                     Large industrial projects
                 </p>
 
-                <h2 class="text-5xl font-bold mt-6">
+                <h2 class="text-4xl font-bold mt-5">
                     ₹19,999
-                    <span class="text-lg text-gray-500">/year</span>
+                    <span class="text-base text-gray-500">/year</span>
                 </h2>
 
-                <ul class="space-y-4 mt-8 text-gray-600">
+                <ul class="space-y-3 mt-6 text-gray-600 text-sm">
 
                     <li>✓ Monthly visits</li>
                     <li>✓ Comprehensive reports</li>
@@ -233,7 +247,7 @@
                 </ul>
 
                 <button
-                    class="w-full border border-gray-300 py-3 rounded-full mt-8 hover:bg-gray-100">
+                    class="w-full border border-gray-300 py-2.5 rounded-full mt-6 text-sm hover:bg-gray-100 transition">
                     Contact Sales
                 </button>
 
@@ -245,32 +259,31 @@
 
 </section>
 
-
 <!-- STATS -->
-<section class="bg-black py-12">
+<section class="bg-black py-10">
 
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
 
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
 
             <div>
-                <h3 class="text-[#FF8C00] text-4xl font-bold">2,000+</h3>
-                <p class="text-gray-300 mt-2">Structures Under AMC</p>
+                <h3 class="text-[#FF8C00] text-3xl md:text-4xl font-bold">2,000+</h3>
+                <p class="text-gray-300 text-sm mt-1">Structures Under AMC</p>
             </div>
 
             <div>
-                <h3 class="text-[#FF8C00] text-4xl font-bold">18+</h3>
-                <p class="text-gray-300 mt-2">Cities Covered</p>
+                <h3 class="text-[#FF8C00] text-3xl md:text-4xl font-bold">18+</h3>
+                <p class="text-gray-300 text-sm mt-1">Cities Covered</p>
             </div>
 
             <div>
-                <h3 class="text-[#FF8C00] text-4xl font-bold">4.9★</h3>
-                <p class="text-gray-300 mt-2">Customer Rating</p>
+                <h3 class="text-[#FF8C00] text-3xl md:text-4xl font-bold">4.9★</h3>
+                <p class="text-gray-300 text-sm mt-1">Customer Rating</p>
             </div>
 
             <div>
-                <h3 class="text-[#FF8C00] text-4xl font-bold">&lt; 4 hrs</h3>
-                <p class="text-gray-300 mt-2">Emergency Response</p>
+                <h3 class="text-[#FF8C00] text-3xl md:text-4xl font-bold">&lt; 4 hrs</h3>
+                <p class="text-gray-300 text-sm mt-1">Emergency Response</p>
             </div>
 
         </div>
@@ -278,12 +291,14 @@
     </div>
 
 </section>
-<section class="py-20 bg-[#F8F9FB]">
 
-    <div class="max-w-7xl mx-auto px-6">
+<!-- TESTIMONIALS -->
+<section class="py-16 bg-[#F8F9FB]">
 
-        <div class="text-center mb-14">
-            <h2 class="text-4xl font-bold text-gray-900">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+
+        <div class="text-center mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
                 What AMC Customers Say
             </h2>
         </div>
@@ -311,17 +326,17 @@
         ];
         @endphp
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             @foreach($testimonials as $item)
 
-            <div class="bg-white rounded-3xl p-8 shadow-sm border hover:shadow-lg transition">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border hover:shadow-lg transition">
 
-                <div class="text-[#FF8C00] text-xl mb-5">
+                <div class="text-[#FF8C00] text-base mb-4">
                     ★★★★★
                 </div>
 
-                <p class="text-gray-600 leading-8 mb-8">
+                <p class="text-gray-600 text-sm leading-7 mb-6">
                     "{{ $item['review'] }}"
                 </p>
 
@@ -329,23 +344,23 @@
 
                     <div class="flex items-center gap-3">
 
-                        <div class="w-10 h-10 rounded-full bg-[#FF8C00] text-white flex items-center justify-center font-bold">
+                        <div class="w-9 h-9 rounded-full bg-[#FF8C00] text-white flex items-center justify-center font-bold text-sm">
                             {{ strtoupper(substr($item['name'],0,1)) }}
                         </div>
 
                         <div>
-                            <h4 class="font-semibold">
+                            <h4 class="font-semibold text-sm">
                                 {{ $item['name'] }}
                             </h4>
 
-                            <p class="text-sm text-gray-500">
+                            <p class="text-xs text-gray-500">
                                 {{ $item['city'] }}
                             </p>
                         </div>
 
                     </div>
 
-                    <span class="bg-orange-100 text-[#FF8C00] px-3 py-1 rounded-full text-sm">
+                    <span class="bg-orange-100 text-[#FF8C00] px-2.5 py-0.5 rounded-full text-[10px] font-medium">
                         {{ $item['plan'] }}
                     </span>
 
@@ -362,12 +377,12 @@
 </section>
 
 <!-- FAQ -->
-<section class="py-20 bg-white">
-    <div class="max-w-4xl mx-auto px-6">
+<section class="py-16 bg-white">
+    <div class="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
 
         <!-- Heading -->
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold text-gray-900">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-900">
                 Frequently Asked Questions
             </h2>
         </div>
@@ -376,7 +391,7 @@
             $faqs = [
                 [
                     'question' => 'What does an AMC site visit include?',
-                    'answer' => 'An AMC visit includes structural inspection, corrosion assessment, preventive maintenance, safety checks, and a detailed digital report.'
+                    'answer' => 'An AMC visit includes structural inspection, corrosion assessment, preventive maintenance, safety checks, and a detailed digital report with photos and measurements.'
                 ],
                 [
                     'question' => 'Can I add extra visits to my plan?',
@@ -397,27 +412,27 @@
             ];
         @endphp
 
-        <div class="space-y-4">
+        <div class="space-y-3">
 
             @foreach($faqs as $index => $faq)
 
-                <details class="group border border-gray-200 rounded-2xl overflow-hidden">
+                <details class="group border border-gray-200 rounded-xl overflow-hidden">
 
                     <summary
-                        class="flex items-center justify-between px-6 py-5 cursor-pointer list-none bg-white">
+                        class="flex items-center justify-between px-5 py-4 cursor-pointer list-none bg-white">
 
-                        <span class="font-medium text-gray-900">
+                        <span class="font-medium text-gray-900 text-sm">
                             {{ $faq['question'] }}
                         </span>
 
-       <span
-    class="w-8 h-8 rounded-full bg-[#FF8C00] text-white flex items-center justify-center text-xl font-medium group-open:rotate-45 transition duration-300">
-    +
-</span>
+                        <span
+                            class="w-7 h-7 rounded-full bg-[#FF8C00] text-white flex items-center justify-center text-lg font-medium group-open:rotate-45 transition duration-300">
+                            +
+                        </span>
 
                     </summary>
 
-                    <div class="px-6 pb-5 text-gray-500 leading-7 border-t border-gray-100">
+                    <div class="px-5 pb-4 text-gray-500 text-sm leading-7 border-t border-gray-100">
                         {{ $faq['answer'] }}
                     </div>
 

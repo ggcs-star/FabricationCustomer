@@ -97,8 +97,8 @@
         return view('terms');
     })->name('terms');
 
-    Route::get('/profile', function () {
-    return view('profile');
+  Route::get('/profile', function () {
+    return view('customer_profile');
 })->name('profile');
 
     Route::get('/orders', function () {
@@ -120,10 +120,6 @@ Route::get('/services', function () {
 Route::get('/vendor-profile', function () {
     return view('vendor_profile');
 })->name('vendor-profile');
-
-Route::get('/saved-addresses', function () {
-    return view('saved-addresses');
-})->name('saved-addresses');
 
 Route::get('/support', function () {
     return view('support');
