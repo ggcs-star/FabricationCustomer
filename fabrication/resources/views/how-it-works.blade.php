@@ -5,7 +5,8 @@
 @section('content')
 
 <!-- Hero Section -->
-<section class="bg-white pt-32 pb-16">
+<!-- Hero Section -->
+<section class="bg-black pt-32 pb-16">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
 
         <div class="text-center max-w-3xl mx-auto">
@@ -14,11 +15,11 @@
                 Simple Process
             </span>
 
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
                 How <span class="text-[#FF8A00]">FABRIQ</span> Works
             </h1>
 
-            <p class="text-gray-500 text-sm md:text-base leading-relaxed">
+            <p class="text-gray-300 text-sm md:text-base leading-relaxed">
                 Book trusted fabrication services in a few simple steps.
                 From request to project completion, we've made the entire
                 process transparent and hassle-free.
