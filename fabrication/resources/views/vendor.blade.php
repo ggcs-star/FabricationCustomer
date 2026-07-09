@@ -1,302 +1,1064 @@
+{{-- resources/views/vendors/index.blade.php --}}
 @extends('app')
 
-@section('title', 'Vendors')
-
 @section('content')
+<style>
+    .vendor-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.07);
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+        border-radius: 16px;
+        overflow: hidden;
+        background: #fff;
+        cursor: pointer;
+    }
+    .vendor-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    .vendor-card .image-container {
+        min-height: 180px;
+        overflow: hidden;
+        position: relative;
+    }
+    .vendor-card .image-container img {
+        transition: transform 0.5s ease;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .vendor-card:hover .image-container img {
+        transform: scale(1.05);
+    }
 
-<!-- Hero Section -->
-<section class="bg-gradient-to-br from-[#161616] via-[#1B1B1B] to-[#202020] pt-32 pb-12">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
-        <p class="uppercase tracking-[4px] text-[#FF8C00] font-semibold text-xs mb-2">
+    .vendor-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .vendor-card.hidden-card {
+        display: none !important;
+    }
+
+    .no-results {
+        display: none;
+        text-align: center;
+        padding: 40px 20px;
+        background: #f9f9f9;
+        border-radius: 16px;
+        border: 1px dashed #ddd;
+        grid-column: 1 / -1;
+    }
+    .no-results.show {
+        display: block;
+    }
+
+    /* ===== FULL WIDTH FILTERS SECTION ===== */
+    .filters-section {
+        background: #fff;
+        border-bottom: 1px solid #e8e8e8;
+        padding: 20px 0;
+        position: sticky;
+        top: 64px;
+        z-index: 10;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    .filters-section .filter-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px 30px;
+    }
+    .filters-section .filter-group {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+    }
+    .filters-section .filter-group .filter-label {
+    font-size: 0.7rem;
+        font-weight: 600;
+        color: #100d0d;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-family: 'Inter', sans-serif;
+        margin-right: 4px;
+    }
+    .filters-section .filter-group .filter-option {
+        padding: 4px 14px;
+        border-radius: 9999px;
+        font-size: 0.78rem;
+        font-weight: 500;
+        font-family: 'Inter', sans-serif;
+        background: #f5f5f5;
+        color: #666;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+    .filters-section .filter-group .filter-option:hover {
+        background: #e8e8e8;
+    }
+    .filters-section .filter-group .filter-option.active {
+        background: #FF7A00;
+        color: #fff;
+        border-color: #FF7A00;
+    }
+    .filters-section .filter-group .filter-option.verified {
+        background: #e8f5e9;
+        color: #2e7d32;
+        border-color: #a5d6a7;
+        cursor: default;
+    }
+    .filters-section .filter-group .filter-option.verified i {
+        margin-right: 4px;
+    }
+    .filters-section .filter-divider {
+        width: 1px;
+        height: 28px;
+        background: #e8e8e8;
+        flex-shrink: 0;
+    }
+    .filters-section .results-count {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #333;
+        font-family: 'Inter', sans-serif;
+        margin-left: auto;
+        white-space: nowrap;
+    }
+    .filters-section .results-count span {
+        font-weight: 700;
+        color: #FF7A00;
+    }
+
+    /* Filter toggle for mobile */
+    .filter-toggle {
+        display: none;
+        background: #fff;
+        border: 1px solid #e8e8e8;
+        border-radius: 12px;
+        padding: 12px 16px;
+        width: 100%;
+        font-size: 0.9rem;
+        font-weight: 500;
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        color: #333;
+        margin-bottom: 0;
+    }
+    .filter-toggle i {
+        margin-right: 8px;
+        color: #FF7A00;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .vendors-hero {
+        padding-top: 100px;
+        padding-bottom: 40px;
+        min-height: 320px;
+        transition: all 0.5s ease;
+    }
+    .vendors-hero.expanded {
+        min-height: 550px;
+        transition: all 0.5s ease;
+    }
+
+    /* Vendor details in hero */
+    .vendor-detail-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 20px 24px;
+        margin-top: 16px;
+        display: none;
+        animation: fadeInUp 0.5s ease;
+    }
+    .vendor-detail-card.show {
+        display: block;
+    }
+    .vendor-detail-card .detail-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .vendor-detail-card .detail-row:last-child {
+        border-bottom: none;
+    }
+    .vendor-detail-card .detail-label {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.8rem;
+        font-family: 'Inter', sans-serif;
+        min-width: 100px;
+    }
+    .vendor-detail-card .detail-value {
+        color: #fff;
+        font-size: 0.9rem;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+    }
+    .vendor-detail-card .detail-value .highlight {
+        color: #FF7A00;
+        font-weight: 600;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .close-detail {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: #fff;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .close-detail:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .stat-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+    .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+        .vendors-hero {
+            padding-top: 90px;
+        }
+        .vendor-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .filters-section .filter-row {
+            gap: 12px 20px;
+        }
+        .filters-section .filter-divider {
+            display: none;
+        }
+        .filters-section .results-count {
+            margin-left: 0;
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .vendors-hero {
+            padding-top: 80px;
+        }
+        h1 {
+            font-size: 2rem !important;
+        }
+        .vendor-detail-card {
+            padding: 16px;
+        }
+        .vendor-detail-card .detail-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+        .vendor-detail-card .detail-label {
+            min-width: auto;
+        }
+        .filters-section {
+            position: relative;
+            top: 0;
+            padding: 12px 0;
+        }
+        .filters-section .filter-row {
+            display: none;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+        }
+        .filters-section .filter-row.open {
+            display: flex;
+        }
+        .filters-section .filter-group {
+            flex-wrap: wrap;
+        }
+        .filters-section .filter-group .filter-option {
+            font-size: 0.7rem;
+            padding: 3px 10px;
+        }
+        .filters-section .results-count {
+            font-size: 0.8rem;
+        }
+        .filter-toggle {
+            display: block;
+        }
+        .vendor-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .filters-section .filter-divider {
+            display: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .vendors-hero {
+            padding-top: 70px;
+        }
+        h1 {
+            font-size: 1.6rem !important;
+        }
+        .vendor-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        .filters-section .filter-group .filter-option {
+            font-size: 0.65rem;
+            padding: 2px 8px;
+        }
+    }
+</style>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="vendors-hero py-8 md:py-12" id="vendorsHero" style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-16">
+        <div class="text-xs font-semibold uppercase tracking-widest mb-2" style="color: #FF7A00; font-family: 'Inter', sans-serif;">
             Verified Network
-        </p>
-        <h1 class="text-3xl lg:text-4xl font-bold text-white leading-tight">
+        </div>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3" style="font-family: 'Poppins', sans-serif;">
             Find Fabrication Vendors
         </h1>
-        <p class="text-gray-400 text-base mt-3 max-w-3xl leading-6">
-            Browse verified fabrication vendors across India. Compare,
-            shortlist and request quotations for your projects.
+        <p class="text-sm sm:text-base md:text-lg max-w-2xl" style="font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.6);">
+            Browse verified fabricators across India. Compare, shortlist and get quotes.
         </p>
-
-        <!-- Search -->
-        <div class="mt-6 flex flex-col lg:flex-row gap-3">
-            <div class="relative flex-1">
-                <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-                <input
-                    type="text"
-                    placeholder="Search vendors, specialties..."
-                    class="w-full h-12 rounded-xl bg-[#2A2A2A] border border-[#3B3B3B] pl-12 pr-4 text-white placeholder:text-gray-500 text-sm focus:outline-none focus:border-[#FF8C00] transition">
+        <div class="flex flex-wrap items-center gap-3 mt-6">
+            <div class="flex-1 min-w-[200px]">
+                <input type="text" 
+                       id="searchVendor"
+                       placeholder="Search vendors, specialties..." 
+                       class="w-full px-4 py-2.5 rounded-full border border-white/20 bg-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-[#FF7A00] text-sm">
             </div>
-            <select class="w-full lg:w-40 h-12 rounded-xl bg-[#2A2A2A] border border-[#3B3B3B] text-white px-4 text-sm focus:outline-none focus:border-[#FF8C00]">
-                <option>All Cities</option>
-                <option>Ahmedabad</option>
-                <option>Vadodara</option>
-                <option>Surat</option>
-                <option>Rajkot</option>
+            <select class="px-4 py-2.5 rounded-full border border-white/20 bg-white/10 text-white text-sm focus:outline-none focus:border-[#FF7A00]" id="cityFilter">
+                <option value="" class="text-black">All Cities</option>
+                <option value="ahmedabad" class="text-black">Ahmedabad</option>
+                <option value="mumbai" class="text-black">Mumbai</option>
+                <option value="delhi" class="text-black">Delhi</option>
+                <option value="pune" class="text-black">Pune</option>
+                <option value="bangalore" class="text-black">Bangalore</option>
+                <option value="surat" class="text-black">Surat</option>
             </select>
-            <button class="h-12 px-6 rounded-xl bg-[#2A2A2A] border border-[#3B3B3B] text-white font-semibold text-sm hover:bg-[#FF8C00] hover:border-[#FF8C00] transition">
-                <i class="fas fa-sliders-h mr-2"></i>
-                Filters
+            <button class="px-5 py-2.5 rounded-full text-sm font-semibold text-white" style="background: #FF7A00;" id="filterBtn">
+                <i class="fas fa-sliders-h mr-2"></i> Filters
             </button>
+        </div>
+
+        <!-- Vendor Detail Card -->
+        <div class="vendor-detail-card" id="vendorDetail">
+            <div class="flex justify-between items-start mb-3">
+                <h3 class="text-xl font-bold text-white" style="font-family: 'Poppins', sans-serif;" id="detailName">Mohit Steel Works</h3>
+                <button class="close-detail" id="closeDetail">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Specialty</span>
+                <span class="detail-value" id="detailSpecialty">Large-scale Structural Work</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Experience</span>
+                <span class="detail-value" id="detailExperience">18 yrs</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Projects Done</span>
+                <span class="detail-value" id="detailProjects">820</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Starting Price</span>
+                <span class="detail-value" id="detailPrice"><span class="highlight">₹85+</span> / sqft</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Rating</span>
+                <span class="detail-value" id="detailRating">⭐ 4.9 ★</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Location</span>
+                <span class="detail-value" id="detailLocation">Ahmedabad</span>
+            </div>
+            <div class="mt-4 flex gap-3">
+                <button class="px-6 py-2.5 rounded-xl text-sm font-medium border border-white/30 text-white hover:bg-white/10 transition">
+                    View Full Profile
+                </button>
+                <button class="px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90" style="background: #FF7A00;">
+                    Get Quote
+                    <i class="fas fa-arrow-right text-xs ml-2"></i>
+                </button>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Vendor Listing -->
-<section class="bg-[#F7F7F7] py-8">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+<!-- ===== FULL WIDTH FILTERS SECTION ===== -->
+<section class="filters-section" id="filtersSection">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-16">
         
-        <div class="flex items-center gap-3 mb-6 flex-wrap">
-            <span class="text-sm font-medium" style="font-family: Inter, sans-serif; color: #111;">
-                12 vendors found
-            </span>
+        <!-- Filter Toggle for Mobile -->
+        <button class="filter-toggle" id="filterToggle">
+            <i class="fas fa-sliders-h"></i> Show Filters
+        </button>
+
+        <!-- Filter Row -->
+        <div class="filter-row" id="filterRow">
+            
+            <!-- Category -->
+            <div class="filter-group">
+<span class="filter-label" style="font-bold;">Category</span>
+
+                <span class="filter-option active" data-category="all">All Categories</span>
+                <span class="filter-option" data-category="steel">Steel Structure</span>
+                <span class="filter-option" data-category="glass">Glass Work</span>
+                <span class="filter-option" data-category="aluminium">Aluminium Work</span>
+                <span class="filter-option" data-category="ceiling">False Ceiling</span>
+                <span class="filter-option" data-category="interior">Interior Work</span>
+                <span class="filter-option" data-category="ms">MS Fabrication</span>
+                <span class="filter-option" data-category="ss">SS Fabrication</span>
+                <span class="filter-option" data-category="custom">Custom Projects</span>
+            </div>
+
+
+            <!-- Sort -->
+            <div class="filter-group">
+
+<span class="filter-label" style="font-weight:700;">Sort by</span>
+                <span class="filter-option active" data-sort="rating">Best Rating</span>
+                <span class="filter-option" data-sort="projects">Most Projects</span>
+                <span class="filter-option" data-sort="price">Lowest Price</span>
+                <span class="filter-option" data-sort="experience">Most Experienced</span>
+            </div>
+
+            <div class="filter-divider"></div>
+
+            <!-- Verified Badges -->
+          
+            <!-- Results Count -->
+            <div class="results-count">
+                <span id="vendorCountNumber">9</span> vendors found
+            </div>
+
         </div>
+    </div>
+</section>
 
-        @php
-        $vendors = [
-            [
-                'badge' => 'Top Rated',
-                'name' => 'Mehta Steel Works',
-                'category' => 'Industrial & Commercial Steel',
-                'city' => 'Ahmedabad',
-                'experience' => '18yrs',
-                'projects' => '820',
-                'price' => '₹85+',
-                'rating' => '4.9',
-                'image' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=320&fit=crop&auto=format'
-            ],
-            [
-                'badge' => 'Most Experienced',
-                'name' => 'PrimeStruct Co.',
-                'category' => 'Large-scale Structural Work',
-                'city' => 'Delhi',
-                'experience' => '22yrs',
-                'projects' => '1200',
-                'price' => '₹75+',
-                'rating' => '4.9',
-                'image' => 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&h=320&fit=crop&auto=format'
-            ],
-            [
-                'badge' => 'Top Rated',
-                'name' => 'IronVault Structures',
-                'category' => 'Pre-engineered Buildings',
-                'city' => 'Ahmedabad',
-                'experience' => '20yrs',
-                'projects' => '980',
-                'price' => '₹80+',
-                'rating' => '4.9',
-                'image' => 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=320&fit=crop&auto=format'
-            ],
-            [
-                'badge' => 'Fast Delivery',
-                'name' => 'ArcLight Fabricators',
-                'category' => 'Precision Metal Fabrication',
-                'city' => 'Mumbai',
-                'experience' => '12yrs',
-                'projects' => '560',
-                'price' => '₹95+',
-                'rating' => '4.8',
-                'image' => 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&h=320&fit=crop&auto=format'
-            ],
-            [
-                'badge' => 'Premium',
-                'name' => 'Luxo Design Studio',
-                'category' => 'Premium Office Interiors',
-                'city' => 'Mumbai',
-                'experience' => '11yrs',
-                'projects' => '390',
-                'price' => '₹280+',
-                'rating' => '4.8',
-                'image' => 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&h=320&fit=crop&auto=format'
-            ],
-            [
-                'badge' => '',
-                'name' => 'GlassEdge Interiors',
-                'category' => 'Commercial Glass & Facades',
-                'city' => 'Pune',
-                'experience' => '9yrs',
-                'projects' => '340',
-                'price' => '₹120+',
-                'rating' => '4.7',
-                'image' => 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=320&fit=crop&auto=format'
-            ],
-            [
-                'badge' => '',
-                'name' => 'SteelForm Works',
-                'category' => 'Stainless Steel Installations',
-                'city' => 'Surat',
-                'experience' => '16yrs',
-                'projects' => '670',
-                'price' => '₹88+',
-                'rating' => '4.7',
-                'image' => 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=320&fit=crop&auto=format'
-            ],
-            [
-                'badge' => '',
-                'name' => 'ClearView Glass Co.',
-                'category' => 'Structural Glass & Railings',
-                'city' => 'Delhi',
-                'experience' => '13yrs',
-                'projects' => '450',
-                'price' => '₹135+',
-                'rating' => '4.7',
-                'image' => 'https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=600&h=320&fit=crop&auto=format'
-            ],
-            [
-                'badge' => '',
-                'name' => 'AluVision Systems',
-                'category' => 'Curtain Walls & Windows',
-                'city' => 'Bangalore',
-                'experience' => '14yrs',
-                'projects' => '430',
-                'price' => '₹110+',
-                'rating' => '4.6',
-                'image' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=320&fit=crop&auto=format'
-            ],
-            [
-                'badge' => '',
-                'name' => 'CraftBuild Projects',
-                'category' => 'Bespoke & Exhibition Builds',
-                'city' => 'Hyderabad',
-                'experience' => '8yrs',
-                'projects' => '210',
-                'price' => '₹95+',
-                'rating' => '4.6',
-                'image' => 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=320&fit=crop&auto=format'
-            ],
-            [
-                'badge' => '',
-                'name' => 'InnoFrame Aluminium',
-                'category' => 'Modular Facade Systems',
-                'city' => 'Pune',
-                'experience' => '10yrs',
-                'projects' => '320',
-                'price' => '₹105+',
-                'rating' => '4.6',
-                'image' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=320&fit=crop&auto=format'
-            ],
-            [
-                'badge' => '',
-                'name' => 'CeilCraft Interiors',
-                'category' => 'Gypsum & Metal Ceilings',
-                'city' => 'Chennai',
-                'experience' => '7yrs',
-                'projects' => '280',
-                'price' => '₹65+',
-                'rating' => '4.5',
-                'image' => 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=320&fit=crop&auto=format'
-            ],
-        ];
-        @endphp
+<!-- ===== VENDOR GRID ===== -->
+<section class="py-8 md:py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-16">
+        
+        <div class="vendor-grid" id="vendorGrid">
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-            @foreach($vendors as $vendor)
-            <div class="bg-white rounded-2xl overflow-hidden border cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl" 
-                 style="border-color: rgba(0, 0, 0, 0.07); box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 16px;">
-                
-                <!-- Image -->
-                <div class="h-48 relative overflow-hidden">
-                    <img src="{{ $vendor['image'] }}" 
-                         alt="{{ $vendor['name'] }}" 
-                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
-                    
-                    <!-- Gradient Overlay -->
-                    <div class="absolute inset-0" style="background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.6));"></div>
-                    
-                    <!-- Badge -->
-                    @if($vendor['badge'] != '')
+            <!-- Vendor 1: Mehta Steel Works -->
+            <div class="vendor-card" data-category="steel" data-rating="4.9" data-projects="820" data-price="85" data-experience="18"
+                 data-name="Mehta Steel Works" data-specialty="Industrial & Commercial Steel" data-location="Ahmedabad">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=300&fit=crop&auto=format" 
+                         alt="Mehta Steel Works" loading="lazy">
                     <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
-                         style="background: #FF7A00; color: #fff; font-family: Inter, sans-serif;">
-                        {{ $vendor['badge'] }}
+                         style="background: #FF7A00; color: #fff; font-family: 'Inter', sans-serif;">
+                        Top Rated
                     </div>
-                    @endif
-                    
-                    <!-- Verified Badge -->
-                    <div class="absolute top-3 right-3 flex items-center gap-1 bg-white rounded-full px-2.5 py-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21.801 10A10 10 0 1 1 17 3.335"/>
-                            <path d="m9 11 3 3L22 4"/>
-                        </svg>
-                        <span class="text-xs font-semibold text-green-600">Verified</span>
-                    </div>
-                    
-                    <!-- Location -->
-                    <div class="absolute bottom-3 left-3">
-                        <div class="flex items-center gap-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            <span class="text-xs text-white">{{ $vendor['city'] }}</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Rating -->
-                    <div class="absolute bottom-3 right-3 flex items-center gap-1 bg-white rounded-full px-2 py-0.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="#FF7A00" stroke="#FF7A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
-                        </svg>
-                        <span class="text-xs font-bold" style="color: #111;">{{ $vendor['rating'] }}</span>
+                    <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700" 
+                         style="font-family: 'Inter', sans-serif;">
+                        <i class="fas fa-check-circle"></i> Verified
                     </div>
                 </div>
-                
-                <!-- Content -->
                 <div class="p-5">
-                    <div class="font-bold text-base mb-0.5" style="font-family: Poppins, sans-serif; color: #111;">
-                        {{ $vendor['name'] }}
+                    <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-bold text-base text-black" style="font-family: 'Poppins', sans-serif;">Mehta Steel Works</h3>
                     </div>
-                    <div class="text-xs mb-3" style="font-family: Inter, sans-serif; color: #FF7A00;">
-                        {{ $vendor['category'] }}
+                    <p class="text-xs text-gray-500 mb-3" style="font-family: 'Inter', sans-serif;">Industrial & Commercial Steel</p>
+                    <div class="flex flex-wrap gap-4 mb-3 text-xs" style="font-family: 'Inter', sans-serif;">
+                        <div><span style="color: #999;">Experience: </span><span class="font-semibold" style="color: #111;">18 yrs</span></div>
+                        <div><span style="color: #999;">Projects: </span><span class="font-semibold" style="color: #111;">820</span></div>
+                        <div><span style="color: #999;">Price: </span><span class="font-semibold" style="color: #111;">₹85+</span></div>
                     </div>
-                    
-                    <!-- Stats -->
-                    <div class="grid grid-cols-3 gap-3 mb-4 text-center py-3 rounded-xl" style="background: #f9f9f9;">
-                        <div>
-                            <div class="text-sm font-bold" style="font-family: Poppins, sans-serif; color: #111;">
-                                {{ $vendor['experience'] }}
-                            </div>
-                            <div class="text-xs" style="color: #999;">Experience</div>
-                        </div>
-                        <div>
-                            <div class="text-sm font-bold" style="font-family: Poppins, sans-serif; color: #111;">
-                                {{ $vendor['projects'] }}
-                            </div>
-                            <div class="text-xs" style="color: #999;">Projects</div>
-                        </div>
-                        <div>
-                            <div class="text-sm font-bold" style="font-family: Poppins, sans-serif; color: #FF7A00;">
-                                {{ $vendor['price'] }}
-                            </div>
-                            <div class="text-xs" style="color: #999;">Per sqft</div>
-                        </div>
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-xs text-gray-500" style="font-family: 'Inter', sans-serif;">Rating:</span>
+                        <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.9 ★</span>
                     </div>
-                    
-                    <!-- Buttons -->
-                   <div class="flex gap-2">
-    <a href="{{ url('/vendor-profile') }}" class="flex-1">
-        <button
-            class="w-full py-2.5 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50"
-            style="border-color: rgba(0, 0, 0, 0.1); color: #111; font-family: Inter, sans-serif;">
-            View Profile
-        </button>
-    </a>
-
-                        <button class="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90" 
-                                style="background: #FF7A00; font-family: Inter, sans-serif;">
-                            Get Quote 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"/>
-                                <path d="m12 5 7 7-7 7"/>
-                            </svg>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
+                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
+                            View Profile
+                        </button>
+                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
+                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
+                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
                         </button>
                     </div>
                 </div>
             </div>
-            @endforeach
 
+            <!-- Vendor 2: PrimeStruct Co. -->
+            <div class="vendor-card" data-category="steel" data-rating="4.9" data-projects="1200" data-price="70" data-experience="22"
+                 data-name="PrimeStruct Co." data-specialty="Large-scale Structural Work" data-location="Delhi">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&h=300&fit=crop&auto=format" 
+                         alt="PrimeStruct Co." loading="lazy">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
+                         style="background: #FF7A00; color: #fff; font-family: 'Inter', sans-serif;">
+                        Top Rated
+                    </div>
+                    <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700" 
+                         style="font-family: 'Inter', sans-serif;">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-bold text-base text-black" style="font-family: 'Poppins', sans-serif;">PrimeStruct Co.</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-3" style="font-family: 'Inter', sans-serif;">Large-scale Structural Work</p>
+                    <div class="flex flex-wrap gap-4 mb-3 text-xs" style="font-family: 'Inter', sans-serif;">
+                        <div><span style="color: #999;">Experience: </span><span class="font-semibold" style="color: #111;">22 yrs</span></div>
+                        <div><span style="color: #999;">Projects: </span><span class="font-semibold" style="color: #111;">1200</span></div>
+                        <div><span style="color: #999;">Price: </span><span class="font-semibold" style="color: #111;">₹70+</span></div>
+                    </div>
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-xs text-gray-500" style="font-family: 'Inter', sans-serif;">Rating:</span>
+                        <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.9 ★</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
+                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
+                            View Profile
+                        </button>
+                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
+                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
+                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendor 3: IronVault Structures -->
+            <div class="vendor-card" data-category="steel" data-rating="4.8" data-projects="980" data-price="75" data-experience="20"
+                 data-name="IronVault Structures" data-specialty="Pre-engineered Buildings" data-location="Mumbai">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&h=300&fit=crop&auto=format" 
+                         alt="IronVault Structures" loading="lazy">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
+                         style="background: #FF7A00; color: #fff; font-family: 'Inter', sans-serif;">
+                        Most Experienced
+                    </div>
+                    <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700" 
+                         style="font-family: 'Inter', sans-serif;">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-bold text-base text-black" style="font-family: 'Poppins', sans-serif;">IronVault Structures</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-3" style="font-family: 'Inter', sans-serif;">Pre-engineered Buildings</p>
+                    <div class="flex flex-wrap gap-4 mb-3 text-xs" style="font-family: 'Inter', sans-serif;">
+                        <div><span style="color: #999;">Experience: </span><span class="font-semibold" style="color: #111;">20 yrs</span></div>
+                        <div><span style="color: #999;">Projects: </span><span class="font-semibold" style="color: #111;">980</span></div>
+                        <div><span style="color: #999;">Price: </span><span class="font-semibold" style="color: #111;">₹75+</span></div>
+                    </div>
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-xs text-gray-500" style="font-family: 'Inter', sans-serif;">Rating:</span>
+                        <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.8 ★</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
+                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
+                            View Profile
+                        </button>
+                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
+                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
+                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendor 4: GlassEdge Interiors -->
+            <div class="vendor-card" data-category="glass" data-rating="4.7" data-projects="340" data-price="120" data-experience="9"
+                 data-name="GlassEdge Interiors" data-specialty="Glass Partitions & Facades" data-location="Pune">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=600&h=300&fit=crop&auto=format" 
+                         alt="GlassEdge Interiors" loading="lazy">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
+                         style="background: #FF7A00; color: #fff; font-family: 'Inter', sans-serif;">
+                        Glass Specialist
+                    </div>
+                    <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700" 
+                         style="font-family: 'Inter', sans-serif;">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-bold text-base text-black" style="font-family: 'Poppins', sans-serif;">GlassEdge Interiors</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-3" style="font-family: 'Inter', sans-serif;">Glass Partitions & Facades</p>
+                    <div class="flex flex-wrap gap-4 mb-3 text-xs" style="font-family: 'Inter', sans-serif;">
+                        <div><span style="color: #999;">Experience: </span><span class="font-semibold" style="color: #111;">9 yrs</span></div>
+                        <div><span style="color: #999;">Projects: </span><span class="font-semibold" style="color: #111;">340</span></div>
+                        <div><span style="color: #999;">Price: </span><span class="font-semibold" style="color: #111;">₹120+</span></div>
+                    </div>
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-xs text-gray-500" style="font-family: 'Inter', sans-serif;">Rating:</span>
+                        <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.7 ★</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
+                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
+                            View Profile
+                        </button>
+                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
+                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
+                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendor 5: AlcoFab Solutions -->
+            <div class="vendor-card" data-category="aluminium" data-rating="4.6" data-projects="560" data-price="95" data-experience="12"
+                 data-name="AlcoFab Solutions" data-specialty="Aluminium Facades & Windows" data-location="Bangalore">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=300&fit=crop&auto=format" 
+                         alt="AlcoFab Solutions" loading="lazy">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
+                         style="background: #FF7A00; color: #fff; font-family: 'Inter', sans-serif;">
+                        Aluminium Expert
+                    </div>
+                    <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700" 
+                         style="font-family: 'Inter', sans-serif;">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-bold text-base text-black" style="font-family: 'Poppins', sans-serif;">AlcoFab Solutions</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-3" style="font-family: 'Inter', sans-serif;">Aluminium Facades & Windows</p>
+                    <div class="flex flex-wrap gap-4 mb-3 text-xs" style="font-family: 'Inter', sans-serif;">
+                        <div><span style="color: #999;">Experience: </span><span class="font-semibold" style="color: #111;">12 yrs</span></div>
+                        <div><span style="color: #999;">Projects: </span><span class="font-semibold" style="color: #111;">560</span></div>
+                        <div><span style="color: #999;">Price: </span><span class="font-semibold" style="color: #111;">₹95+</span></div>
+                    </div>
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-xs text-gray-500" style="font-family: 'Inter', sans-serif;">Rating:</span>
+                        <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.6 ★</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
+                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
+                            View Profile
+                        </button>
+                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
+                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
+                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendor 6: CeilingCraft -->
+            <div class="vendor-card" data-category="ceiling" data-rating="4.5" data-projects="290" data-price="65" data-experience="8"
+                 data-name="CeilingCraft" data-specialty="False Ceiling Solutions" data-location="Surat">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=300&fit=crop&auto=format" 
+                         alt="CeilingCraft" loading="lazy">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
+                         style="background: #FF7A00; color: #fff; font-family: 'Inter', sans-serif;">
+                        Ceiling Specialist
+                    </div>
+                    <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700" 
+                         style="font-family: 'Inter', sans-serif;">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-bold text-base text-black" style="font-family: 'Poppins', sans-serif;">CeilingCraft</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-3" style="font-family: 'Inter', sans-serif;">False Ceiling Solutions</p>
+                    <div class="flex flex-wrap gap-4 mb-3 text-xs" style="font-family: 'Inter', sans-serif;">
+                        <div><span style="color: #999;">Experience: </span><span class="font-semibold" style="color: #111;">8 yrs</span></div>
+                        <div><span style="color: #999;">Projects: </span><span class="font-semibold" style="color: #111;">290</span></div>
+                        <div><span style="color: #999;">Price: </span><span class="font-semibold" style="color: #111;">₹65+</span></div>
+                    </div>
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-xs text-gray-500" style="font-family: 'Inter', sans-serif;">Rating:</span>
+                        <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.5 ★</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
+                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
+                            View Profile
+                        </button>
+                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
+                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
+                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendor 7: ArcLight Fabricators -->
+            <div class="vendor-card" data-category="steel" data-rating="4.8" data-projects="560" data-price="95" data-experience="12"
+                 data-name="ArcLight Fabricators" data-specialty="Custom Steel Fabrication" data-location="Mumbai">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=300&fit=crop&auto=format" 
+                         alt="ArcLight Fabricators" loading="lazy">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
+                         style="background: #FF7A00; color: #fff; font-family: 'Inter', sans-serif;">
+                        Popular
+                    </div>
+                    <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700" 
+                         style="font-family: 'Inter', sans-serif;">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-bold text-base text-black" style="font-family: 'Poppins', sans-serif;">ArcLight Fabricators</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-3" style="font-family: 'Inter', sans-serif;">Custom Steel Fabrication</p>
+                    <div class="flex flex-wrap gap-4 mb-3 text-xs" style="font-family: 'Inter', sans-serif;">
+                        <div><span style="color: #999;">Experience: </span><span class="font-semibold" style="color: #111;">12 yrs</span></div>
+                        <div><span style="color: #999;">Projects: </span><span class="font-semibold" style="color: #111;">560</span></div>
+                        <div><span style="color: #999;">Price: </span><span class="font-semibold" style="color: #111;">₹95+</span></div>
+                    </div>
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-xs text-gray-500" style="font-family: 'Inter', sans-serif;">Rating:</span>
+                        <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.8 ★</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
+                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
+                            View Profile
+                        </button>
+                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
+                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
+                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendor 8: Premium Glass Works -->
+            <div class="vendor-card" data-category="glass" data-rating="4.7" data-projects="450" data-price="150" data-experience="15"
+                 data-name="Premium Glass Works" data-specialty="Architectural Glass Solutions" data-location="Delhi">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&h=300&fit=crop&auto=format" 
+                         alt="Premium Glass Works" loading="lazy">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
+                         style="background: #FF7A00; color: #fff; font-family: 'Inter', sans-serif;">
+                        Glass Specialist
+                    </div>
+                    <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700" 
+                         style="font-family: 'Inter', sans-serif;">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-bold text-base text-black" style="font-family: 'Poppins', sans-serif;">Premium Glass Works</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-3" style="font-family: 'Inter', sans-serif;">Architectural Glass Solutions</p>
+                    <div class="flex flex-wrap gap-4 mb-3 text-xs" style="font-family: 'Inter', sans-serif;">
+                        <div><span style="color: #999;">Experience: </span><span class="font-semibold" style="color: #111;">15 yrs</span></div>
+                        <div><span style="color: #999;">Projects: </span><span class="font-semibold" style="color: #111;">450</span></div>
+                        <div><span style="color: #999;">Price: </span><span class="font-semibold" style="color: #111;">₹150+</span></div>
+                    </div>
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-xs text-gray-500" style="font-family: 'Inter', sans-serif;">Rating:</span>
+                        <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.7 ★</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
+                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
+                            View Profile
+                        </button>
+                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
+                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
+                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vendor 9: MS Fabricators -->
+            <div class="vendor-card" data-category="ms" data-rating="4.6" data-projects="380" data-price="70" data-experience="10"
+                 data-name="MS Fabricators" data-specialty="Industrial MS Fabrication" data-location="Ahmedabad">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=300&fit=crop&auto=format" 
+                         alt="MS Fabricators" loading="lazy">
+                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
+                         style="background: #FF7A00; color: #fff; font-family: 'Inter', sans-serif;">
+                        Popular
+                    </div>
+                    <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700" 
+                         style="font-family: 'Inter', sans-serif;">
+                        <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="flex items-center gap-2 mb-1">
+                        <h3 class="font-bold text-base text-black" style="font-family: 'Poppins', sans-serif;">MS Fabricators</h3>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-3" style="font-family: 'Inter', sans-serif;">Industrial MS Fabrication</p>
+                    <div class="flex flex-wrap gap-4 mb-3 text-xs" style="font-family: 'Inter', sans-serif;">
+                        <div><span style="color: #999;">Experience: </span><span class="font-semibold" style="color: #111;">10 yrs</span></div>
+                        <div><span style="color: #999;">Projects: </span><span class="font-semibold" style="color: #111;">380</span></div>
+                        <div><span style="color: #999;">Price: </span><span class="font-semibold" style="color: #111;">₹70+</span></div>
+                    </div>
+                    <div class="flex items-center gap-1 mb-3">
+                        <span class="text-xs text-gray-500" style="font-family: 'Inter', sans-serif;">Rating:</span>
+                        <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.6 ★</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
+                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
+                            View Profile
+                        </button>
+                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
+                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
+                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- No Results -->
+        <div class="no-results" id="noResults">
+            <i class="fas fa-search text-4xl text-gray-300 mb-4"></i>
+            <h3 class="text-xl font-bold text-gray-700">No vendors found</h3>
+            <p class="text-gray-500 text-sm mt-2">Try adjusting your filters or search criteria</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== STATS SECTION ===== -->
+<section class="py-8 md:py-12" style="background: #f5f5f5;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-16">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+            <div class="stat-card">
+                <div class="text-2xl font-bold mb-0.5" style="font-family: 'Poppins', sans-serif; color: #111;">8-Point</div>
+                <div class="text-xs sm:text-sm" style="font-family: 'Inter', sans-serif; color: #999;">Vendor Verification</div>
+            </div>
+            <div class="stat-card">
+                <div class="text-2xl font-bold mb-0.5" style="font-family: 'Poppins', sans-serif; color: #111;">4.8★</div>
+                <div class="text-xs sm:text-sm" style="font-family: 'Inter', sans-serif; color: #999;">Average Service Rating</div>
+            </div>
+            <div class="stat-card">
+                <div class="text-2xl font-bold mb-0.5" style="font-family: 'Poppins', sans-serif; color: #111;">5000+</div>
+                <div class="text-xs sm:text-sm" style="font-family: 'Inter', sans-serif; color: #999;">Projects Delivered</div>
+            </div>
+            <div class="stat-card">
+                <div class="text-2xl font-bold mb-0.5" style="font-family: 'Poppins', sans-serif; color: #111;">48 hrs</div>
+                <div class="text-xs sm:text-sm" style="font-family: 'Inter', sans-serif; color: #999;">First Quote Guarantee</div>
+            </div>
         </div>
     </div>
 </section>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const vendorCards = document.querySelectorAll('.vendor-card');
+    const categoryOptions = document.querySelectorAll('.filter-group .filter-option[data-category]');
+    const sortOptions = document.querySelectorAll('.filter-group .filter-option[data-sort]');
+    const searchInput = document.getElementById('searchVendor');
+    const vendorCountNumber = document.getElementById('vendorCountNumber');
+    const noResults = document.getElementById('noResults');
+    const vendorGrid = document.getElementById('vendorGrid');
+    const vendorDetail = document.getElementById('vendorDetail');
+    const closeDetail = document.getElementById('closeDetail');
+    const vendorsHero = document.getElementById('vendorsHero');
+    const filterToggle = document.getElementById('filterToggle');
+    const filterRow = document.getElementById('filterRow');
+
+    let currentCategory = 'all';
+    let currentSort = 'rating';
+    let searchTerm = '';
+
+    // Toggle filters on mobile
+    if (filterToggle) {
+        filterToggle.addEventListener('click', function() {
+            filterRow.classList.toggle('open');
+            this.innerHTML = filterRow.classList.contains('open') ? 
+                '<i class="fas fa-times"></i> Hide Filters' : 
+                '<i class="fas fa-sliders-h"></i> Show Filters';
+        });
+    }
+
+    // Show vendor details
+    function showVendorDetails(card) {
+        const name = card.dataset.name || card.querySelector('h3').textContent;
+        const specialty = card.dataset.specialty || card.querySelector('p').textContent;
+        const experience = card.dataset.experience || card.querySelector('.flex.gap-4 div:first-child .font-semibold').textContent;
+        const projects = card.dataset.projects || card.querySelector('.flex.gap-4 div:nth-child(2) .font-semibold').textContent;
+        const price = card.dataset.price || card.querySelector('.flex.gap-4 div:nth-child(3) .font-semibold').textContent;
+        const rating = card.dataset.rating || '4.8';
+        const location = card.dataset.location || 'India';
+
+        document.getElementById('detailName').textContent = name;
+        document.getElementById('detailSpecialty').textContent = specialty;
+        document.getElementById('detailExperience').textContent = experience + ' yrs';
+        document.getElementById('detailProjects').textContent = projects;
+        document.getElementById('detailPrice').innerHTML = '<span class="highlight">₹' + price + '+</span> / sqft';
+        document.getElementById('detailRating').textContent = '⭐ ' + rating + ' ★';
+        document.getElementById('detailLocation').textContent = location;
+
+        vendorDetail.classList.add('show');
+        vendorsHero.classList.add('expanded');
+        vendorsHero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function closeVendorDetail() {
+        vendorDetail.classList.remove('show');
+        vendorsHero.classList.remove('expanded');
+    }
+
+    closeDetail.addEventListener('click', closeVendorDetail);
+
+    vendorCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('button')) return;
+            showVendorDetails(this);
+        });
+
+        const viewBtn = card.querySelector('.view-profile-btn');
+        if (viewBtn) {
+            viewBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showVendorDetails(card);
+            });
+        }
+
+        const quoteBtn = card.querySelector('.get-quote-btn');
+        if (quoteBtn) {
+            quoteBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                showVendorDetails(card);
+            });
+        }
+    });
+
+    function filterVendors() {
+        let visibleCount = 0;
+
+        vendorCards.forEach(card => {
+            const category = card.dataset.category;
+            const name = card.querySelector('h3').textContent.toLowerCase();
+            const desc = card.querySelector('p').textContent.toLowerCase();
+            const matchCategory = currentCategory === 'all' || category === currentCategory;
+            const matchSearch = name.includes(searchTerm) || desc.includes(searchTerm);
+
+            if (matchCategory && matchSearch) {
+                card.classList.remove('hidden-card');
+                visibleCount++;
+            } else {
+                card.classList.add('hidden-card');
+            }
+        });
+
+        vendorCountNumber.textContent = visibleCount;
+
+        if (visibleCount === 0) {
+            noResults.classList.add('show');
+        } else {
+            noResults.classList.remove('show');
+        }
+
+        sortVendors();
+    }
+
+    function sortVendors() {
+        const visibleCards = Array.from(document.querySelectorAll('.vendor-card:not(.hidden-card)'));
+        
+        visibleCards.sort((a, b) => {
+            let aVal, bVal;
+            switch(currentSort) {
+                case 'rating':
+                    aVal = parseFloat(a.dataset.rating);
+                    bVal = parseFloat(b.dataset.rating);
+                    return bVal - aVal;
+                case 'projects':
+                    aVal = parseInt(a.dataset.projects);
+                    bVal = parseInt(b.dataset.projects);
+                    return bVal - aVal;
+                case 'price':
+                    aVal = parseInt(a.dataset.price);
+                    bVal = parseInt(b.dataset.price);
+                    return aVal - bVal;
+                case 'experience':
+                    aVal = parseInt(a.dataset.experience);
+                    bVal = parseInt(b.dataset.experience);
+                    return bVal - aVal;
+                default:
+                    return 0;
+            }
+        });
+
+        visibleCards.forEach(card => {
+            vendorGrid.appendChild(card);
+        });
+    }
+
+    // Category filter
+    categoryOptions.forEach(btn => {
+        btn.addEventListener('click', function() {
+            categoryOptions.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentCategory = this.dataset.category;
+            filterVendors();
+        });
+    });
+
+    // Sort filter
+    sortOptions.forEach(btn => {
+        btn.addEventListener('click', function() {
+            sortOptions.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentSort = this.dataset.sort;
+            filterVendors();
+        });
+    });
+
+    // Search
+    searchInput.addEventListener('input', function() {
+        searchTerm = this.value.toLowerCase().trim();
+        filterVendors();
+    });
+
+    filterVendors();
+});
+</script>
 @endsection

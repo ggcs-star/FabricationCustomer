@@ -35,47 +35,46 @@
 
         <div class="grid lg:grid-cols-2 gap-6">
 
-            @php
-            $steps = [
-            [
-            'number'=>'01',
-            'title'=>'Book a Fabrication Service',
-            'desc'=>'Choose the fabrication service you need and submit your project requirements.',
-            'icon'=>'fa-calendar-check'
-            ],
-            [
-            'number'=>'02',
-            'title'=>'Vendor Confirms Request',
-            'desc'=>'Verified fabricators review your request and accept the booking.',
-            'icon'=>'fa-user-check'
-            ],
-            [
-            'number'=>'03',
-            'title'=>'On-Site Measurement',
-            'desc'=>'The vendor visits your location to inspect and take measurements.',
-            'icon'=>'fa-ruler-combined'
-            ],
-            [
-            'number'=>'04',
-            'title'=>'Final Quote Approval',
-            'desc'=>'Review pricing, material details and approve the final quotation.',
-            'icon'=>'fa-file-invoice-dollar'
-            ],
-            [
-            'number'=>'05',
-            'title'=>'Fabrication Work Begins',
-            'desc'=>'The selected vendor starts fabrication and keeps you updated.',
-            'icon'=>'fa-hammer'
-            ],
-            [
-            'number'=>'06',
-            'title'=>'Secure Payment & Completion',
-            'desc'=>'Release payment securely after successful project completion.',
-            'icon'=>'fa-shield-halved'
-            ]
-            ];
-            @endphp
-
+         @php
+$steps = [
+[
+    'number' => '01',
+    'title' => 'Request a Quote',
+    'desc' => 'Browse fabrication services, select your project category, and submit your requirements to receive quotations from verified vendors.',
+    'icon' => 'fa-file-signature'
+],
+[
+    'number' => '02',
+    'title' => 'Get Connected with Verified Vendors',
+    'desc' => 'Our platform matches your project with trusted fabrication vendors who review your requirements and respond with competitive quotations.',
+    'icon' => 'fa-users'
+],
+[
+    'number' => '03',
+    'title' => 'Book Free Site Inspection',
+    'desc' => 'Choose a convenient date for an on-site visit where professionals inspect the location, take measurements, and understand your project requirements.',
+    'icon' => 'fa-ruler-combined'
+],
+[
+    'number' => '04',
+    'title' => 'Approve the Final Quotation',
+    'desc' => 'Compare vendor quotations, review pricing, materials, timelines, and approve the proposal that best fits your project.',
+    'icon' => 'fa-file-invoice-dollar'
+],
+[
+    'number' => '05',
+    'title' => 'Fabrication & Installation',
+    'desc' => 'The selected vendor begins fabrication and installation while keeping you informed about every stage of the project.',
+    'icon' => 'fa-screwdriver-wrench'
+],
+[
+    'number' => '06',
+    'title' => 'Project Completion & Support',
+    'desc' => 'Inspect the completed work, make secure payment, and enjoy post-installation support along with optional AMC services.',
+    'icon' => 'fa-circle-check'
+]
+];
+@endphp
             @foreach($steps as $step)
 
             <div
