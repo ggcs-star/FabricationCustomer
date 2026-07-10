@@ -37,10 +37,10 @@
                 </div>
 
                 <div class="flex flex-wrap gap-3 mt-8">
-                    <a href="#" class="bg-[#FF8C00] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-orange-600 transition">
+                    <a href="/vendors" class="bg-[#FF8C00] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-orange-600 transition">
                         Find Vendors
                     </a>
-                    <a href="#" class="border border-gray-400 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:border-[#FF8C00] hover:text-[#FF8C00] transition">
+                    <a href="/quote-details" class="border border-gray-400 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:border-[#FF8C00] hover:text-[#FF8C00] transition">
                         Get Free Quote
                     </a>
                 </div>
@@ -70,58 +70,72 @@
 </section>
 
 <!-- COVERAGE -->
-<section class="py-16 bg-gray-50">
+@php
+$features = [
+    [
+        'icon' => 'fa-solid fa-screwdriver-wrench',
+        'title' => 'Structural Inspection',
+        'description' => 'Complete check of all joints, welds and load-bearing elements'
+    ],
+    [
+        'icon' => 'fa-regular fa-shield',
+        'title' => 'Corrosion Assessment',
+        'description' => 'Early detection of rust, coating failure and surface degradation'
+    ],
+    [
+        'icon' => 'fa-solid fa-chart-column',
+        'title' => 'Digital Health Report',
+        'description' => 'Detailed report with photos, measurements and recommendations'
+    ],
+    [
+        'icon' => 'fa-solid fa-circle-exclamation',
+        'title' => 'Risk Flagging',
+        'description' => 'Immediate alert if any safety-critical issue is discovered'
+    ],
+    [
+        'icon' => 'fa-regular fa-calendar',
+        'title' => 'Scheduled Maintenance',
+        'description' => 'Preventive work like re-torquing, sealing and re-painting'
+    ],
+    [
+        'icon' => 'fa-solid fa-headset',
+        'title' => 'Year-round Support',
+        'description' => 'Call us any time — our team is available to address concerns'
+    ],
+];
+@endphp
 
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
+<section class="bg-[#F7F7F7] py-14">
+    <div class="max-w-7xl mx-auto px-6">
 
-        <div class="text-center mb-12">
-
-            <span class="text-[#FF8C00] uppercase text-xs font-semibold">
+        <!-- Heading -->
+        <div class="text-center mb-10">
+            <p class="text-[#FF7A00] uppercase tracking-[3px] text-xs font-semibold mb-2">
                 Every Plan Includes
-            </span>
+            </p>
 
-            <h2 class="text-2xl md:text-3xl font-bold mt-2">
+            <h2 class="text-3xl font-bold text-[#111827]">
                 Comprehensive Maintenance Coverage
             </h2>
-
         </div>
 
-        @php
-        $features = [
-            [
-                'icon' => '🏗️',
-                'title' => 'Structural Inspection',
-                'desc' => 'Complete check of joints, welds and load-bearing elements'
-            ],
-            [
-                'icon' => '🔬',
-                'title' => 'Corrosion Assessment',
-                'desc' => 'Early rust detection and coating inspection'
-            ],
-            [
-                'icon' => '📊',
-                'title' => 'Digital Health Report',
-                'desc' => 'Detailed report with photos, measurements and recommendations'
-            ]
-        ];
-        @endphp
-
-        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <!-- Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
             @foreach($features as $feature)
 
-            <div class="bg-white rounded-2xl p-6 shadow-sm border hover:shadow-md transition text-center">
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition duration-300 p-5">
 
-                <div class="text-4xl mb-4">
-                    {{ $feature['icon'] }}
+                <div class="w-11 h-11 rounded-xl bg-[#FFF3E9] flex items-center justify-center mb-4">
+                    <i class="{{ $feature['icon'] }} text-[#FF7A00] text-base"></i>
                 </div>
 
-                <h4 class="font-bold text-base md:text-lg mb-2">
+                <h3 class="text-xl font-semibold text-[#111827] mb-2">
                     {{ $feature['title'] }}
-                </h4>
+                </h3>
 
-                <p class="text-gray-500 text-sm">
-                    {{ $feature['desc'] }}
+                <p class="text-gray-600 leading-6 text-sm">
+                    {{ $feature['description'] }}
                 </p>
 
             </div>
@@ -129,9 +143,7 @@
             @endforeach
 
         </div>
-
     </div>
-
 </section>
 
 <!-- PRICING -->
@@ -177,11 +189,10 @@
 
                 </ul>
 
-                <button
-                    class="w-full border border-gray-300 py-2.5 rounded-full mt-6 text-sm hover:bg-gray-100 transition">
-                    Get Started
-                </button>
-
+              <a href="{{ url('/quote-details') }}"
+   class="w-full border border-gray-300 py-2.5 rounded-full mt-6 text-sm hover:bg-gray-100 transition inline-block text-center">
+    Get Started
+</a>
             </div>
 
             <!-- Professional -->
@@ -214,10 +225,10 @@
 
                 </ul>
 
-                <button
-                    class="w-full bg-[#FF8C00] text-white py-2.5 rounded-full mt-6 text-sm hover:bg-orange-600 transition">
-                    Choose Professional
-                </button>
+          <a href="{{ url('/quote-details') }}"
+   class="w-full bg-[#FF8C00] text-white py-2.5 rounded-full mt-6 text-sm hover:bg-orange-600 transition inline-block text-center">
+    Choose Professional
+</a>
 
             </div>
 
@@ -246,13 +257,21 @@
 
                 </ul>
 
-                <button
-                    class="w-full border border-gray-300 py-2.5 rounded-full mt-6 text-sm hover:bg-gray-100 transition">
+                <a href="{{ url('/quote-details') }}"
+                    class="w-full border border-gray-300 py-2.5 rounded-full mt-6 text-sm hover:bg-gray-100 transition inline-block text-center">
                     Contact Sales
-                </button>
+                </a>
 
             </div>
 
+        </div>
+
+        <!-- Footer note: All plans include GST + custom plan -->
+        <div class="text-center mt-10 pt-6 border-t border-gray-200">
+            <p class="text-gray-500 text-sm">
+                All plans include GST. Need a custom plan for a large portfolio? 
+                <a href="#" class="text-[#FF8C00] font-medium hover:underline">Contact our team</a>
+            </p>
         </div>
 
     </div>
@@ -445,4 +464,59 @@
     </div>
 </section>
 
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div
+            class="max-w-5xl mx-auto rounded-[32px] bg-gradient-to-r from-[#FF8A1F] to-[#FF6B00] px-8 md:px-16 py-16 text-center">
+
+            <!-- Heading -->
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-5">
+                Ready to Protect Your Investment?
+            </h2>
+
+            <!-- Description -->
+            <p class="text-white/90 text-lg md:text-xl mb-10">
+                Join 2,000+ customers who trust FabriQ AMC to keep their
+                structures safe and performing.
+            </p>
+
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row justify-center gap-5">
+
+                <!-- Primary Button -->
+                <a href="#"
+                    class="inline-flex items-center justify-center gap-3 bg-white text-[#FF6B00] font-semibold text-lg px-10 py-4 rounded-full hover:scale-105 transition duration-300">
+
+                    Get AMC Quote
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="w-5 h-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2">
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M5 12h14M13 5l7 7-7 7"/>
+                    </svg>
+
+                </a>
+
+                <!-- Secondary Button -->
+                <a href="#"
+                    class="inline-flex items-center justify-center gap-3 border-2 border-white text-white font-semibold text-lg px-10 py-4 rounded-full hover:bg-white hover:text-[#FF6B00] transition duration-300">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                    Talk to Expert
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
 @endsection

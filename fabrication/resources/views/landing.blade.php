@@ -189,20 +189,24 @@
                 <h1 class="text-white text-[22px] sm:text-[28px] md:text-[34px] lg:text-[40px] font-bold leading-[1.2] mt-3">
                     Build Your <br><span class="text-[#FF8C00]">Dream Space</span><br> With Verified <br> Fabrication Experts
                 </h1>
-                <p class="text-gray-600 text-xs sm:text-sm md:text-base leading-5 md:leading-6 mt-3 max-w-xl">
-                    Get quotations from trusted vendors for Steel Structures, Glass Work, Aluminium, False Ceiling, Interior and Custom Fabrication.
-                </p>
+     <p class="text-gray-300 text-xs sm:text-sm md:text-base leading-5 md:leading-6 mt-3 max-w-xl">
+    Get quotations from trusted vendors for Steel Structures, Glass Work, Aluminium, False Ceiling, Interior and Custom Fabrication.
+</p>
                 <div class="flex flex-wrap gap-2 md:gap-3 mt-4">
                     <a href="#" class="primary-btn flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 text-xs md:text-sm">
                         Get Free Quote <i class="fas fa-arrow-right text-[10px] md:text-xs"></i>
                     </a>
-                    <a href="/services" class="border border-gray-300 text-white rounded-full px-4 py-2 md:px-5 md:py-2.5 text-xs md:text-sm font-semibold hover:border-[#FF8C00] hover:text-[#FF8C00] transition">Explore Services</a>
-                </div>
+<a href="/services"
+   class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-[#3A3A3A] text-white text-sm font-semibold transition-all duration-300 hover:border-[#FF8C00] hover:text-[#FF8C00]">
+    Explore Services
+    <span class="text-base"></span>
+</a>
+              </div>
                 <div class="border-t border-[#1F2937] mt-6 md:mt-8 pt-5 md:pt-6">
                     <div class="grid grid-cols-3 gap-3 md:gap-4">
-                        <div><h3 class="text-white text-lg md:text-2xl font-bold">5000+</h3><p class="text-gray-500 text-[10px] md:text-sm mt-0.5 md:mt-1">Projects Completed</p></div>
-                        <div><h3 class="text-white text-lg md:text-2xl font-bold">250+</h3><p class="text-gray-500 text-[10px] md:text-sm mt-0.5 md:mt-1">Verified Vendors</p></div>
-                        <div><h3 class="text-white text-lg md:text-2xl font-bold">4.8 ★</h3><p class="text-gray-500 text-[10px] md:text-sm mt-0.5 md:mt-1">Customer Rating</p></div>
+                        <div><h3 class="text-white text-lg md:text-2xl font-bold">5000+</h3><p class="text-[#B3B3B3] text-[10px] md:text-sm font-normal mt-1">Projects Completed</p></div>
+                        <div><h3 class="text-white text-lg md:text-2xl font-bold">250+</h3><p class="text-[#B3B3B3] text-[10px] md:text-sm font-normal mt-1">Verified Vendors</p></div>
+                        <div><h3 class="text-white text-lg md:text-2xl font-bold">4.8 ★</h3><p class="text-[#B3B3B3] text-[10px] md:text-sm font-normal mt-1">Customer Rating</p></div>
                     </div>
                 </div>
             </div>
@@ -226,6 +230,18 @@
         </div>
     </div>
 </section>
+<!-- Floating Get Free Quote Button -->
+<div class="fixed bottom-6 right-6 z-50">
+    <a href="{{ url('/quote-details') }}"
+       class="inline-flex items-center gap-3 bg-[#FF8C00] text-white px-7 py-4 rounded-full text-lg font-semibold shadow-[0_10px_30px_rgba(255,140,0,0.35)] hover:bg-[#E67A00] transition-all duration-300 hover:scale-105">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H9M17 7V15"/>
+        </svg>
+
+        Get Free Quote
+    </a>
+</div>
 
 <!-- ===== SERVICE CATEGORIES - HORIZONTAL SCROLL ===== -->
 <section class="py-16 bg-white">
@@ -241,13 +257,19 @@
                         Service Categories
                     </h2>
                 </div>
-                <button class="hidden md:flex items-center gap-2 text-sm font-medium" style="color: rgb(255, 122, 0); font-family: Inter, sans-serif;">
-                    View All 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                    </svg>
-                </button>
+            <a href="{{ url('/services') }}"
+   class="hidden md:flex items-center gap-2 text-sm font-medium text-[#FF7A00] hover:text-[#E56E00] transition"
+   style="font-family: Inter, sans-serif;">
+
+    View All
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+         viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14"></path>
+        <path d="m12 5 7 7-7 7"></path>
+    </svg>
+</a>
             </div>
         </div>
 
@@ -309,21 +331,23 @@
             <p class="text-[#FF8C00] uppercase text-sm font-semibold tracking-[6px]">Simple Process</p>
             <h2 class="text-3xl md:text-4xl font-bold mt-3 text-black">How It Works</h2>
         </div>
-        
+
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
+
             <!-- Step 01 -->
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 group">
                 <div class="flex items-start gap-4">
                     <div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0 group-hover:bg-orange-100 transition">
-                        <i class="fas fa-calendar-check text-2xl text-[#FF8C00]"></i>
+                        <i class="fas fa-file-signature text-2xl text-[#FF8C00]"></i>
                     </div>
                     <div>
                         <span class="inline-block bg-orange-100 text-[#FF8C00] text-xs font-semibold px-3 py-0.5 rounded-full mb-2">
                             Step 01
                         </span>
-                        <h3 class="text-lg font-semibold text-black">Book a Fabrication Service</h3>
-                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">Choose the fabrication service you need and submit your project requirements.</p>
+                        <h3 class="text-lg font-semibold text-black">Request a Quote</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">
+                            Browse fabrication services, choose your project category, and submit your requirements to receive quotations from verified vendors.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -332,14 +356,16 @@
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 group">
                 <div class="flex items-start gap-4">
                     <div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0 group-hover:bg-orange-100 transition">
-                        <i class="fas fa-user-check text-2xl text-[#FF8C00]"></i>
+                        <i class="fas fa-users text-2xl text-[#FF8C00]"></i>
                     </div>
                     <div>
                         <span class="inline-block bg-orange-100 text-[#FF8C00] text-xs font-semibold px-3 py-0.5 rounded-full mb-2">
                             Step 02
                         </span>
-                        <h3 class="text-lg font-semibold text-black">Vendor Confirms Request</h3>
-                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">Verified fabricators review your request and accept the booking.</p>
+                        <h3 class="text-lg font-semibold text-black">Get Connected with Verified Vendors</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">
+                            Our platform matches your project with trusted fabrication vendors who review your requirements and respond with competitive quotations.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -354,8 +380,10 @@
                         <span class="inline-block bg-orange-100 text-[#FF8C00] text-xs font-semibold px-3 py-0.5 rounded-full mb-2">
                             Step 03
                         </span>
-                        <h3 class="text-lg font-semibold text-black">On-Site Measurement</h3>
-                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">The vendor visits your location to inspect and take measurements.</p>
+                        <h3 class="text-lg font-semibold text-black">Book Free Site Inspection</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">
+                            Schedule a site visit where professionals inspect the location, take measurements, and understand your project requirements.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -370,8 +398,10 @@
                         <span class="inline-block bg-orange-100 text-[#FF8C00] text-xs font-semibold px-3 py-0.5 rounded-full mb-2">
                             Step 04
                         </span>
-                        <h3 class="text-lg font-semibold text-black">Final Quote Approval</h3>
-                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">Review pricing, material details and approve the final quotation.</p>
+                        <h3 class="text-lg font-semibold text-black">Approve the Final Quotation</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">
+                            Compare vendor quotations, review pricing, materials, and timelines before approving the proposal that best suits your project.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -380,14 +410,16 @@
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 group">
                 <div class="flex items-start gap-4">
                     <div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0 group-hover:bg-orange-100 transition">
-                        <i class="fas fa-hammer text-2xl text-[#FF8C00]"></i>
+                        <i class="fas fa-screwdriver-wrench text-2xl text-[#FF8C00]"></i>
                     </div>
                     <div>
                         <span class="inline-block bg-orange-100 text-[#FF8C00] text-xs font-semibold px-3 py-0.5 rounded-full mb-2">
                             Step 05
                         </span>
-                        <h3 class="text-lg font-semibold text-black">Fabrication Work Begins</h3>
-                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">The selected vendor starts fabrication and keeps you updated.</p>
+                        <h3 class="text-lg font-semibold text-black">Fabrication & Installation</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">
+                            The selected vendor begins fabrication and installation while keeping you informed about every stage of the project.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -396,14 +428,16 @@
             <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 group">
                 <div class="flex items-start gap-4">
                     <div class="w-14 h-14 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0 group-hover:bg-orange-100 transition">
-                        <i class="fas fa-shield-halved text-2xl text-[#FF8C00]"></i>
+                        <i class="fas fa-circle-check text-2xl text-[#FF8C00]"></i>
                     </div>
                     <div>
                         <span class="inline-block bg-orange-100 text-[#FF8C00] text-xs font-semibold px-3 py-0.5 rounded-full mb-2">
                             Step 06
                         </span>
-                        <h3 class="text-lg font-semibold text-black">Secure Payment & Completion</h3>
-                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">Release payment securely after successful project completion.</p>
+                        <h3 class="text-lg font-semibold text-black">Project Completion & Support</h3>
+                        <p class="text-gray-500 text-sm mt-1 leading-relaxed">
+                            Inspect the completed work, make secure payment, and enjoy post-installation support along with optional AMC services.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -550,105 +584,349 @@
 </section>
 
 <!-- ===== FEATURED PROJECTS ===== -->
-<section class="py-16 bg-black">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
-        <p class="text-[#FF8C00] uppercase text-sm font-semibold">Portfolio</p>
-        <h2 class="text-3xl md:text-5xl font-bold text-white mb-10">Featured Projects</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div class="lg:col-span-2 lg:row-span-2 rounded-2xl overflow-hidden relative group trending-card">
-                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=800" class="w-full h-64 md:h-full object-cover group-hover:scale-105 transition duration-500" alt="Luxury Office Interior">
-                <div class="absolute inset-0 bg-black/40"></div>
-                <div class="absolute bottom-6 left-6">
-                    <p class="text-orange-400 text-sm">Interior</p>
-                    <h3 class="text-white text-xl md:text-2xl font-bold">Luxury Office Interior</h3>
-                </div>
-            </div>
-            <div class="rounded-2xl overflow-hidden relative trending-card">
-                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600" class="w-full h-64 object-cover" alt="Glass Partition">
-                <div class="absolute bottom-4 left-4 text-white">
-                    <h3 class="font-bold text-sm md:text-base">Glass Partition Project</h3>
-                </div>
-            </div>
-            <div class="rounded-2xl overflow-hidden relative trending-card">
-                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600" class="w-full h-64 object-cover" alt="Warehouse">
-                <div class="absolute bottom-4 left-4 text-white">
-                    <h3 class="font-bold text-sm md:text-base">Warehouse Fabrication</h3>
-                </div>
-            </div>
-            <div class="rounded-2xl overflow-hidden relative trending-card">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=600" class="w-full h-80 object-cover" alt="Commercial">
-                <div class="absolute bottom-4 left-4 text-white">
-                    <h3 class="font-bold text-sm md:text-base">Commercial Structure</h3>
-                </div>
-            </div>
-            <div class="rounded-2xl overflow-hidden relative trending-card">
-                <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=600" class="w-full h-64 object-cover" alt="Residential">
-                <div class="absolute bottom-4 left-4 text-white">
-                    <h3 class="font-bold text-sm md:text-base">Residential Terrace Work</h3>
-                </div>
-            </div>
+<!-- ===== FEATURED PROJECTS ===== -->
+<section class="bg-[#141414] py-20">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Heading -->
+        <div class="mb-10">
+            <p class="text-[#FF8C00] uppercase tracking-[3px] text-xs font-semibold mb-2">
+                Portfolio
+            </p>
+
+            <h2 class="text-white text-5xl font-bold">
+                Featured Projects
+            </h2>
         </div>
+
+        <div class="grid grid-cols-12 gap-4">
+
+            <!-- Left Large -->
+            <div class="col-span-12 lg:col-span-4">
+                <div class="relative h-[530px] rounded-3xl overflow-hidden group">
+
+                 <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&auto=format&fit=crop"
+     class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+
+                    <div class="absolute bottom-7 left-7">
+                        <p class="text-[#FF8C00] text-sm font-semibold">
+                            Interior
+                        </p>
+
+                        <h3 class="text-white text-3xl font-bold mt-1">
+                            Luxury Office Interior
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="relative h-[230px] rounded-3xl overflow-hidden mt-4 group">
+
+<img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&auto=format&fit=crop"
+     class="w-full h-full object-cover transition duration-500 group-hover:scale-105">                        class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+                    <div class="absolute bottom-6 left-6">
+                        <p class="text-[#FF8C00] text-sm font-semibold">
+                            Aluminium
+                        </p>
+
+                        <h3 class="text-white text-2xl font-bold">
+                            Residential Terrace Work
+                        </h3>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Middle -->
+            <div class="col-span-12 lg:col-span-4">
+
+                <div class="relative h-[250px] rounded-3xl overflow-hidden group">
+
+                  <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&auto=format&fit=crop"
+     class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+                    <div class="absolute bottom-6 left-6">
+                        <p class="text-[#FF8C00] text-sm font-semibold">
+                            Glass Work
+                        </p>
+
+                        <h3 class="text-white text-2xl font-bold">
+                            Glass Partition Project
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="relative h-[510px] rounded-3xl overflow-hidden mt-4 group">
+
+                  <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&auto=format&fit=crop"
+     class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+
+                    <div class="absolute bottom-7 left-7">
+                        <p class="text-[#FF8C00] text-sm font-semibold">
+                            MS Fabrication
+                        </p>
+
+                        <h3 class="text-white text-3xl font-bold">
+                            Commercial Structure
+                        </h3>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Right -->
+            <div class="col-span-12 lg:col-span-4">
+
+                <div class="relative h-[250px] rounded-3xl overflow-hidden group">
+
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&auto=format&fit=crop"
+     class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+                    <div class="absolute bottom-6 left-6">
+                        <p class="text-[#FF8C00] text-sm font-semibold">
+                            Steel Structure
+                        </p>
+
+                        <h3 class="text-white text-2xl font-bold">
+                            Warehouse Fabrication
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="relative h-[230px] rounded-3xl overflow-hidden mt-4 group">
+
+              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&auto=format&fit=crop"
+     class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+
+                    <div class="absolute bottom-6 left-6">
+                        <p class="text-[#FF8C00] text-sm font-semibold">
+                            Interior
+                        </p>
+
+                        <h3 class="text-white text-2xl font-bold">
+                            Restaurant Interior
+                        </h3>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 </section>
 
 <!-- ===== BOOK A MEASUREMENT ===== -->
-<section class="py-16 bg-white">
+<section class="py-12 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div class="order-2 lg:order-1">
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800" class="rounded-2xl w-full h-[300px] md:h-[500px] object-cover" alt="Site Visit">
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+                <div class="order-2 lg:order-1">
+               <div class="relative max-w-[520px]">
+
+    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200"
+         class="w-full h-[410px] object-cover rounded-[22px]"
+         alt="Site Visit">
+
+    <!-- Floating Badge -->
+    <div class="absolute top-5 left-5 bg-white rounded-xl px-4 py-3 shadow-lg">
+        <p class="font-semibold text-sm text-black">
+            Free Site Visit
+        </p>
+
+        <p class="text-xs text-gray-500 mt-1">
+            Within 24–48 hrs
+        </p>
+    </div>
+
+</div>
             </div>
             <div class="order-1 lg:order-2">
-                <p class="text-[#FF8C00] uppercase text-sm font-semibold">Book a Measurement</p>
-                <h2 class="text-3xl md:text-5xl font-bold text-black mt-4">Book A Free <br> Site Visit</h2>
-                <p class="text-gray-500 mt-6">Our trained engineers visit your site, take precise measurements and provide competitive quotations.</p>
+                <!-- Label -->
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-[#FF8C00] uppercase text-xs font-semibold tracking-[3px]">Book a Measurement</span>
+                </div>
+                
+                <h2 class="text-3xl md:text-5xl font-bold text-black leading-tight">
+                    Book a Free <br> Site Visit
+                </h2>
+                
+                <p class="text-gray-500 text-sm mt-4 leading-relaxed">
+                    Our trained engineers visit your site, take precise measurements, and return with multiple competitive quotations.
+                </p>
+                
                 <form class="mt-8 space-y-4">
-                    <input type="text" placeholder="Full Name" class="w-full border rounded-xl px-5 py-3.5">
-                    <input type="text" placeholder="Mobile Number" class="w-full border rounded-xl px-5 py-3.5">
-                    <input type="text" placeholder="City" class="w-full border rounded-xl px-5 py-3.5">
-                    <select class="w-full border rounded-xl px-5 py-3.5">
-                        <option>Select Project Type</option>
-                        <option>Steel Structure</option>
-                        <option>Glass Work</option>
-                        <option>Interior Work</option>
-                    </select>
-                    <button class="primary-btn w-full">Book Free Site Visit</button>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Full Name</label>
+                        <input type="text" placeholder="Rajesh Mehta" 
+                               class="w-full border border-gray-200 rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:border-[#FF8C00] focus:ring-1 focus:ring-[#FF8C00] transition">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Mobile Number</label>
+                        <input type="text" placeholder="+91 98765 43210" 
+                               class="w-full border border-gray-200 rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:border-[#FF8C00] focus:ring-1 focus:ring-[#FF8C00] transition">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">City</label>
+                        <input type="text" placeholder="Ahmedabad" 
+                               class="w-full border border-gray-200 rounded-xl px-5 py-3.5 text-sm focus:outline-none focus:border-[#FF8C00] focus:ring-1 focus:ring-[#FF8C00] transition">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-700 mb-1.5">Project Type</label>
+                        <select class="w-full border border-gray-200 rounded-xl px-5 py-3.5 text-sm text-gray-400 focus:outline-none focus:border-[#FF8C00] focus:ring-1 focus:ring-[#FF8C00] transition appearance-none bg-white" 
+                                style="background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Cpath fill=%22%23999%22 d=%22M6 8L1 3h10z%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 16px center;">
+                            <option value="" disabled selected>Select project type</option>
+                            <option>Steel Structure</option>
+                            <option>Glass Work</option>
+                            <option>Aluminium Work</option>
+                            <option>False Ceiling</option>
+                            <option>Interior Work</option>
+                            <option>MS Fabrication</option>
+                            <option>SS Fabrication</option>
+                            <option>Custom Projects</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="primary-btn w-full flex items-center justify-center gap-2 py-3.5 text-sm">
+                        Book Free Site Visit
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </button>
                 </form>
             </div>
         </div>
     </div>
 </section>
-
 <!-- ===== TESTIMONIALS ===== -->
-<section class="py-16 bg-[#F7F7F7]">
-    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
-        <div class="text-center mb-12">
-            <p class="text-[#FF8A1E] text-lg uppercase tracking-[10px] font-bold mb-4">Testimonials</p>
-            <h2 class="text-3xl md:text-5xl font-bold text-black">What Our Customers Say</h2>
+<!-- ===== TESTIMONIALS ===== -->
+<section class="py-20 bg-[#F7F7F7]">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Heading -->
+        <div class="text-center mb-14">
+            <p class="text-[#FF7A00] text-sm font-semibold uppercase tracking-[3px] mb-3">
+                TESTIMONIALS
+            </p>
+
+            <h2 class="text-[48px] leading-tight font-bold text-[#111111]">
+                What Our Customers Say
+            </h2>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @for($i=1;$i<=6;$i++)
-            <div class="bg-white rounded-2xl p-6 shadow-sm">
-                <div class="text-orange-400 text-xl mb-3">★★★★★</div>
-                <p class="text-gray-600 leading-7 text-sm">"The quotation process was smooth and transparent. I'd like to see a more detailed breakdown of the pricing structure."</p>
-                <div class="mt-4 flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold">R</div>
-                    <div>
-                        <h4 class="font-bold text-sm">Harshita Sharma</h4>
-                        <p class="text-gray-500 text-xs">Ahmedabad</p>
-                    </div>
+
+        @php
+        $testimonials = [
+            [
+                'initial'=>'P',
+                'name'=>'Priya Mehta',
+                'city'=>'Ahmedabad',
+                'review'=>'The quotation process was smooth and transparent. Got 4 vendors to compete — ended up saving 22% on my office fabrication.'
+            ],
+            [
+                'initial'=>'R',
+                'name'=>'Rohan Sharma',
+                'city'=>'Mumbai',
+                'review'=>'Live tracking was a game changer. I knew exactly when each milestone was hit without calling the vendor every day.'
+            ],
+            [
+                'initial'=>'N',
+                'name'=>'Neha Kapoor',
+                'city'=>'Pune',
+                'review'=>'Booked a free site visit and within 48 hours had verified measurements and 3 competitive quotes in hand.'
+            ],
+            [
+                'initial'=>'A',
+                'name'=>'Aditya Joshi',
+                'city'=>'Delhi',
+                'review'=>'Quality assurance team visited mid-project. The final glass partition looks stunning. Zero compromises on quality.'
+            ],
+            [
+                'initial'=>'S',
+                'name'=>'Sunita Patel',
+                'city'=>'Surat',
+                'review'=>'AMC plan has been excellent — quarterly inspections and quick response whenever something needed attention.'
+            ],
+            [
+                'initial'=>'M',
+                'name'=>'Manish Verma',
+                'city'=>'Bangalore',
+                'review'=>'Enterprise-grade platform experience. The vendor verification system gives you real confidence before signing.'
+            ]
+        ];
+        @endphp
+
+        <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-7">
+
+            @foreach($testimonials as $item)
+
+            <div class="bg-white rounded-[22px] p-8 border border-[#EEEEEE] shadow-[0_10px_35px_rgba(0,0,0,0.05)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_15px_45px_rgba(0,0,0,0.08)]">
+<div class="mb-3">
+    <i class="fas fa-quote-left text-[#FFD2A6] text-4xl"></i>
+</div>
+
+                <!-- Stars -->
+                <div class="flex gap-1 text-[#FF7A00] text-sm mb-5">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
                 </div>
+
+                <!-- Review -->
+                <p class="text-[16px] leading-8 text-[#444444] mb-8">
+                    "{{ $item['review'] }}"
+                </p>
+
+                <!-- User -->
+                <div class="flex items-center">
+
+                    <div class="w-11 h-11 rounded-full bg-[#FF7A00] text-white flex items-center justify-center font-semibold text-sm">
+                        {{ $item['initial'] }}
+                    </div>
+
+                    <div class="ml-4">
+                        <h4 class="font-bold text-[18px] text-[#111111] leading-none">
+                            {{ $item['name'] }}
+                        </h4>
+
+                        <p class="text-[#9A9A9A] text-sm mt-1">
+                            {{ $item['city'] }}
+                        </p>
+                    </div>
+
+                </div>
+
             </div>
-            @endfor
+
+            @endforeach
+
         </div>
+
     </div>
 </section>
-
 <!-- ===== WHY CHOOSE FABRIQ ===== -->
-<section class="py-16 bg-[#F8F8F8]">
+<section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
         <div class="text-center mb-12">
-            <p class="text-[#FF8A1E] text-xl uppercase tracking-[10px] font-bold mb-2">Our Advantage</p>
+            <p class="text-white text-xl uppercase tracking-[10px] font-bold mb-2">Our Advantage</p>
             <h2 class="text-[32px] md:text-[48px] font-bold text-[#111827] mt-1">Why Choose FabriQ</h2>
         </div>
         @php
@@ -725,8 +1003,11 @@
                     <p class="uppercase text-white/80 text-xs font-semibold tracking-wider">Annual Maintenance</p>
                     <h2 class="text-white text-3xl md:text-4xl lg:text-5xl font-bold mt-3 leading-tight">Keep Your Structure Maintained For Years</h2>
                     <p class="text-white/90 mt-4 leading-7 max-w-xl text-sm">Quarterly inspections, priority response and preventive maintenance — keeping your fabrication performing at its best.</p>
-                    <button class="mt-6 bg-white text-[#FF8C1A] px-6 py-3 rounded-full font-semibold hover:scale-105 transition text-sm">Explore AMC Plans →</button>
-                </div>
+<a href="/amc-plans">
+    <button class="mt-6 bg-white text-[#FF8C1A] px-6 py-3 rounded-full font-semibold hover:scale-105 transition text-sm">
+        Explore AMC Plans →
+    </button>
+</a>                </div>
                 <div class="relative">
                     <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800" class="rounded-[20px] w-full h-[260px] md:h-[300px] object-cover" alt="AMC">
                     <div class="absolute -bottom-4 left-5 bg-white rounded-2xl px-4 py-3 shadow-xl max-w-[90%]">

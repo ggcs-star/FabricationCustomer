@@ -139,3 +139,11 @@ Route::post('/logout', function () {
 })->name('logout');
 
 Route::view('/amc-plans', 'amc-plans');
+
+Route::get('/track-project', function () {
+    return view('track-project');
+})->name('track-project');
+
+Route::get('/quote-details', function () {
+    return view('quote_details');
+})->name('quote_details');
