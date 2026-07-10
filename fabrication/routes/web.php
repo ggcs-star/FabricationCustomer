@@ -147,3 +147,8 @@ Route::get('/track-project', function () {
 Route::get('/quote-details', function () {
     return view('quote_details');
 })->name('quote_details');
+
+
+Route::get('/contact-us', function () {
+    return view('contact-us');
+})->name('contact-us');

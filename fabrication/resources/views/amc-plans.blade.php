@@ -16,12 +16,13 @@
                     Annual Maintenance Contract
                 </span>
 
-                <h1 class="text-3xl md:text-4xl font-bold text-white mt-3 leading-tight">
-                    Keep Your Structure
-                    <span class="text-[#FF8C00] block">
-                        Maintained For Years
-                    </span>
-                </h1>
+                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight" style="font-family: 'Poppins', sans-serif;">
+    Keep Your Structure
+    <span class="block">
+        <span class="text-[#FF8C00]">Maintained</span>
+        <span class="text-white"> For Years</span>
+    </span>
+</h1>
 
                 <p class="text-gray-300 mt-4 text-sm md:text-base leading-relaxed">
                     Protect your fabrication investment with scheduled inspections,
@@ -36,14 +37,7 @@
 
                 </div>
 
-                <div class="flex flex-wrap gap-3 mt-8">
-                    <a href="/vendors" class="bg-[#FF8C00] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-orange-600 transition">
-                        Find Vendors
-                    </a>
-                    <a href="/quote-details" class="border border-gray-400 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:border-[#FF8C00] hover:text-[#FF8C00] transition">
-                        Get Free Quote
-                    </a>
-                </div>
+               
             </div>
 
             <!-- Right -->
@@ -77,11 +71,11 @@ $features = [
         'title' => 'Structural Inspection',
         'description' => 'Complete check of all joints, welds and load-bearing elements'
     ],
-    [
-        'icon' => 'fa-regular fa-shield',
-        'title' => 'Corrosion Assessment',
-        'description' => 'Early detection of rust, coating failure and surface degradation'
-    ],
+  [
+    'icon' => 'fas fa-magnifying-glass',
+    'title' => 'Corrosion Assessment',
+    'description' => 'Early detection of rust, coating failure and surface degradation'
+],
     [
         'icon' => 'fa-solid fa-chart-column',
         'title' => 'Digital Health Report',
@@ -464,34 +458,31 @@ $features = [
     </div>
 </section>
 
-<section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6">
-
-        <div
-            class="max-w-5xl mx-auto rounded-[32px] bg-gradient-to-r from-[#FF8A1F] to-[#FF6B00] px-8 md:px-16 py-16 text-center">
+<section class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto rounded-2xl bg-gradient-to-r from-[#FF8C00] to-[#e67a00] px-6 md:px-12 py-10 text-center">
 
             <!-- Heading -->
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-5">
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">
                 Ready to Protect Your Investment?
             </h2>
 
             <!-- Description -->
-            <p class="text-white/90 text-lg md:text-xl mb-10">
-                Join 2,000+ customers who trust FabriQ AMC to keep their
-                structures safe and performing.
+            <p class="text-white/90 text-base md:text-lg mb-6">
+                Join 2,000+ customers who trust FabriQ AMC to keep their structures safe and performing.
             </p>
 
             <!-- Buttons -->
-            <div class="flex flex-col sm:flex-row justify-center gap-5">
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
 
                 <!-- Primary Button -->
-                <a href="#"
-                    class="inline-flex items-center justify-center gap-3 bg-white text-[#FF6B00] font-semibold text-lg px-10 py-4 rounded-full hover:scale-105 transition duration-300">
+                <a href="quote-details"
+                    class="inline-flex items-center justify-center gap-2 bg-white text-[#FF8C00] font-semibold text-base px-8 py-3 rounded-full hover:scale-105 transition duration-300">
 
                     Get AMC Quote
 
                     <svg xmlns="http://www.w3.org/2000/svg"
-                        class="w-5 h-5"
+                        class="w-4 h-4"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -504,8 +495,8 @@ $features = [
                 </a>
 
                 <!-- Secondary Button -->
-                <a href="#"
-                    class="inline-flex items-center justify-center gap-3 border-2 border-white text-white font-semibold text-lg px-10 py-4 rounded-full hover:bg-white hover:text-[#FF6B00] transition duration-300">
+                <a href="/contact-us"
+                    class="inline-flex items-center justify-center gap-2 border-2 border-white text-white font-semibold text-base px-8 py-3 rounded-full hover:bg-white hover:text-[#FF8C00] transition duration-300">
 
                     <i class="fa-solid fa-phone"></i>
 
@@ -516,7 +507,6 @@ $features = [
             </div>
 
         </div>
-
     </div>
 </section>
 @endsection
