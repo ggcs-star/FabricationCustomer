@@ -57,6 +57,8 @@
                     <li><a href="/faq" class="text-sm transition-colors duration-200 hover:text-[#FF7A00]" style="font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.55);">FAQs</a></li>
                     <li><a href="/privacy-policy" class="text-sm transition-colors duration-200 hover:text-[#FF7A00]" style="font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.55);">Privacy Policy</a></li>
                     <li><a href="/terms" class="text-sm transition-colors duration-200 hover:text-[#FF7A00]" style="font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.55);">Terms &amp; Conditions</a></li>
+                    <li><a href="/contact-us" class="text-sm transition-colors duration-200 hover:text-[#FF7A00]" style="font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.55);">Contact Us</a></li>
+
                 </ul>
             </div>
 

@@ -55,158 +55,185 @@
         display: block;
     }
 
-    /* ===== FULL WIDTH FILTERS SECTION ===== */
-    .filters-section {
-        background: #fff;
-        border-bottom: 1px solid #e8e8e8;
-        padding: 20px 0;
-        position: sticky;
-        top: 64px;
-        z-index: 10;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    }
-    .filters-section .filter-row {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 16px 30px;
-    }
-    .filters-section .filter-group {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 8px;
-    }
-    .filters-section .filter-group .filter-label {
-    font-size: 0.7rem;
-        font-weight: 600;
-        color: #100d0d;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-family: 'Inter', sans-serif;
-        margin-right: 4px;
-    }
-    .filters-section .filter-group .filter-option {
-        padding: 4px 14px;
-        border-radius: 9999px;
-        font-size: 0.78rem;
-        font-weight: 500;
-        font-family: 'Inter', sans-serif;
-        background: #f5f5f5;
-        color: #666;
-        border: 1px solid transparent;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        white-space: nowrap;
-    }
-    .filters-section .filter-group .filter-option:hover {
-        background: #e8e8e8;
-    }
-    .filters-section .filter-group .filter-option.active {
-        background: #FF7A00;
-        color: #fff;
-        border-color: #FF7A00;
-    }
-    .filters-section .filter-group .filter-option.verified {
-        background: #e8f5e9;
-        color: #2e7d32;
-        border-color: #a5d6a7;
-        cursor: default;
-    }
-    .filters-section .filter-group .filter-option.verified i {
-        margin-right: 4px;
-    }
-    .filters-section .filter-divider {
-        width: 1px;
-        height: 28px;
-        background: #e8e8e8;
-        flex-shrink: 0;
-    }
-    .filters-section .results-count {
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: #333;
-        font-family: 'Inter', sans-serif;
-        margin-left: auto;
-        white-space: nowrap;
-    }
-    .filters-section .results-count span {
-        font-weight: 700;
-        color: #FF7A00;
-    }
-
-    /* Filter toggle for mobile */
-    .filter-toggle {
-        display: none;
-        background: #fff;
-        border: 1px solid #e8e8e8;
-        border-radius: 12px;
-        padding: 12px 16px;
-        width: 100%;
-        font-size: 0.9rem;
-        font-weight: 500;
-        font-family: 'Inter', sans-serif;
-        cursor: pointer;
-        color: #333;
-        margin-bottom: 0;
-    }
-    .filter-toggle i {
-        margin-right: 8px;
-        color: #FF7A00;
-    }
-
     /* ===== HERO SECTION ===== */
     .vendors-hero {
         padding-top: 100px;
         padding-bottom: 40px;
         min-height: 320px;
         transition: all 0.5s ease;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%);
+        position: relative;
+        overflow: hidden;
+        border-bottom: 3px solid #FF7A00;
     }
-    .vendors-hero.expanded {
-        min-height: 550px;
-        transition: all 0.5s ease;
+    .vendors-hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -20%;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(255,122,0,0.08) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+    .vendors-hero .hero-content {
+        position: relative;
+        z-index: 1;
     }
 
-    /* Vendor details in hero */
-    .vendor-detail-card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 20px 24px;
-        margin-top: 16px;
-        display: none;
-        animation: fadeInUp 0.5s ease;
+    /* Verified Badge */
+    .verified-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255,122,0,0.12);
+        border: 1px solid rgba(255,122,0,0.2);
+        border-radius: 9999px;
+        padding: 4px 16px 4px 12px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #FF7A00;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 16px;
     }
-    .vendor-detail-card.show {
-        display: block;
+    .verified-badge .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #FF7A00;
+        animation: pulse-dot 2s infinite;
     }
-    .vendor-detail-card .detail-row {
+    @keyframes pulse-dot {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+    }
+
+    /* Search Bar */
+    .search-bar-wrapper {
+        display: flex;
+        gap: 12px;
+        max-width: 700px;
+        flex-wrap: wrap;
+    }
+    .search-bar-wrapper .search-input {
+        flex: 1;
+        min-width: 200px;
+        padding: 14px 20px;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.15);
+        background: rgba(255,255,255,0.06);
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+    }
+    .search-bar-wrapper .search-input::placeholder {
+        color: rgba(255,255,255,0.4);
+    }
+    .search-bar-wrapper .search-input:focus {
+        outline: none;
+        border-color: #FF7A00;
+        background: rgba(255,255,255,0.1);
+        box-shadow: 0 0 0 4px rgba(255,122,0,0.06);
+    }
+    .search-bar-wrapper .filter-btn {
+        padding: 14px 24px;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.15);
+        background: rgba(255,255,255,0.06);
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
         display: flex;
         align-items: center;
-        gap: 12px;
-        padding: 8px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        gap: 8px;
+        white-space: nowrap;
     }
-    .vendor-detail-card .detail-row:last-child {
-        border-bottom: none;
+    .search-bar-wrapper .filter-btn:hover {
+        background: rgba(255,255,255,0.12);
+        border-color: rgba(255,255,255,0.25);
     }
-    .vendor-detail-card .detail-label {
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 0.8rem;
-        font-family: 'Inter', sans-serif;
-        min-width: 100px;
-    }
-    .vendor-detail-card .detail-value {
+    .search-bar-wrapper .filter-btn.active {
+        background: #FF7A00;
+        border-color: #FF7A00;
         color: #fff;
-        font-size: 0.9rem;
-        font-family: 'Inter', sans-serif;
-        font-weight: 500;
-    }
-    .vendor-detail-card .detail-value .highlight {
-        color: #FF7A00;
-        font-weight: 600;
     }
 
+    /* ===== FILTERS SECTION ===== */
+    .filters-section {
+        display: none;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 16px;
+        padding: 24px 28px;
+        margin-top: 24px;
+        animation: fadeInUp 0.4s ease;
+    }
+    .filters-section.show {
+        display: block;
+    }
+    .filters-section .filter-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+    .filters-section .filter-group .filter-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: rgba(255,255,255,0.5);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        display: block;
+        margin-bottom: 10px;
+    }
+    .filters-section .filter-group .filter-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .filters-section .filter-group .filter-option {
+        padding: 6px 16px;
+        border-radius: 9999px;
+        font-size: 0.78rem;
+        font-weight: 500;
+        font-family: 'Inter', sans-serif;
+        background: rgba(255,255,255,0.06);
+        color: rgba(255,255,255,0.6);
+        border: 1px solid rgba(255,255,255,0.08);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+    .filters-section .filter-group .filter-option:hover {
+        background: rgba(255,255,255,0.12);
+        color: #fff;
+    }
+    .filters-section .filter-group .filter-option.active {
+        background: #FF7A00;
+        color: #fff;
+        border-color: #FF7A00;
+    }
+
+    /* ===== RESULTS COUNT ===== */
+    .results-count {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.85rem;
+        color: rgba(255,255,255,0.5);
+        margin-top: 20px;
+    }
+    .results-count span {
+        color: #FF7A00;
+        font-weight: 700;
+    }
+
+    /* ===== ANIMATIONS ===== */
     @keyframes fadeInUp {
         from {
             opacity: 0;
@@ -218,36 +245,6 @@
         }
     }
 
-    .close-detail {
-        background: rgba(255, 255, 255, 0.1);
-        border: none;
-        color: #fff;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .close-detail:hover {
-        background: rgba(255, 255, 255, 0.2);
-    }
-
-    .stat-card {
-        background: #fff;
-        border-radius: 12px;
-        padding: 16px;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-        transition: all 0.3s ease;
-        text-align: center;
-    }
-    .stat-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
-
     /* ===== RESPONSIVE ===== */
     @media (max-width: 1024px) {
         .vendors-hero {
@@ -255,16 +252,6 @@
         }
         .vendor-grid {
             grid-template-columns: repeat(2, 1fr);
-        }
-        .filters-section .filter-row {
-            gap: 12px 20px;
-        }
-        .filters-section .filter-divider {
-            display: none;
-        }
-        .filters-section .results-count {
-            margin-left: 0;
-            width: 100%;
         }
     }
 
@@ -275,50 +262,32 @@
         h1 {
             font-size: 2rem !important;
         }
-        .vendor-detail-card {
-            padding: 16px;
+        .search-bar-wrapper .search-input {
+            min-width: 150px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
         }
-        .vendor-detail-card .detail-row {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 4px;
-        }
-        .vendor-detail-card .detail-label {
-            min-width: auto;
+        .search-bar-wrapper .filter-btn {
+            padding: 12px 18px;
+            font-size: 0.85rem;
         }
         .filters-section {
-            position: relative;
-            top: 0;
-            padding: 12px 0;
+            padding: 18px 16px;
         }
         .filters-section .filter-row {
-            display: none;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 12px;
+            grid-template-columns: 1fr;
+            gap: 16px;
         }
-        .filters-section .filter-row.open {
-            display: flex;
-        }
-        .filters-section .filter-group {
-            flex-wrap: wrap;
+        .filters-section .filter-group .filter-options {
+            gap: 6px;
         }
         .filters-section .filter-group .filter-option {
             font-size: 0.7rem;
-            padding: 3px 10px;
-        }
-        .filters-section .results-count {
-            font-size: 0.8rem;
-        }
-        .filter-toggle {
-            display: block;
+            padding: 4px 12px;
         }
         .vendor-grid {
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-        }
-        .filters-section .filter-divider {
-            display: none;
         }
     }
 
@@ -329,140 +298,84 @@
         h1 {
             font-size: 1.6rem !important;
         }
+        .search-bar-wrapper {
+            flex-direction: column;
+        }
+        .search-bar-wrapper .filter-btn {
+            justify-content: center;
+        }
         .vendor-grid {
             grid-template-columns: 1fr;
             gap: 16px;
-        }
-        .filters-section .filter-group .filter-option {
-            font-size: 0.65rem;
-            padding: 2px 8px;
         }
     }
 </style>
 
 <!-- ===== HERO SECTION ===== -->
-<section class="vendors-hero py-8 md:py-12" id="vendorsHero" style="background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);">
+<section class="vendors-hero" id="vendorsHero">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-16">
-        <div class="text-xs font-semibold uppercase tracking-widest mb-2" style="color: #FF7A00; font-family: 'Inter', sans-serif;">
-            Verified Network
-        </div>
-        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3" style="font-family: 'Poppins', sans-serif;">
-            Find Fabrication Vendors
-        </h1>
-        <p class="text-sm sm:text-base md:text-lg max-w-2xl" style="font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.6);">
-            Browse verified fabricators across India. Compare, shortlist and get quotes.
-        </p>
-        <div class="flex flex-wrap items-center gap-3 mt-6">
-            <div class="flex-1 min-w-[200px]">
+        <div class="hero-content">
+            
+            <!-- Verified Badge -->
+            <div class="verified-badge">
+                <span class="dot"></span>
+                Verified Network
+            </div>
+
+            <!-- Heading -->
+            <h1 style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 3rem; color: #fff; margin-bottom: 12px;">
+                Find <span style="color: #FF7A00;">Fabrication</span> Vendors
+            </h1>
+            <p style="font-family: 'Inter', sans-serif; color: rgba(255,255,255,0.6); font-size: 1.05rem; max-width: 550px; line-height: 1.7; margin-bottom: 28px;">
+                Browse 12 verified fabricators across India. Compare, shortlist and get quotes.
+            </p>
+
+            <!-- Search Bar -->
+            <div class="search-bar-wrapper">
                 <input type="text" 
                        id="searchVendor"
                        placeholder="Search vendors, specialties..." 
-                       class="w-full px-4 py-2.5 rounded-full border border-white/20 bg-white/10 text-white placeholder:text-white/50 focus:outline-none focus:border-[#FF7A00] text-sm">
-            </div>
-            <select class="px-4 py-2.5 rounded-full border border-white/20 bg-white/10 text-white text-sm focus:outline-none focus:border-[#FF7A00]" id="cityFilter">
-                <option value="" class="text-black">All Cities</option>
-                <option value="ahmedabad" class="text-black">Ahmedabad</option>
-                <option value="mumbai" class="text-black">Mumbai</option>
-                <option value="delhi" class="text-black">Delhi</option>
-                <option value="pune" class="text-black">Pune</option>
-                <option value="bangalore" class="text-black">Bangalore</option>
-                <option value="surat" class="text-black">Surat</option>
-            </select>
-            <button class="px-5 py-2.5 rounded-full text-sm font-semibold text-white" style="background: #FF7A00;" id="filterBtn">
-                <i class="fas fa-sliders-h mr-2"></i> Filters
-            </button>
-        </div>
-
-        <!-- Vendor Detail Card -->
-        <div class="vendor-detail-card" id="vendorDetail">
-            <div class="flex justify-between items-start mb-3">
-                <h3 class="text-xl font-bold text-white" style="font-family: 'Poppins', sans-serif;" id="detailName">Mohit Steel Works</h3>
-                <button class="close-detail" id="closeDetail">
-                    <i class="fas fa-times"></i>
+                       class="search-input">
+                <button class="filter-btn" id="filterToggleBtn">
+                    <i class="fas fa-sliders-h"></i> Filters
                 </button>
             </div>
-            <div class="detail-row">
-                <span class="detail-label">Specialty</span>
-                <span class="detail-value" id="detailSpecialty">Large-scale Structural Work</span>
-            </div>
-            <div class="detail-row">
-                <span class="detail-label">Experience</span>
-                <span class="detail-value" id="detailExperience">18 yrs</span>
-            </div>
-            <div class="detail-row">
-                <span class="detail-label">Projects Done</span>
-                <span class="detail-value" id="detailProjects">820</span>
-            </div>
-            <div class="detail-row">
-                <span class="detail-label">Starting Price</span>
-                <span class="detail-value" id="detailPrice"><span class="highlight">₹85+</span> / sqft</span>
-            </div>
-            <div class="detail-row">
-                <span class="detail-label">Rating</span>
-                <span class="detail-value" id="detailRating">⭐ 4.9 ★</span>
-            </div>
-            <div class="detail-row">
-                <span class="detail-label">Location</span>
-                <span class="detail-value" id="detailLocation">Ahmedabad</span>
-            </div>
-            <div class="mt-4 flex gap-3">
-                <button class="px-6 py-2.5 rounded-xl text-sm font-medium border border-white/30 text-white hover:bg-white/10 transition">
-                    View Full Profile
-                </button>
-                <button class="px-6 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:opacity-90" style="background: #FF7A00;">
-                    Get Quote
-                    <i class="fas fa-arrow-right text-xs ml-2"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- ===== FULL WIDTH FILTERS SECTION ===== -->
-<section class="filters-section" id="filtersSection">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-16">
-        
-        <!-- Filter Toggle for Mobile -->
-        <button class="filter-toggle" id="filterToggle">
-            <i class="fas fa-sliders-h"></i> Show Filters
-        </button>
+            <!-- Filters Section -->
+            <div class="filters-section" id="filtersSection">
+                <div class="filter-row">
+                    <!-- Left Column: Categories -->
+                    <div class="filter-group">
+                        <span class="filter-label">Categories</span>
+                        <div class="filter-options">
+                            <span class="filter-option active" data-category="all">All Categories</span>
+                            <span class="filter-option" data-category="steel">Steel Structure</span>
+                            <span class="filter-option" data-category="glass">Glass Work</span>
+                            <span class="filter-option" data-category="aluminium">Aluminium Work</span>
+                            <span class="filter-option" data-category="ceiling">False Ceiling</span>
+                            <span class="filter-option" data-category="interior">Interior Work</span>
+                            <span class="filter-option" data-category="ms">MS Fabrication</span>
+                            <span class="filter-option" data-category="ss">SS Fabrication</span>
+                            <span class="filter-option" data-category="custom">Custom Projects</span>
+                        </div>
+                    </div>
 
-        <!-- Filter Row -->
-        <div class="filter-row" id="filterRow">
-            
-            <!-- Category -->
-            <div class="filter-group">
-<span class="filter-label" style="font-bold;">Category</span>
-
-                <span class="filter-option active" data-category="all">All Categories</span>
-                <span class="filter-option" data-category="steel">Steel Structure</span>
-                <span class="filter-option" data-category="glass">Glass Work</span>
-                <span class="filter-option" data-category="aluminium">Aluminium Work</span>
-                <span class="filter-option" data-category="ceiling">False Ceiling</span>
-                <span class="filter-option" data-category="interior">Interior Work</span>
-                <span class="filter-option" data-category="ms">MS Fabrication</span>
-                <span class="filter-option" data-category="ss">SS Fabrication</span>
-                <span class="filter-option" data-category="custom">Custom Projects</span>
+                    <!-- Right Column: Sort By -->
+                    <div class="filter-group">
+                        <span class="filter-label">Sort By</span>
+                        <div class="filter-options">
+                            <span class="filter-option active" data-sort="rating">Best Rating</span>
+                            <span class="filter-option" data-sort="projects">Most Projects</span>
+                            <span class="filter-option" data-sort="price">Lowest Price</span>
+                            <span class="filter-option" data-sort="experience">Most Experienced</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-
-            <!-- Sort -->
-            <div class="filter-group">
-
-<span class="filter-label" style="font-weight:700;">Sort by</span>
-                <span class="filter-option active" data-sort="rating">Best Rating</span>
-                <span class="filter-option" data-sort="projects">Most Projects</span>
-                <span class="filter-option" data-sort="price">Lowest Price</span>
-                <span class="filter-option" data-sort="experience">Most Experienced</span>
-            </div>
-
-            <div class="filter-divider"></div>
-
-            <!-- Verified Badges -->
-          
             <!-- Results Count -->
             <div class="results-count">
-                <span id="vendorCountNumber">9</span> vendors found
+                <span id="vendorCountNumber">12</span> vendors found
             </div>
 
         </div>
@@ -472,7 +385,6 @@
 <!-- ===== VENDOR GRID ===== -->
 <section class="py-8 md:py-12 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-16">
-        
         <div class="vendor-grid" id="vendorGrid">
 
             <!-- Vendor 1: Mehta Steel Works -->
@@ -505,14 +417,8 @@
                         <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.9 ★</span>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-2">
-                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
-                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
-                            View Profile
-                        </button>
-                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
-                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
-                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
+                        <button onclick="window.location.href='/vendor-profile'" class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50" style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">View Profile</button>
+                        <button onclick="window.location.href='/quote-details'" class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90" style="background: #FF7A00; font-family: 'Inter', sans-serif;">Get Quote <i class="fas fa-arrow-right text-xs"></i></button>
                     </div>
                 </div>
             </div>
@@ -547,14 +453,8 @@
                         <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.9 ★</span>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-2">
-                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
-                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
-                            View Profile
-                        </button>
-                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
-                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
-                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
+                        <button onclick="window.location.href='/vendor-profile'" class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50" style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">View Profile</button>
+                        <button onclick="window.location.href='/quote-details'" class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90" style="background: #FF7A00; font-family: 'Inter', sans-serif;">Get Quote <i class="fas fa-arrow-right text-xs"></i></button>
                     </div>
                 </div>
             </div>
@@ -589,14 +489,8 @@
                         <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.8 ★</span>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-2">
-                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
-                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
-                            View Profile
-                        </button>
-                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
-                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
-                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
+                        <button onclick="window.location.href='/vendor-profile'" class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50" style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">View Profile</button>
+                        <button onclick="window.location.href='/quote-details'" class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90" style="background: #FF7A00; font-family: 'Inter', sans-serif;">Get Quote <i class="fas fa-arrow-right text-xs"></i></button>
                     </div>
                 </div>
             </div>
@@ -631,14 +525,8 @@
                         <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.7 ★</span>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-2">
-                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
-                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
-                            View Profile
-                        </button>
-                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
-                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
-                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
+                        <button onclick="window.location.href='/vendor-profile'" class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50" style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">View Profile</button>
+                        <button onclick="window.location.href='/quote-details'" class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90" style="background: #FF7A00; font-family: 'Inter', sans-serif;">Get Quote <i class="fas fa-arrow-right text-xs"></i></button>
                     </div>
                 </div>
             </div>
@@ -673,14 +561,8 @@
                         <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.6 ★</span>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-2">
-                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
-                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
-                            View Profile
-                        </button>
-                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
-                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
-                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
+                        <button onclick="window.location.href='/vendor-profile'" class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50" style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">View Profile</button>
+                        <button onclick="window.location.href='/quote-details'" class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90" style="background: #FF7A00; font-family: 'Inter', sans-serif;">Get Quote <i class="fas fa-arrow-right text-xs"></i></button>
                     </div>
                 </div>
             </div>
@@ -715,140 +597,8 @@
                         <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.5 ★</span>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-2">
-                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
-                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
-                            View Profile
-                        </button>
-                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
-                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
-                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Vendor 7: ArcLight Fabricators -->
-            <div class="vendor-card" data-category="steel" data-rating="4.8" data-projects="560" data-price="95" data-experience="12"
-                 data-name="ArcLight Fabricators" data-specialty="Custom Steel Fabrication" data-location="Mumbai">
-                <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=300&fit=crop&auto=format" 
-                         alt="ArcLight Fabricators" loading="lazy">
-                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
-                         style="background: #FF7A00; color: #fff; font-family: 'Inter', sans-serif;">
-                        Popular
-                    </div>
-                    <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700" 
-                         style="font-family: 'Inter', sans-serif;">
-                        <i class="fas fa-check-circle"></i> Verified
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center gap-2 mb-1">
-                        <h3 class="font-bold text-base text-black" style="font-family: 'Poppins', sans-serif;">ArcLight Fabricators</h3>
-                    </div>
-                    <p class="text-xs text-gray-500 mb-3" style="font-family: 'Inter', sans-serif;">Custom Steel Fabrication</p>
-                    <div class="flex flex-wrap gap-4 mb-3 text-xs" style="font-family: 'Inter', sans-serif;">
-                        <div><span style="color: #999;">Experience: </span><span class="font-semibold" style="color: #111;">12 yrs</span></div>
-                        <div><span style="color: #999;">Projects: </span><span class="font-semibold" style="color: #111;">560</span></div>
-                        <div><span style="color: #999;">Price: </span><span class="font-semibold" style="color: #111;">₹95+</span></div>
-                    </div>
-                    <div class="flex items-center gap-1 mb-3">
-                        <span class="text-xs text-gray-500" style="font-family: 'Inter', sans-serif;">Rating:</span>
-                        <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.8 ★</span>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-2">
-                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
-                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
-                            View Profile
-                        </button>
-                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
-                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
-                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Vendor 8: Premium Glass Works -->
-            <div class="vendor-card" data-category="glass" data-rating="4.7" data-projects="450" data-price="150" data-experience="15"
-                 data-name="Premium Glass Works" data-specialty="Architectural Glass Solutions" data-location="Delhi">
-                <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&h=300&fit=crop&auto=format" 
-                         alt="Premium Glass Works" loading="lazy">
-                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
-                         style="background: #FF7A00; color: #fff; font-family: 'Inter', sans-serif;">
-                        Glass Specialist
-                    </div>
-                    <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700" 
-                         style="font-family: 'Inter', sans-serif;">
-                        <i class="fas fa-check-circle"></i> Verified
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center gap-2 mb-1">
-                        <h3 class="font-bold text-base text-black" style="font-family: 'Poppins', sans-serif;">Premium Glass Works</h3>
-                    </div>
-                    <p class="text-xs text-gray-500 mb-3" style="font-family: 'Inter', sans-serif;">Architectural Glass Solutions</p>
-                    <div class="flex flex-wrap gap-4 mb-3 text-xs" style="font-family: 'Inter', sans-serif;">
-                        <div><span style="color: #999;">Experience: </span><span class="font-semibold" style="color: #111;">15 yrs</span></div>
-                        <div><span style="color: #999;">Projects: </span><span class="font-semibold" style="color: #111;">450</span></div>
-                        <div><span style="color: #999;">Price: </span><span class="font-semibold" style="color: #111;">₹150+</span></div>
-                    </div>
-                    <div class="flex items-center gap-1 mb-3">
-                        <span class="text-xs text-gray-500" style="font-family: 'Inter', sans-serif;">Rating:</span>
-                        <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.7 ★</span>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-2">
-                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
-                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
-                            View Profile
-                        </button>
-                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
-                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
-                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Vendor 9: MS Fabricators -->
-            <div class="vendor-card" data-category="ms" data-rating="4.6" data-projects="380" data-price="70" data-experience="10"
-                 data-name="MS Fabricators" data-specialty="Industrial MS Fabrication" data-location="Ahmedabad">
-                <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&h=300&fit=crop&auto=format" 
-                         alt="MS Fabricators" loading="lazy">
-                    <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-xs font-semibold" 
-                         style="background: #FF7A00; color: #fff; font-family: 'Inter', sans-serif;">
-                        Popular
-                    </div>
-                    <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700" 
-                         style="font-family: 'Inter', sans-serif;">
-                        <i class="fas fa-check-circle"></i> Verified
-                    </div>
-                </div>
-                <div class="p-5">
-                    <div class="flex items-center gap-2 mb-1">
-                        <h3 class="font-bold text-base text-black" style="font-family: 'Poppins', sans-serif;">MS Fabricators</h3>
-                    </div>
-                    <p class="text-xs text-gray-500 mb-3" style="font-family: 'Inter', sans-serif;">Industrial MS Fabrication</p>
-                    <div class="flex flex-wrap gap-4 mb-3 text-xs" style="font-family: 'Inter', sans-serif;">
-                        <div><span style="color: #999;">Experience: </span><span class="font-semibold" style="color: #111;">10 yrs</span></div>
-                        <div><span style="color: #999;">Projects: </span><span class="font-semibold" style="color: #111;">380</span></div>
-                        <div><span style="color: #999;">Price: </span><span class="font-semibold" style="color: #111;">₹70+</span></div>
-                    </div>
-                    <div class="flex items-center gap-1 mb-3">
-                        <span class="text-xs text-gray-500" style="font-family: 'Inter', sans-serif;">Rating:</span>
-                        <span class="text-xs font-semibold text-black" style="font-family: 'Inter', sans-serif;">⭐ 4.6 ★</span>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-2">
-                        <button class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50 view-profile-btn" 
-                                style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">
-                            View Profile
-                        </button>
-                        <button class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90 get-quote-btn" 
-                                style="background: #FF7A00; font-family: 'Inter', sans-serif;">
-                            Get Quote <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
+                        <button onclick="window.location.href='/vendor-profile'" class="flex-1 py-2 rounded-xl text-sm font-medium border transition-all hover:bg-gray-50" style="border-color: rgba(0,0,0,0.1); color: #111; font-family: 'Inter', sans-serif;">View Profile</button>
+                        <button onclick="window.location.href='/quote-details'" class="flex-1 py-2 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-1 transition-all hover:opacity-90" style="background: #FF7A00; font-family: 'Inter', sans-serif;">Get Quote <i class="fas fa-arrow-right text-xs"></i></button>
                     </div>
                 </div>
             </div>
@@ -865,119 +615,68 @@
     </div>
 </section>
 
-<!-- ===== STATS SECTION ===== -->
-<section class="py-8 md:py-12" style="background: #f5f5f5;">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-16">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-            <div class="stat-card">
-                <div class="text-2xl font-bold mb-0.5" style="font-family: 'Poppins', sans-serif; color: #111;">8-Point</div>
-                <div class="text-xs sm:text-sm" style="font-family: 'Inter', sans-serif; color: #999;">Vendor Verification</div>
-            </div>
-            <div class="stat-card">
-                <div class="text-2xl font-bold mb-0.5" style="font-family: 'Poppins', sans-serif; color: #111;">4.8★</div>
-                <div class="text-xs sm:text-sm" style="font-family: 'Inter', sans-serif; color: #999;">Average Service Rating</div>
-            </div>
-            <div class="stat-card">
-                <div class="text-2xl font-bold mb-0.5" style="font-family: 'Poppins', sans-serif; color: #111;">5000+</div>
-                <div class="text-xs sm:text-sm" style="font-family: 'Inter', sans-serif; color: #999;">Projects Delivered</div>
-            </div>
-            <div class="stat-card">
-                <div class="text-2xl font-bold mb-0.5" style="font-family: 'Poppins', sans-serif; color: #111;">48 hrs</div>
-                <div class="text-xs sm:text-sm" style="font-family: 'Inter', sans-serif; color: #999;">First Quote Guarantee</div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const vendorCards = document.querySelectorAll('.vendor-card');
-    const categoryOptions = document.querySelectorAll('.filter-group .filter-option[data-category]');
-    const sortOptions = document.querySelectorAll('.filter-group .filter-option[data-sort]');
+    const filterToggleBtn = document.getElementById('filterToggleBtn');
+    const filtersSection = document.getElementById('filtersSection');
+    const filterOptions = document.querySelectorAll('.filters-section .filter-option');
     const searchInput = document.getElementById('searchVendor');
+    const vendorCards = document.querySelectorAll('.vendor-card');
     const vendorCountNumber = document.getElementById('vendorCountNumber');
     const noResults = document.getElementById('noResults');
     const vendorGrid = document.getElementById('vendorGrid');
-    const vendorDetail = document.getElementById('vendorDetail');
-    const closeDetail = document.getElementById('closeDetail');
-    const vendorsHero = document.getElementById('vendorsHero');
-    const filterToggle = document.getElementById('filterToggle');
-    const filterRow = document.getElementById('filterRow');
 
     let currentCategory = 'all';
     let currentSort = 'rating';
     let searchTerm = '';
 
-    // Toggle filters on mobile
-    if (filterToggle) {
-        filterToggle.addEventListener('click', function() {
-            filterRow.classList.toggle('open');
-            this.innerHTML = filterRow.classList.contains('open') ? 
-                '<i class="fas fa-times"></i> Hide Filters' : 
-                '<i class="fas fa-sliders-h"></i> Show Filters';
+    // Toggle filters
+    if (filterToggleBtn) {
+        filterToggleBtn.addEventListener('click', function() {
+            filtersSection.classList.toggle('show');
+            this.classList.toggle('active');
+            
+            if (filtersSection.classList.contains('show')) {
+                this.innerHTML = '<i class="fas fa-times"></i> Hide Filters';
+            } else {
+                this.innerHTML = '<i class="fas fa-sliders-h"></i> Filters';
+            }
         });
     }
 
-    // Show vendor details
-    function showVendorDetails(card) {
-        const name = card.dataset.name || card.querySelector('h3').textContent;
-        const specialty = card.dataset.specialty || card.querySelector('p').textContent;
-        const experience = card.dataset.experience || card.querySelector('.flex.gap-4 div:first-child .font-semibold').textContent;
-        const projects = card.dataset.projects || card.querySelector('.flex.gap-4 div:nth-child(2) .font-semibold').textContent;
-        const price = card.dataset.price || card.querySelector('.flex.gap-4 div:nth-child(3) .font-semibold').textContent;
-        const rating = card.dataset.rating || '4.8';
-        const location = card.dataset.location || 'India';
+    // Filter options click
+    filterOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const parent = this.parentElement;
+            const siblings = parent.querySelectorAll('.filter-option');
+            siblings.forEach(s => s.classList.remove('active'));
+            this.classList.add('active');
 
-        document.getElementById('detailName').textContent = name;
-        document.getElementById('detailSpecialty').textContent = specialty;
-        document.getElementById('detailExperience').textContent = experience + ' yrs';
-        document.getElementById('detailProjects').textContent = projects;
-        document.getElementById('detailPrice').innerHTML = '<span class="highlight">₹' + price + '+</span> / sqft';
-        document.getElementById('detailRating').textContent = '⭐ ' + rating + ' ★';
-        document.getElementById('detailLocation').textContent = location;
-
-        vendorDetail.classList.add('show');
-        vendorsHero.classList.add('expanded');
-        vendorsHero.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function closeVendorDetail() {
-        vendorDetail.classList.remove('show');
-        vendorsHero.classList.remove('expanded');
-    }
-
-    closeDetail.addEventListener('click', closeVendorDetail);
-
-    vendorCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            if (e.target.closest('button')) return;
-            showVendorDetails(this);
+            if (this.dataset.category) {
+                currentCategory = this.dataset.category;
+            } else if (this.dataset.sort) {
+                currentSort = this.dataset.sort;
+            }
+            filterVendors();
         });
-
-        const viewBtn = card.querySelector('.view-profile-btn');
-        if (viewBtn) {
-            viewBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                showVendorDetails(card);
-            });
-        }
-
-        const quoteBtn = card.querySelector('.get-quote-btn');
-        if (quoteBtn) {
-            quoteBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                showVendorDetails(card);
-            });
-        }
     });
 
+    // Search input
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            searchTerm = this.value.toLowerCase().trim();
+            filterVendors();
+        });
+    }
+
+    // Filter vendors
     function filterVendors() {
         let visibleCount = 0;
 
         vendorCards.forEach(card => {
             const category = card.dataset.category;
-            const name = card.querySelector('h3').textContent.toLowerCase();
-            const desc = card.querySelector('p').textContent.toLowerCase();
+            const name = card.querySelector('h3')?.textContent.toLowerCase() || '';
+            const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
             const matchCategory = currentCategory === 'all' || category === currentCategory;
             const matchSearch = name.includes(searchTerm) || desc.includes(searchTerm);
 
@@ -989,17 +688,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        vendorCountNumber.textContent = visibleCount;
+        if (vendorCountNumber) {
+            vendorCountNumber.textContent = visibleCount;
+        }
 
-        if (visibleCount === 0) {
-            noResults.classList.add('show');
-        } else {
-            noResults.classList.remove('show');
+        if (noResults) {
+            if (visibleCount === 0) {
+                noResults.classList.add('show');
+            } else {
+                noResults.classList.remove('show');
+            }
         }
 
         sortVendors();
     }
 
+    // Sort vendors
     function sortVendors() {
         const visibleCards = Array.from(document.querySelectorAll('.vendor-card:not(.hidden-card)'));
         
@@ -1028,36 +732,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         visibleCards.forEach(card => {
-            vendorGrid.appendChild(card);
+            if (vendorGrid) {
+                vendorGrid.appendChild(card);
+            }
         });
     }
 
-    // Category filter
-    categoryOptions.forEach(btn => {
-        btn.addEventListener('click', function() {
-            categoryOptions.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            currentCategory = this.dataset.category;
-            filterVendors();
-        });
-    });
-
-    // Sort filter
-    sortOptions.forEach(btn => {
-        btn.addEventListener('click', function() {
-            sortOptions.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            currentSort = this.dataset.sort;
-            filterVendors();
-        });
-    });
-
-    // Search
-    searchInput.addEventListener('input', function() {
-        searchTerm = this.value.toLowerCase().trim();
-        filterVendors();
-    });
-
+    // Initial filter
     filterVendors();
 });
 </script>
